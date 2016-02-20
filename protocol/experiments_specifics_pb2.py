@@ -13,7 +13,7 @@ from google.protobuf import descriptor_pb2
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='experiments_specifics.proto',
   package='sync_pb',
-  serialized_pb='\n\x1b\x65xperiments_specifics.proto\x12\x07sync_pb\"*\n\x17KeystoreEncryptionFlags\x12\x0f\n\x07\x65nabled\x18\x01 \x01(\x08\"*\n\x17HistoryDeleteDirectives\x12\x0f\n\x07\x65nabled\x18\x01 \x01(\x08\"\'\n\x14\x41utofillCullingFlags\x12\x0f\n\x07\x65nabled\x18\x01 \x01(\x08\"D\n\x10\x46\x61viconSyncFlags\x12\x0f\n\x07\x65nabled\x18\x01 \x01(\x08\x12\x1f\n\x12\x66\x61vicon_sync_limit\x18\x02 \x01(\x05:\x03\x32\x30\x30\"0\n\x1dPreCommitUpdateAvoidanceFlags\x12\x0f\n\x07\x65nabled\x18\x01 \x01(\x08\"\"\n\x0fGcmChannelFlags\x12\x0f\n\x07\x65nabled\x18\x01 \x01(\x08\"?\n\x16\x45nhancedBookmarksFlags\x12\x0f\n\x07\x65nabled\x18\x01 \x01(\x08\x12\x14\n\x0c\x65xtension_id\x18\x02 \x01(\t\"(\n\x15GcmInvalidationsFlags\x12\x0f\n\x07\x65nabled\x18\x01 \x01(\x08\"\xf8\x03\n\x14\x45xperimentsSpecifics\x12=\n\x13keystore_encryption\x18\x01 \x01(\x0b\x32 .sync_pb.KeystoreEncryptionFlags\x12\x43\n\x19history_delete_directives\x18\x02 \x01(\x0b\x32 .sync_pb.HistoryDeleteDirectives\x12\x37\n\x10\x61utofill_culling\x18\x03 \x01(\x0b\x32\x1d.sync_pb.AutofillCullingFlags\x12/\n\x0c\x66\x61vicon_sync\x18\x04 \x01(\x0b\x32\x19.sync_pb.FaviconSyncFlags\x12K\n\x1bpre_commit_update_avoidance\x18\x05 \x01(\x0b\x32&.sync_pb.PreCommitUpdateAvoidanceFlags\x12-\n\x0bgcm_channel\x18\x06 \x01(\x0b\x32\x18.sync_pb.GcmChannelFlags\x12;\n\x12\x65nhanced_bookmarks\x18\x07 \x01(\x0b\x32\x1f.sync_pb.EnhancedBookmarksFlags\x12\x39\n\x11gcm_invalidations\x18\x08 \x01(\x0b\x32\x1e.sync_pb.GcmInvalidationsFlagsB\x04H\x03`\x01')
+  serialized_pb='\n\x1b\x65xperiments_specifics.proto\x12\x07sync_pb\"*\n\x17KeystoreEncryptionFlags\x12\x0f\n\x07\x65nabled\x18\x01 \x01(\x08\"*\n\x17HistoryDeleteDirectives\x12\x0f\n\x07\x65nabled\x18\x01 \x01(\x08\"\'\n\x14\x41utofillCullingFlags\x12\x0f\n\x07\x65nabled\x18\x01 \x01(\x08\"D\n\x10\x46\x61viconSyncFlags\x12\x0f\n\x07\x65nabled\x18\x01 \x01(\x08\x12\x1f\n\x12\x66\x61vicon_sync_limit\x18\x02 \x01(\x05:\x03\x32\x30\x30\"0\n\x1dPreCommitUpdateAvoidanceFlags\x12\x0f\n\x07\x65nabled\x18\x01 \x01(\x08\"\"\n\x0fGcmChannelFlags\x12\x0f\n\x07\x65nabled\x18\x01 \x01(\x08\"?\n\x16\x45nhancedBookmarksFlags\x12\x0f\n\x07\x65nabled\x18\x01 \x01(\x08\x12\x14\n\x0c\x65xtension_id\x18\x02 \x01(\t\"(\n\x15GcmInvalidationsFlags\x12\x0f\n\x07\x65nabled\x18\x01 \x01(\x08\"\"\n\x0fWalletSyncFlags\x12\x0f\n\x07\x65nabled\x18\x01 \x01(\x08\"\xb0\x04\n\x14\x45xperimentsSpecifics\x12=\n\x13keystore_encryption\x18\x01 \x01(\x0b\x32 .sync_pb.KeystoreEncryptionFlags\x12\x43\n\x19history_delete_directives\x18\x02 \x01(\x0b\x32 .sync_pb.HistoryDeleteDirectives\x12\x37\n\x10\x61utofill_culling\x18\x03 \x01(\x0b\x32\x1d.sync_pb.AutofillCullingFlags\x12/\n\x0c\x66\x61vicon_sync\x18\x04 \x01(\x0b\x32\x19.sync_pb.FaviconSyncFlags\x12K\n\x1bpre_commit_update_avoidance\x18\x05 \x01(\x0b\x32&.sync_pb.PreCommitUpdateAvoidanceFlags\x12-\n\x0bgcm_channel\x18\x06 \x01(\x0b\x32\x18.sync_pb.GcmChannelFlags\x12\x44\n\x1bobsolete_enhanced_bookmarks\x18\x07 \x01(\x0b\x32\x1f.sync_pb.EnhancedBookmarksFlags\x12\x39\n\x11gcm_invalidations\x18\x08 \x01(\x0b\x32\x1e.sync_pb.GcmInvalidationsFlags\x12-\n\x0bwallet_sync\x18\t \x01(\x0b\x32\x18.sync_pb.WalletSyncFlagsB\x04H\x03`\x01')
 
 
 
@@ -256,6 +256,34 @@ _GCMINVALIDATIONSFLAGS = _descriptor.Descriptor(
 )
 
 
+_WALLETSYNCFLAGS = _descriptor.Descriptor(
+  name='WalletSyncFlags',
+  full_name='sync_pb.WalletSyncFlags',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='enabled', full_name='sync_pb.WalletSyncFlags.enabled', index=0,
+      number=1, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=432,
+  serialized_end=466,
+)
+
+
 _EXPERIMENTSSPECIFICS = _descriptor.Descriptor(
   name='ExperimentsSpecifics',
   full_name='sync_pb.ExperimentsSpecifics',
@@ -306,7 +334,7 @@ _EXPERIMENTSSPECIFICS = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='enhanced_bookmarks', full_name='sync_pb.ExperimentsSpecifics.enhanced_bookmarks', index=6,
+      name='obsolete_enhanced_bookmarks', full_name='sync_pb.ExperimentsSpecifics.obsolete_enhanced_bookmarks', index=6,
       number=7, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
@@ -315,6 +343,13 @@ _EXPERIMENTSSPECIFICS = _descriptor.Descriptor(
     _descriptor.FieldDescriptor(
       name='gcm_invalidations', full_name='sync_pb.ExperimentsSpecifics.gcm_invalidations', index=7,
       number=8, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='wallet_sync', full_name='sync_pb.ExperimentsSpecifics.wallet_sync', index=8,
+      number=9, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -328,8 +363,8 @@ _EXPERIMENTSSPECIFICS = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=433,
-  serialized_end=937,
+  serialized_start=469,
+  serialized_end=1029,
 )
 
 _EXPERIMENTSSPECIFICS.fields_by_name['keystore_encryption'].message_type = _KEYSTOREENCRYPTIONFLAGS
@@ -338,8 +373,9 @@ _EXPERIMENTSSPECIFICS.fields_by_name['autofill_culling'].message_type = _AUTOFIL
 _EXPERIMENTSSPECIFICS.fields_by_name['favicon_sync'].message_type = _FAVICONSYNCFLAGS
 _EXPERIMENTSSPECIFICS.fields_by_name['pre_commit_update_avoidance'].message_type = _PRECOMMITUPDATEAVOIDANCEFLAGS
 _EXPERIMENTSSPECIFICS.fields_by_name['gcm_channel'].message_type = _GCMCHANNELFLAGS
-_EXPERIMENTSSPECIFICS.fields_by_name['enhanced_bookmarks'].message_type = _ENHANCEDBOOKMARKSFLAGS
+_EXPERIMENTSSPECIFICS.fields_by_name['obsolete_enhanced_bookmarks'].message_type = _ENHANCEDBOOKMARKSFLAGS
 _EXPERIMENTSSPECIFICS.fields_by_name['gcm_invalidations'].message_type = _GCMINVALIDATIONSFLAGS
+_EXPERIMENTSSPECIFICS.fields_by_name['wallet_sync'].message_type = _WALLETSYNCFLAGS
 DESCRIPTOR.message_types_by_name['KeystoreEncryptionFlags'] = _KEYSTOREENCRYPTIONFLAGS
 DESCRIPTOR.message_types_by_name['HistoryDeleteDirectives'] = _HISTORYDELETEDIRECTIVES
 DESCRIPTOR.message_types_by_name['AutofillCullingFlags'] = _AUTOFILLCULLINGFLAGS
@@ -348,6 +384,7 @@ DESCRIPTOR.message_types_by_name['PreCommitUpdateAvoidanceFlags'] = _PRECOMMITUP
 DESCRIPTOR.message_types_by_name['GcmChannelFlags'] = _GCMCHANNELFLAGS
 DESCRIPTOR.message_types_by_name['EnhancedBookmarksFlags'] = _ENHANCEDBOOKMARKSFLAGS
 DESCRIPTOR.message_types_by_name['GcmInvalidationsFlags'] = _GCMINVALIDATIONSFLAGS
+DESCRIPTOR.message_types_by_name['WalletSyncFlags'] = _WALLETSYNCFLAGS
 DESCRIPTOR.message_types_by_name['ExperimentsSpecifics'] = _EXPERIMENTSSPECIFICS
 
 class KeystoreEncryptionFlags(_message.Message):
@@ -397,6 +434,12 @@ class GcmInvalidationsFlags(_message.Message):
   DESCRIPTOR = _GCMINVALIDATIONSFLAGS
 
   # @@protoc_insertion_point(class_scope:sync_pb.GcmInvalidationsFlags)
+
+class WalletSyncFlags(_message.Message):
+  __metaclass__ = _reflection.GeneratedProtocolMessageType
+  DESCRIPTOR = _WALLETSYNCFLAGS
+
+  # @@protoc_insertion_point(class_scope:sync_pb.WalletSyncFlags)
 
 class ExperimentsSpecifics(_message.Message):
   __metaclass__ = _reflection.GeneratedProtocolMessageType

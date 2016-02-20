@@ -32,6 +32,7 @@ import nigori_specifics_pb2
 import managed_user_setting_specifics_pb2
 import managed_user_shared_setting_specifics_pb2
 import managed_user_specifics_pb2
+import managed_user_whitelist_specifics_pb2
 import password_specifics_pb2
 import preference_specifics_pb2
 import priority_preference_specifics_pb2
@@ -43,12 +44,13 @@ import synced_notification_specifics_pb2
 import theme_specifics_pb2
 import typed_url_specifics_pb2
 import unique_position_pb2
+import wifi_credential_specifics_pb2
 
 
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='sync.proto',
   package='sync_pb',
-  serialized_pb='\n\nsync.proto\x12\x07sync_pb\x1a\x18\x61pp_list_specifics.proto\x1a app_notification_specifics.proto\x1a\x1b\x61pp_setting_specifics.proto\x1a\x13\x61pp_specifics.proto\x1a\x17\x61rticle_specifics.proto\x1a\x11\x61ttachments.proto\x1a\x18\x61utofill_specifics.proto\x1a\x18\x62ookmark_specifics.proto\x1a\x15\x63lient_commands.proto\x1a\x17\x63lient_debug_info.proto\x1a\x1b\x64\x65vice_info_specifics.proto\x1a\x1a\x64ictionary_specifics.proto\x1a\x10\x65ncryption.proto\x1a\x1b\x65xperiments_specifics.proto\x1a!extension_setting_specifics.proto\x1a\x19\x65xtension_specifics.proto\x1a\x1d\x66\x61vicon_image_specifics.proto\x1a favicon_tracking_specifics.proto\x1a\x1dget_updates_caller_info.proto\x1a(history_delete_directive_specifics.proto\x1a\x16nigori_specifics.proto\x1a$managed_user_setting_specifics.proto\x1a+managed_user_shared_setting_specifics.proto\x1a\x1cmanaged_user_specifics.proto\x1a\x18password_specifics.proto\x1a\x1apreference_specifics.proto\x1a#priority_preference_specifics.proto\x1a\x1dsearch_engine_specifics.proto\x1a\x17session_specifics.proto\x1a\x10sync_enums.proto\x1a,synced_notification_app_info_specifics.proto\x1a#synced_notification_specifics.proto\x1a\x15theme_specifics.proto\x1a\x19typed_url_specifics.proto\x1a\x15unique_position.proto\"\xbb\x01\n\rProfilingData\x12\x1c\n\x14meta_data_write_time\x18\x01 \x01(\x03\x12\x1c\n\x14\x66ile_data_write_time\x18\x02 \x01(\x03\x12\x18\n\x10user_lookup_time\x18\x03 \x01(\x03\x12\x1b\n\x13meta_data_read_time\x18\x04 \x01(\x03\x12\x1b\n\x13\x66ile_data_read_time\x18\x05 \x01(\x03\x12\x1a\n\x12total_request_time\x18\x06 \x01(\x03\"\xa2\r\n\x0f\x45ntitySpecifics\x12)\n\tencrypted\x18\x01 \x01(\x0b\x32\x16.sync_pb.EncryptedData\x12.\n\x08\x61utofill\x18\xf1\xf7\x01 \x01(\x0b\x32\x1a.sync_pb.AutofillSpecifics\x12.\n\x08\x62ookmark\x18\x88\x81\x02 \x01(\x0b\x32\x1a.sync_pb.BookmarkSpecifics\x12\x32\n\npreference\x18\xc6\xa6\x02 \x01(\x0b\x32\x1c.sync_pb.PreferenceSpecifics\x12/\n\ttyped_url\x18\xcd\xbe\x02 \x01(\x0b\x32\x1a.sync_pb.TypedUrlSpecifics\x12(\n\x05theme\x18\xfa\xc1\x02 \x01(\x0b\x32\x17.sync_pb.ThemeSpecifics\x12\x34\n\x10\x61pp_notification\x18\x80\xe1\x02 \x01(\x0b\x32\x18.sync_pb.AppNotification\x12.\n\x08password\x18\xb1\xe6\x02 \x01(\x0b\x32\x1a.sync_pb.PasswordSpecifics\x12*\n\x06nigori\x18\x81\xf5\x02 \x01(\x0b\x32\x18.sync_pb.NigoriSpecifics\x12\x30\n\textension\x18\xf7\xf7\x02 \x01(\x0b\x32\x1b.sync_pb.ExtensionSpecifics\x12$\n\x03\x61pp\x18\xec\xf9\x02 \x01(\x0b\x32\x15.sync_pb.AppSpecifics\x12,\n\x07session\x18\xc7\x87\x03 \x01(\x0b\x32\x19.sync_pb.SessionSpecifics\x12=\n\x10\x61utofill_profile\x18\xcf\xf3\x03 \x01(\x0b\x32!.sync_pb.AutofillProfileSpecifics\x12\x37\n\rsearch_engine\x18\xa2\xb4\x05 \x01(\x0b\x32\x1e.sync_pb.SearchEngineSpecifics\x12?\n\x11\x65xtension_setting\x18\x9f\xef\x05 \x01(\x0b\x32\".sync_pb.ExtensionSettingSpecifics\x12\x33\n\x0b\x61pp_setting\x18\xe8\xa9\x06 \x01(\x0b\x32\x1c.sync_pb.AppSettingSpecifics\x12L\n\x18history_delete_directive\x18\xeb\x95\t \x01(\x0b\x32(.sync_pb.HistoryDeleteDirectiveSpecifics\x12\x43\n\x13synced_notification\x18\x94\xac\t \x01(\x0b\x32$.sync_pb.SyncedNotificationSpecifics\x12S\n\x1csynced_notification_app_info\x18\xa8\xb2\x0e \x01(\x0b\x32+.sync_pb.SyncedNotificationAppInfoSpecifics\x12\x33\n\x0b\x64\x65vice_info\x18\x9a\xb7\t \x01(\x0b\x32\x1c.sync_pb.DeviceInfoSpecifics\x12\x34\n\x0b\x65xperiments\x18\xd8\xed\t \x01(\x0b\x32\x1d.sync_pb.ExperimentsSpecifics\x12\x43\n\x13priority_preference\x18\xe1\xfc\t \x01(\x0b\x32$.sync_pb.PriorityPreferenceSpecifics\x12\x32\n\ndictionary\x18\xac\xb4\n \x01(\x0b\x32\x1c.sync_pb.DictionarySpecifics\x12=\n\x10\x66\x61vicon_tracking\x18\x9e\x8a\x0b \x01(\x0b\x32!.sync_pb.FaviconTrackingSpecifics\x12\x37\n\rfavicon_image\x18\x83\x8e\x0b \x01(\x0b\x32\x1e.sync_pb.FaviconImageSpecifics\x12\x44\n\x14managed_user_setting\x18\xa6\xb2\x0b \x01(\x0b\x32$.sync_pb.ManagedUserSettingSpecifics\x12\x35\n\x0cmanaged_user\x18\x96\xf0\x0b \x01(\x0b\x32\x1d.sync_pb.ManagedUserSpecifics\x12Q\n\x1bmanaged_user_shared_setting\x18\xaa\xaa\x0c \x01(\x0b\x32*.sync_pb.ManagedUserSharedSettingSpecifics\x12,\n\x07\x61rticle\x18\x8f\xd4\r \x01(\x0b\x32\x19.sync_pb.ArticleSpecifics\x12-\n\x08\x61pp_list\x18\xb2\xfe\r \x01(\x0b\x32\x19.sync_pb.AppListSpecifics\"\xed\x05\n\nSyncEntity\x12\x11\n\tid_string\x18\x01 \x01(\t\x12\x18\n\x10parent_id_string\x18\x02 \x01(\t\x12\x15\n\rold_parent_id\x18\x03 \x01(\t\x12\x0f\n\x07version\x18\x04 \x02(\x03\x12\r\n\x05mtime\x18\x05 \x01(\x03\x12\r\n\x05\x63time\x18\x06 \x01(\x03\x12\x0c\n\x04name\x18\x07 \x02(\t\x12\x17\n\x0fnon_unique_name\x18\x08 \x01(\t\x12\x16\n\x0esync_timestamp\x18\t \x01(\x03\x12!\n\x19server_defined_unique_tag\x18\n \x01(\t\x12\x36\n\x0c\x62ookmarkdata\x18\x0b \x01(\n2 .sync_pb.SyncEntity.BookmarkData\x12\x1a\n\x12position_in_parent\x18\x0f \x01(\x03\x12\x1c\n\x14insert_after_item_id\x18\x10 \x01(\t\x12\x16\n\x07\x64\x65leted\x18\x12 \x01(\x08:\x05\x66\x61lse\x12\x1d\n\x15originator_cache_guid\x18\x13 \x01(\t\x12!\n\x19originator_client_item_id\x18\x14 \x01(\t\x12+\n\tspecifics\x18\x15 \x01(\x0b\x32\x18.sync_pb.EntitySpecifics\x12\x15\n\x06\x66older\x18\x16 \x01(\x08:\x05\x66\x61lse\x12!\n\x19\x63lient_defined_unique_tag\x18\x17 \x01(\t\x12\x19\n\x11ordinal_in_parent\x18\x18 \x01(\x0c\x12\x30\n\x0funique_position\x18\x19 \x01(\x0b\x32\x17.sync_pb.UniquePosition\x12\x31\n\rattachment_id\x18\x1a \x03(\x0b\x32\x1a.sync_pb.AttachmentIdProto\x1aW\n\x0c\x42ookmarkData\x12\x17\n\x0f\x62ookmark_folder\x18\x0c \x02(\x08\x12\x14\n\x0c\x62ookmark_url\x18\r \x01(\t\x12\x18\n\x10\x62ookmark_favicon\x18\x0e \x01(\x0c\"]\n\x1a\x43hromiumExtensionsActivity\x12\x14\n\x0c\x65xtension_id\x18\x01 \x01(\t\x12)\n!bookmark_writes_since_last_commit\x18\x02 \x01(\r\"M\n\x12\x43lientConfigParams\x12\x18\n\x10\x65nabled_type_ids\x18\x01 \x03(\x05\x12\x1d\n\x15tabs_datatype_enabled\x18\x02 \x01(\x08\"\xf2\x01\n\rCommitMessage\x12$\n\x07\x65ntries\x18\x01 \x03(\x0b\x32\x13.sync_pb.SyncEntity\x12\x12\n\ncache_guid\x18\x02 \x01(\t\x12@\n\x13\x65xtensions_activity\x18\x03 \x03(\x0b\x32#.sync_pb.ChromiumExtensionsActivity\x12\x32\n\rconfig_params\x18\x04 \x01(\x0b\x32\x1b.sync_pb.ClientConfigParams\x12\x31\n\x0f\x63lient_contexts\x18\x05 \x03(\x0b\x32\x18.sync_pb.DataTypeContext\"\xd1\x01\n\x11GetUpdateTriggers\x12\x19\n\x11notification_hint\x18\x01 \x03(\t\x12\x1c\n\x14\x63lient_dropped_hints\x18\x02 \x01(\x08\x12!\n\x19invalidations_out_of_sync\x18\x03 \x01(\x08\x12!\n\x19local_modification_nudges\x18\x04 \x01(\x03\x12\x1f\n\x17\x64\x61tatype_refresh_nudges\x18\x05 \x01(\x03\x12\x1c\n\x14server_dropped_hints\x18\x06 \x01(\x08\"\x87\x02\n\x1aGarbageCollectionDirective\x12?\n\x04type\x18\x01 \x01(\x0e\x32(.sync_pb.GarbageCollectionDirective.Type:\x07UNKNOWN\x12\x19\n\x11version_watermark\x18\x02 \x01(\x03\x12\x1d\n\x15\x61ge_watermark_in_days\x18\x03 \x01(\x05\x12\x1b\n\x13max_number_of_items\x18\x04 \x01(\x05\"Q\n\x04Type\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x15\n\x11VERSION_WATERMARK\x10\x01\x12\x11\n\rAGE_WATERMARK\x10\x02\x12\x12\n\x0eMAX_ITEM_COUNT\x10\x03\"\xf3\x01\n\x16\x44\x61taTypeProgressMarker\x12\x14\n\x0c\x64\x61ta_type_id\x18\x01 \x01(\x05\x12\r\n\x05token\x18\x02 \x01(\x0c\x12%\n\x1dtimestamp_token_for_migration\x18\x03 \x01(\x03\x12\x19\n\x11notification_hint\x18\x04 \x01(\t\x12\x37\n\x13get_update_triggers\x18\x05 \x01(\x0b\x32\x1a.sync_pb.GetUpdateTriggers\x12\x39\n\x0cgc_directive\x18\x06 \x01(\x0b\x32#.sync_pb.GarbageCollectionDirective\"\xfd\x03\n\x11GetUpdatesMessage\x12\x16\n\x0e\x66rom_timestamp\x18\x01 \x01(\x03\x12\x32\n\x0b\x63\x61ller_info\x18\x02 \x01(\x0b\x32\x1d.sync_pb.GetUpdatesCallerInfo\x12\x1b\n\rfetch_folders\x18\x03 \x01(\x08:\x04true\x12\x31\n\x0frequested_types\x18\x04 \x01(\x0b\x32\x18.sync_pb.EntitySpecifics\x12\x12\n\nbatch_size\x18\x05 \x01(\x05\x12=\n\x14\x66rom_progress_marker\x18\x06 \x03(\x0b\x32\x1f.sync_pb.DataTypeProgressMarker\x12\x18\n\tstreaming\x18\x07 \x01(\x08:\x05\x66\x61lse\x12\"\n\x13need_encryption_key\x18\x08 \x01(\x08:\x05\x66\x61lse\x12.\n\x1e\x63reate_mobile_bookmarks_folder\x18\xe8\x07 \x01(\x08:\x05\x66\x61lse\x12?\n\x12get_updates_origin\x18\t \x01(\x0e\x32#.sync_pb.SyncEnums.GetUpdatesOrigin\x12\x17\n\x08is_retry\x18\n \x01(\x08:\x05\x66\x61lse\x12\x31\n\x0f\x63lient_contexts\x18\x0b \x03(\x0b\x32\x18.sync_pb.DataTypeContext\")\n\x13\x41uthenticateMessage\x12\x12\n\nauth_token\x18\x01 \x02(\t\"\x16\n\x14\x43learUserDataMessage\"\x17\n\x15\x43learUserDataResponse\"\x1f\n\x07\x43hipBag\x12\x14\n\x0cserver_chips\x18\x01 \x01(\x0c\"3\n\x0c\x43lientStatus\x12#\n\x1bhierarchy_conflict_detected\x18\x01 \x01(\x08\"I\n\x0f\x44\x61taTypeContext\x12\x14\n\x0c\x64\x61ta_type_id\x18\x01 \x01(\x05\x12\x0f\n\x07\x63ontext\x18\x02 \x01(\x0c\x12\x0f\n\x07version\x18\x03 \x01(\x03\"\x83\x05\n\x15\x43lientToServerMessage\x12\r\n\x05share\x18\x01 \x02(\t\x12\x1c\n\x10protocol_version\x18\x02 \x01(\x05:\x02\x33\x33\x12\x41\n\x10message_contents\x18\x03 \x02(\x0e\x32\'.sync_pb.ClientToServerMessage.Contents\x12&\n\x06\x63ommit\x18\x04 \x01(\x0b\x32\x16.sync_pb.CommitMessage\x12/\n\x0bget_updates\x18\x05 \x01(\x0b\x32\x1a.sync_pb.GetUpdatesMessage\x12\x32\n\x0c\x61uthenticate\x18\x06 \x01(\x0b\x32\x1c.sync_pb.AuthenticateMessage\x12\x36\n\x0f\x63lear_user_data\x18\t \x01(\x0b\x32\x1d.sync_pb.ClearUserDataMessage\x12\x16\n\x0estore_birthday\x18\x07 \x01(\t\x12$\n\x15sync_problem_detected\x18\x08 \x01(\x08:\x05\x66\x61lse\x12&\n\ndebug_info\x18\n \x01(\x0b\x32\x12.sync_pb.DebugInfo\x12&\n\x0c\x62\x61g_of_chips\x18\x0b \x01(\x0b\x32\x10.sync_pb.ChipBag\x12\x0f\n\x07\x61pi_key\x18\x0c \x01(\t\x12,\n\rclient_status\x18\r \x01(\x0b\x32\x15.sync_pb.ClientStatus\x12\x1d\n\x15invalidator_client_id\x18\x0e \x01(\t\"I\n\x08\x43ontents\x12\n\n\x06\x43OMMIT\x10\x01\x12\x0f\n\x0bGET_UPDATES\x10\x02\x12\x10\n\x0c\x41UTHENTICATE\x10\x03\x12\x0e\n\nCLEAR_DATA\x10\x04\"B\n\x13GetCrashInfoRequest\x12\x10\n\x08\x63rash_id\x18\x01 \x01(\t\x12\x19\n\x11\x63rash_time_millis\x18\x02 \x01(\x03\"C\n\x14GetCrashInfoResponse\x12\x10\n\x08stack_id\x18\x01 \x01(\t\x12\x19\n\x11\x63rash_time_millis\x18\x02 \x01(\x03\"\xb4\x03\n\x0e\x43ommitResponse\x12<\n\rentryresponse\x18\x01 \x03(\n2%.sync_pb.CommitResponse.EntryResponse\x1a\xf3\x01\n\rEntryResponse\x12;\n\rresponse_type\x18\x02 \x02(\x0e\x32$.sync_pb.CommitResponse.ResponseType\x12\x11\n\tid_string\x18\x03 \x01(\t\x12\x18\n\x10parent_id_string\x18\x04 \x01(\t\x12\x1a\n\x12position_in_parent\x18\x05 \x01(\x03\x12\x0f\n\x07version\x18\x06 \x01(\x03\x12\x0c\n\x04name\x18\x07 \x01(\t\x12\x17\n\x0fnon_unique_name\x18\x08 \x01(\t\x12\x15\n\rerror_message\x18\t \x01(\t\x12\r\n\x05mtime\x18\n \x01(\x03\"n\n\x0cResponseType\x12\x0b\n\x07SUCCESS\x10\x01\x12\x0c\n\x08\x43ONFLICT\x10\x02\x12\t\n\x05RETRY\x10\x03\x12\x13\n\x0fINVALID_MESSAGE\x10\x04\x12\x0e\n\nOVER_QUOTA\x10\x05\x12\x13\n\x0fTRANSIENT_ERROR\x10\x06\"\x9d\x02\n\x12GetUpdatesResponse\x12$\n\x07\x65ntries\x18\x01 \x03(\x0b\x32\x13.sync_pb.SyncEntity\x12\x15\n\rnew_timestamp\x18\x02 \x01(\x03\x12#\n\x1b\x64\x65precated_newest_timestamp\x18\x03 \x01(\x03\x12\x19\n\x11\x63hanges_remaining\x18\x04 \x01(\x03\x12<\n\x13new_progress_marker\x18\x05 \x03(\x0b\x32\x1f.sync_pb.DataTypeProgressMarker\x12\x17\n\x0f\x65ncryption_keys\x18\x06 \x03(\x0c\x12\x33\n\x11\x63ontext_mutations\x18\x07 \x03(\x0b\x32\x18.sync_pb.DataTypeContext\"u\n\x1aGetUpdatesMetadataResponse\x12\x19\n\x11\x63hanges_remaining\x18\x01 \x01(\x03\x12<\n\x13new_progress_marker\x18\x02 \x03(\x0b\x32\x1f.sync_pb.DataTypeProgressMarker\"C\n\x1bGetUpdatesStreamingResponse\x12$\n\x07\x65ntries\x18\x01 \x03(\x0b\x32\x13.sync_pb.SyncEntity\"P\n\x12UserIdentification\x12\r\n\x05\x65mail\x18\x01 \x02(\t\x12\x14\n\x0c\x64isplay_name\x18\x02 \x01(\t\x12\x15\n\robfuscated_id\x18\x03 \x01(\t\"A\n\x14\x41uthenticateResponse\x12)\n\x04user\x18\x01 \x01(\x0b\x32\x1b.sync_pb.UserIdentification\"\xaa\x01\n\x12ThrottleParameters\x12 \n\x18min_measure_payload_size\x18\x01 \x02(\x05\x12\x1a\n\x12target_utilization\x18\x02 \x02(\x01\x12\x1c\n\x14measure_interval_max\x18\x03 \x02(\x01\x12\x1c\n\x14measure_interval_min\x18\x04 \x02(\x01\x12\x1a\n\x12observation_window\x18\x05 \x02(\x01\"\xea\x06\n\x16\x43lientToServerResponse\x12\'\n\x06\x63ommit\x18\x01 \x01(\x0b\x32\x17.sync_pb.CommitResponse\x12\x30\n\x0bget_updates\x18\x02 \x01(\x0b\x32\x1b.sync_pb.GetUpdatesResponse\x12\x33\n\x0c\x61uthenticate\x18\x03 \x01(\x0b\x32\x1d.sync_pb.AuthenticateResponse\x12\x39\n\nerror_code\x18\x04 \x01(\x0e\x32\x1c.sync_pb.SyncEnums.ErrorType:\x07UNKNOWN\x12\x15\n\rerror_message\x18\x05 \x01(\t\x12\x16\n\x0estore_birthday\x18\x06 \x01(\t\x12.\n\x0e\x63lient_command\x18\x07 \x01(\x0b\x32\x16.sync_pb.ClientCommand\x12.\n\x0eprofiling_data\x18\x08 \x01(\x0b\x32\x16.sync_pb.ProfilingData\x12\x37\n\x0f\x63lear_user_data\x18\t \x01(\x0b\x32\x1e.sync_pb.ClearUserDataResponse\x12<\n\x0fstream_metadata\x18\n \x01(\x0b\x32#.sync_pb.GetUpdatesMetadataResponse\x12\x39\n\x0bstream_data\x18\x0b \x01(\x0b\x32$.sync_pb.GetUpdatesStreamingResponse\x12\x1d\n\x15migrated_data_type_id\x18\x0c \x03(\x05\x12\x34\n\x05\x65rror\x18\r \x01(\x0b\x32%.sync_pb.ClientToServerResponse.Error\x12*\n\x10new_bag_of_chips\x18\x0e \x01(\x0b\x32\x10.sync_pb.ChipBag\x1a\xc2\x01\n\x05\x45rror\x12\x39\n\nerror_type\x18\x01 \x01(\x0e\x32\x1c.sync_pb.SyncEnums.ErrorType:\x07UNKNOWN\x12\x19\n\x11\x65rror_description\x18\x02 \x01(\t\x12\x0b\n\x03url\x18\x03 \x01(\t\x12\x39\n\x06\x61\x63tion\x18\x04 \x01(\x0e\x32\x19.sync_pb.SyncEnums.Action:\x0eUNKNOWN_ACTION\x12\x1b\n\x13\x65rror_data_type_ids\x18\x05 \x03(\x05\x42\x04H\x03`\x01')
+  serialized_pb='\n\nsync.proto\x12\x07sync_pb\x1a\x18\x61pp_list_specifics.proto\x1a app_notification_specifics.proto\x1a\x1b\x61pp_setting_specifics.proto\x1a\x13\x61pp_specifics.proto\x1a\x17\x61rticle_specifics.proto\x1a\x11\x61ttachments.proto\x1a\x18\x61utofill_specifics.proto\x1a\x18\x62ookmark_specifics.proto\x1a\x15\x63lient_commands.proto\x1a\x17\x63lient_debug_info.proto\x1a\x1b\x64\x65vice_info_specifics.proto\x1a\x1a\x64ictionary_specifics.proto\x1a\x10\x65ncryption.proto\x1a\x1b\x65xperiments_specifics.proto\x1a!extension_setting_specifics.proto\x1a\x19\x65xtension_specifics.proto\x1a\x1d\x66\x61vicon_image_specifics.proto\x1a favicon_tracking_specifics.proto\x1a\x1dget_updates_caller_info.proto\x1a(history_delete_directive_specifics.proto\x1a\x16nigori_specifics.proto\x1a$managed_user_setting_specifics.proto\x1a+managed_user_shared_setting_specifics.proto\x1a\x1cmanaged_user_specifics.proto\x1a&managed_user_whitelist_specifics.proto\x1a\x18password_specifics.proto\x1a\x1apreference_specifics.proto\x1a#priority_preference_specifics.proto\x1a\x1dsearch_engine_specifics.proto\x1a\x17session_specifics.proto\x1a\x10sync_enums.proto\x1a,synced_notification_app_info_specifics.proto\x1a#synced_notification_specifics.proto\x1a\x15theme_specifics.proto\x1a\x19typed_url_specifics.proto\x1a\x15unique_position.proto\x1a\x1fwifi_credential_specifics.proto\"\xbb\x01\n\rProfilingData\x12\x1c\n\x14meta_data_write_time\x18\x01 \x01(\x03\x12\x1c\n\x14\x66ile_data_write_time\x18\x02 \x01(\x03\x12\x18\n\x10user_lookup_time\x18\x03 \x01(\x03\x12\x1b\n\x13meta_data_read_time\x18\x04 \x01(\x03\x12\x1b\n\x13\x66ile_data_read_time\x18\x05 \x01(\x03\x12\x1a\n\x12total_request_time\x18\x06 \x01(\x03\"\xa3\x0f\n\x0f\x45ntitySpecifics\x12)\n\tencrypted\x18\x01 \x01(\x0b\x32\x16.sync_pb.EncryptedData\x12.\n\x08\x61utofill\x18\xf1\xf7\x01 \x01(\x0b\x32\x1a.sync_pb.AutofillSpecifics\x12.\n\x08\x62ookmark\x18\x88\x81\x02 \x01(\x0b\x32\x1a.sync_pb.BookmarkSpecifics\x12\x32\n\npreference\x18\xc6\xa6\x02 \x01(\x0b\x32\x1c.sync_pb.PreferenceSpecifics\x12/\n\ttyped_url\x18\xcd\xbe\x02 \x01(\x0b\x32\x1a.sync_pb.TypedUrlSpecifics\x12(\n\x05theme\x18\xfa\xc1\x02 \x01(\x0b\x32\x17.sync_pb.ThemeSpecifics\x12\x34\n\x10\x61pp_notification\x18\x80\xe1\x02 \x01(\x0b\x32\x18.sync_pb.AppNotification\x12.\n\x08password\x18\xb1\xe6\x02 \x01(\x0b\x32\x1a.sync_pb.PasswordSpecifics\x12*\n\x06nigori\x18\x81\xf5\x02 \x01(\x0b\x32\x18.sync_pb.NigoriSpecifics\x12\x30\n\textension\x18\xf7\xf7\x02 \x01(\x0b\x32\x1b.sync_pb.ExtensionSpecifics\x12$\n\x03\x61pp\x18\xec\xf9\x02 \x01(\x0b\x32\x15.sync_pb.AppSpecifics\x12,\n\x07session\x18\xc7\x87\x03 \x01(\x0b\x32\x19.sync_pb.SessionSpecifics\x12=\n\x10\x61utofill_profile\x18\xcf\xf3\x03 \x01(\x0b\x32!.sync_pb.AutofillProfileSpecifics\x12\x37\n\rsearch_engine\x18\xa2\xb4\x05 \x01(\x0b\x32\x1e.sync_pb.SearchEngineSpecifics\x12?\n\x11\x65xtension_setting\x18\x9f\xef\x05 \x01(\x0b\x32\".sync_pb.ExtensionSettingSpecifics\x12\x33\n\x0b\x61pp_setting\x18\xe8\xa9\x06 \x01(\x0b\x32\x1c.sync_pb.AppSettingSpecifics\x12L\n\x18history_delete_directive\x18\xeb\x95\t \x01(\x0b\x32(.sync_pb.HistoryDeleteDirectiveSpecifics\x12\x43\n\x13synced_notification\x18\x94\xac\t \x01(\x0b\x32$.sync_pb.SyncedNotificationSpecifics\x12S\n\x1csynced_notification_app_info\x18\xa8\xb2\x0e \x01(\x0b\x32+.sync_pb.SyncedNotificationAppInfoSpecifics\x12\x33\n\x0b\x64\x65vice_info\x18\x9a\xb7\t \x01(\x0b\x32\x1c.sync_pb.DeviceInfoSpecifics\x12\x34\n\x0b\x65xperiments\x18\xd8\xed\t \x01(\x0b\x32\x1d.sync_pb.ExperimentsSpecifics\x12\x43\n\x13priority_preference\x18\xe1\xfc\t \x01(\x0b\x32$.sync_pb.PriorityPreferenceSpecifics\x12\x32\n\ndictionary\x18\xac\xb4\n \x01(\x0b\x32\x1c.sync_pb.DictionarySpecifics\x12=\n\x10\x66\x61vicon_tracking\x18\x9e\x8a\x0b \x01(\x0b\x32!.sync_pb.FaviconTrackingSpecifics\x12\x37\n\rfavicon_image\x18\x83\x8e\x0b \x01(\x0b\x32\x1e.sync_pb.FaviconImageSpecifics\x12\x44\n\x14managed_user_setting\x18\xa6\xb2\x0b \x01(\x0b\x32$.sync_pb.ManagedUserSettingSpecifics\x12\x35\n\x0cmanaged_user\x18\x96\xf0\x0b \x01(\x0b\x32\x1d.sync_pb.ManagedUserSpecifics\x12Q\n\x1bmanaged_user_shared_setting\x18\xaa\xaa\x0c \x01(\x0b\x32*.sync_pb.ManagedUserSharedSettingSpecifics\x12H\n\x16managed_user_whitelist\x18\x8c\xd7\x12 \x01(\x0b\x32&.sync_pb.ManagedUserWhitelistSpecifics\x12,\n\x07\x61rticle\x18\x8f\xd4\r \x01(\x0b\x32\x19.sync_pb.ArticleSpecifics\x12-\n\x08\x61pp_list\x18\xb2\xfe\r \x01(\x0b\x32\x19.sync_pb.AppListSpecifics\x12;\n\x0fwifi_credential\x18\xbf\xa8\r \x01(\x0b\x32 .sync_pb.WifiCredentialSpecifics\x12;\n\x0f\x61utofill_wallet\x18\xde\xd8\x12 \x01(\x0b\x32 .sync_pb.AutofillWalletSpecifics\x12;\n\x0fwallet_metadata\x18\xc9\x95\x14 \x01(\x0b\x32 .sync_pb.WalletMetadataSpecifics\"\xed\x05\n\nSyncEntity\x12\x11\n\tid_string\x18\x01 \x01(\t\x12\x18\n\x10parent_id_string\x18\x02 \x01(\t\x12\x15\n\rold_parent_id\x18\x03 \x01(\t\x12\x0f\n\x07version\x18\x04 \x02(\x03\x12\r\n\x05mtime\x18\x05 \x01(\x03\x12\r\n\x05\x63time\x18\x06 \x01(\x03\x12\x0c\n\x04name\x18\x07 \x02(\t\x12\x17\n\x0fnon_unique_name\x18\x08 \x01(\t\x12\x16\n\x0esync_timestamp\x18\t \x01(\x03\x12!\n\x19server_defined_unique_tag\x18\n \x01(\t\x12\x36\n\x0c\x62ookmarkdata\x18\x0b \x01(\n2 .sync_pb.SyncEntity.BookmarkData\x12\x1a\n\x12position_in_parent\x18\x0f \x01(\x03\x12\x1c\n\x14insert_after_item_id\x18\x10 \x01(\t\x12\x16\n\x07\x64\x65leted\x18\x12 \x01(\x08:\x05\x66\x61lse\x12\x1d\n\x15originator_cache_guid\x18\x13 \x01(\t\x12!\n\x19originator_client_item_id\x18\x14 \x01(\t\x12+\n\tspecifics\x18\x15 \x01(\x0b\x32\x18.sync_pb.EntitySpecifics\x12\x15\n\x06\x66older\x18\x16 \x01(\x08:\x05\x66\x61lse\x12!\n\x19\x63lient_defined_unique_tag\x18\x17 \x01(\t\x12\x19\n\x11ordinal_in_parent\x18\x18 \x01(\x0c\x12\x30\n\x0funique_position\x18\x19 \x01(\x0b\x32\x17.sync_pb.UniquePosition\x12\x31\n\rattachment_id\x18\x1a \x03(\x0b\x32\x1a.sync_pb.AttachmentIdProto\x1aW\n\x0c\x42ookmarkData\x12\x17\n\x0f\x62ookmark_folder\x18\x0c \x02(\x08\x12\x14\n\x0c\x62ookmark_url\x18\r \x01(\t\x12\x18\n\x10\x62ookmark_favicon\x18\x0e \x01(\x0c\"]\n\x1a\x43hromiumExtensionsActivity\x12\x14\n\x0c\x65xtension_id\x18\x01 \x01(\t\x12)\n!bookmark_writes_since_last_commit\x18\x02 \x01(\r\"M\n\x12\x43lientConfigParams\x12\x18\n\x10\x65nabled_type_ids\x18\x01 \x03(\x05\x12\x1d\n\x15tabs_datatype_enabled\x18\x02 \x01(\x08\"\xf2\x01\n\rCommitMessage\x12$\n\x07\x65ntries\x18\x01 \x03(\x0b\x32\x13.sync_pb.SyncEntity\x12\x12\n\ncache_guid\x18\x02 \x01(\t\x12@\n\x13\x65xtensions_activity\x18\x03 \x03(\x0b\x32#.sync_pb.ChromiumExtensionsActivity\x12\x32\n\rconfig_params\x18\x04 \x01(\x0b\x32\x1b.sync_pb.ClientConfigParams\x12\x31\n\x0f\x63lient_contexts\x18\x05 \x03(\x0b\x32\x18.sync_pb.DataTypeContext\"\xa2\x02\n\x11GetUpdateTriggers\x12\x19\n\x11notification_hint\x18\x01 \x03(\t\x12\x1c\n\x14\x63lient_dropped_hints\x18\x02 \x01(\x08\x12!\n\x19invalidations_out_of_sync\x18\x03 \x01(\x08\x12!\n\x19local_modification_nudges\x18\x04 \x01(\x03\x12\x1f\n\x17\x64\x61tatype_refresh_nudges\x18\x05 \x01(\x03\x12\x1c\n\x14server_dropped_hints\x18\x06 \x01(\x08\x12 \n\x18initial_sync_in_progress\x18\x07 \x01(\x08\x12-\n%sync_for_resolve_conflict_in_progress\x18\x08 \x01(\x08\"\x87\x02\n\x1aGarbageCollectionDirective\x12?\n\x04type\x18\x01 \x01(\x0e\x32(.sync_pb.GarbageCollectionDirective.Type:\x07UNKNOWN\x12\x19\n\x11version_watermark\x18\x02 \x01(\x03\x12\x1d\n\x15\x61ge_watermark_in_days\x18\x03 \x01(\x05\x12\x1b\n\x13max_number_of_items\x18\x04 \x01(\x05\"Q\n\x04Type\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x15\n\x11VERSION_WATERMARK\x10\x01\x12\x11\n\rAGE_WATERMARK\x10\x02\x12\x12\n\x0eMAX_ITEM_COUNT\x10\x03\"\xf3\x01\n\x16\x44\x61taTypeProgressMarker\x12\x14\n\x0c\x64\x61ta_type_id\x18\x01 \x01(\x05\x12\r\n\x05token\x18\x02 \x01(\x0c\x12%\n\x1dtimestamp_token_for_migration\x18\x03 \x01(\x03\x12\x19\n\x11notification_hint\x18\x04 \x01(\t\x12\x37\n\x13get_update_triggers\x18\x05 \x01(\x0b\x32\x1a.sync_pb.GetUpdateTriggers\x12\x39\n\x0cgc_directive\x18\x06 \x01(\x0b\x32#.sync_pb.GarbageCollectionDirective\"\xfd\x03\n\x11GetUpdatesMessage\x12\x16\n\x0e\x66rom_timestamp\x18\x01 \x01(\x03\x12\x32\n\x0b\x63\x61ller_info\x18\x02 \x01(\x0b\x32\x1d.sync_pb.GetUpdatesCallerInfo\x12\x1b\n\rfetch_folders\x18\x03 \x01(\x08:\x04true\x12\x31\n\x0frequested_types\x18\x04 \x01(\x0b\x32\x18.sync_pb.EntitySpecifics\x12\x12\n\nbatch_size\x18\x05 \x01(\x05\x12=\n\x14\x66rom_progress_marker\x18\x06 \x03(\x0b\x32\x1f.sync_pb.DataTypeProgressMarker\x12\x18\n\tstreaming\x18\x07 \x01(\x08:\x05\x66\x61lse\x12\"\n\x13need_encryption_key\x18\x08 \x01(\x08:\x05\x66\x61lse\x12.\n\x1e\x63reate_mobile_bookmarks_folder\x18\xe8\x07 \x01(\x08:\x05\x66\x61lse\x12?\n\x12get_updates_origin\x18\t \x01(\x0e\x32#.sync_pb.SyncEnums.GetUpdatesOrigin\x12\x17\n\x08is_retry\x18\n \x01(\x08:\x05\x66\x61lse\x12\x31\n\x0f\x63lient_contexts\x18\x0b \x03(\x0b\x32\x18.sync_pb.DataTypeContext\")\n\x13\x41uthenticateMessage\x12\x12\n\nauth_token\x18\x01 \x02(\t\"\x18\n\x16\x43learServerDataMessage\"\x19\n\x17\x43learServerDataResponse\"\x14\n\x12\x44\x65precatedMessage1\"\x14\n\x12\x44\x65precatedMessage2\"\x1f\n\x07\x43hipBag\x12\x14\n\x0cserver_chips\x18\x01 \x01(\x0c\"3\n\x0c\x43lientStatus\x12#\n\x1bhierarchy_conflict_detected\x18\x01 \x01(\x08\"I\n\x0f\x44\x61taTypeContext\x12\x14\n\x0c\x64\x61ta_type_id\x18\x01 \x01(\x05\x12\x0f\n\x07\x63ontext\x18\x02 \x01(\x0c\x12\x0f\n\x07version\x18\x03 \x01(\x03\"\xdd\x05\n\x15\x43lientToServerMessage\x12\r\n\x05share\x18\x01 \x02(\t\x12\x1c\n\x10protocol_version\x18\x02 \x01(\x05:\x02\x34\x35\x12\x41\n\x10message_contents\x18\x03 \x02(\x0e\x32\'.sync_pb.ClientToServerMessage.Contents\x12&\n\x06\x63ommit\x18\x04 \x01(\x0b\x32\x16.sync_pb.CommitMessage\x12/\n\x0bget_updates\x18\x05 \x01(\x0b\x32\x1a.sync_pb.GetUpdatesMessage\x12\x32\n\x0c\x61uthenticate\x18\x06 \x01(\x0b\x32\x1c.sync_pb.AuthenticateMessage\x12;\n\x12\x64\x65precated_field_9\x18\t \x01(\x0b\x32\x1b.sync_pb.DeprecatedMessage1B\x02\x18\x01\x12\x16\n\x0estore_birthday\x18\x07 \x01(\t\x12$\n\x15sync_problem_detected\x18\x08 \x01(\x08:\x05\x66\x61lse\x12&\n\ndebug_info\x18\n \x01(\x0b\x32\x12.sync_pb.DebugInfo\x12&\n\x0c\x62\x61g_of_chips\x18\x0b \x01(\x0b\x32\x10.sync_pb.ChipBag\x12\x0f\n\x07\x61pi_key\x18\x0c \x01(\t\x12,\n\rclient_status\x18\r \x01(\x0b\x32\x15.sync_pb.ClientStatus\x12\x1d\n\x15invalidator_client_id\x18\x0e \x01(\t\x12:\n\x11\x63lear_server_data\x18\x0f \x01(\x0b\x32\x1f.sync_pb.ClearServerDataMessage\"b\n\x08\x43ontents\x12\n\n\x06\x43OMMIT\x10\x01\x12\x0f\n\x0bGET_UPDATES\x10\x02\x12\x10\n\x0c\x41UTHENTICATE\x10\x03\x12\x10\n\x0c\x44\x45PRECATED_4\x10\x04\x12\x15\n\x11\x43LEAR_SERVER_DATA\x10\x05\"B\n\x13GetCrashInfoRequest\x12\x10\n\x08\x63rash_id\x18\x01 \x01(\t\x12\x19\n\x11\x63rash_time_millis\x18\x02 \x01(\x03\"C\n\x14GetCrashInfoResponse\x12\x10\n\x08stack_id\x18\x01 \x01(\t\x12\x19\n\x11\x63rash_time_millis\x18\x02 \x01(\x03\"\xb4\x03\n\x0e\x43ommitResponse\x12<\n\rentryresponse\x18\x01 \x03(\n2%.sync_pb.CommitResponse.EntryResponse\x1a\xf3\x01\n\rEntryResponse\x12;\n\rresponse_type\x18\x02 \x02(\x0e\x32$.sync_pb.CommitResponse.ResponseType\x12\x11\n\tid_string\x18\x03 \x01(\t\x12\x18\n\x10parent_id_string\x18\x04 \x01(\t\x12\x1a\n\x12position_in_parent\x18\x05 \x01(\x03\x12\x0f\n\x07version\x18\x06 \x01(\x03\x12\x0c\n\x04name\x18\x07 \x01(\t\x12\x17\n\x0fnon_unique_name\x18\x08 \x01(\t\x12\x15\n\rerror_message\x18\t \x01(\t\x12\r\n\x05mtime\x18\n \x01(\x03\"n\n\x0cResponseType\x12\x0b\n\x07SUCCESS\x10\x01\x12\x0c\n\x08\x43ONFLICT\x10\x02\x12\t\n\x05RETRY\x10\x03\x12\x13\n\x0fINVALID_MESSAGE\x10\x04\x12\x0e\n\nOVER_QUOTA\x10\x05\x12\x13\n\x0fTRANSIENT_ERROR\x10\x06\"\x9d\x02\n\x12GetUpdatesResponse\x12$\n\x07\x65ntries\x18\x01 \x03(\x0b\x32\x13.sync_pb.SyncEntity\x12\x15\n\rnew_timestamp\x18\x02 \x01(\x03\x12#\n\x1b\x64\x65precated_newest_timestamp\x18\x03 \x01(\x03\x12\x19\n\x11\x63hanges_remaining\x18\x04 \x01(\x03\x12<\n\x13new_progress_marker\x18\x05 \x03(\x0b\x32\x1f.sync_pb.DataTypeProgressMarker\x12\x17\n\x0f\x65ncryption_keys\x18\x06 \x03(\x0c\x12\x33\n\x11\x63ontext_mutations\x18\x07 \x03(\x0b\x32\x18.sync_pb.DataTypeContext\"u\n\x1aGetUpdatesMetadataResponse\x12\x19\n\x11\x63hanges_remaining\x18\x01 \x01(\x03\x12<\n\x13new_progress_marker\x18\x02 \x03(\x0b\x32\x1f.sync_pb.DataTypeProgressMarker\"C\n\x1bGetUpdatesStreamingResponse\x12$\n\x07\x65ntries\x18\x01 \x03(\x0b\x32\x13.sync_pb.SyncEntity\"P\n\x12UserIdentification\x12\r\n\x05\x65mail\x18\x01 \x02(\t\x12\x14\n\x0c\x64isplay_name\x18\x02 \x01(\t\x12\x15\n\robfuscated_id\x18\x03 \x01(\t\"A\n\x14\x41uthenticateResponse\x12)\n\x04user\x18\x01 \x01(\x0b\x32\x1b.sync_pb.UserIdentification\"\xaa\x01\n\x12ThrottleParameters\x12 \n\x18min_measure_payload_size\x18\x01 \x02(\x05\x12\x1a\n\x12target_utilization\x18\x02 \x02(\x01\x12\x1c\n\x14measure_interval_max\x18\x03 \x02(\x01\x12\x1c\n\x14measure_interval_min\x18\x04 \x02(\x01\x12\x1a\n\x12observation_window\x18\x05 \x02(\x01\"\xab\x07\n\x16\x43lientToServerResponse\x12\'\n\x06\x63ommit\x18\x01 \x01(\x0b\x32\x17.sync_pb.CommitResponse\x12\x30\n\x0bget_updates\x18\x02 \x01(\x0b\x32\x1b.sync_pb.GetUpdatesResponse\x12\x33\n\x0c\x61uthenticate\x18\x03 \x01(\x0b\x32\x1d.sync_pb.AuthenticateResponse\x12\x39\n\nerror_code\x18\x04 \x01(\x0e\x32\x1c.sync_pb.SyncEnums.ErrorType:\x07UNKNOWN\x12\x15\n\rerror_message\x18\x05 \x01(\t\x12\x16\n\x0estore_birthday\x18\x06 \x01(\t\x12.\n\x0e\x63lient_command\x18\x07 \x01(\x0b\x32\x16.sync_pb.ClientCommand\x12.\n\x0eprofiling_data\x18\x08 \x01(\x0b\x32\x16.sync_pb.ProfilingData\x12;\n\x12\x64\x65precated_field_9\x18\t \x01(\x0b\x32\x1b.sync_pb.DeprecatedMessage2B\x02\x18\x01\x12<\n\x0fstream_metadata\x18\n \x01(\x0b\x32#.sync_pb.GetUpdatesMetadataResponse\x12\x39\n\x0bstream_data\x18\x0b \x01(\x0b\x32$.sync_pb.GetUpdatesStreamingResponse\x12\x1d\n\x15migrated_data_type_id\x18\x0c \x03(\x05\x12\x34\n\x05\x65rror\x18\r \x01(\x0b\x32%.sync_pb.ClientToServerResponse.Error\x12*\n\x10new_bag_of_chips\x18\x0e \x01(\x0b\x32\x10.sync_pb.ChipBag\x12;\n\x11\x63lear_server_data\x18\x0f \x01(\x0b\x32 .sync_pb.ClearServerDataResponse\x1a\xc2\x01\n\x05\x45rror\x12\x39\n\nerror_type\x18\x01 \x01(\x0e\x32\x1c.sync_pb.SyncEnums.ErrorType:\x07UNKNOWN\x12\x19\n\x11\x65rror_description\x18\x02 \x01(\t\x12\x0b\n\x03url\x18\x03 \x01(\t\x12\x39\n\x06\x61\x63tion\x18\x04 \x01(\x0e\x32\x19.sync_pb.SyncEnums.Action:\x0eUNKNOWN_ACTION\x12\x1b\n\x13\x65rror_data_type_ids\x18\x05 \x03(\x05\"A\n\x0c\x45ventRequest\x12\x31\n\rsync_disabled\x18\x01 \x01(\x0b\x32\x1a.sync_pb.SyncDisabledEvent\"\x0f\n\rEventResponse\"?\n\x11SyncDisabledEvent\x12\x12\n\ncache_guid\x18\x01 \x01(\t\x12\x16\n\x0estore_birthday\x18\x02 \x01(\tB\x04H\x03`\x01')
 
 
 
@@ -77,8 +79,8 @@ _GARBAGECOLLECTIONDIRECTIVE_TYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=4496,
-  serialized_end=4577,
+  serialized_start=4907,
+  serialized_end=4988,
 )
 
 _CLIENTTOSERVERMESSAGE_CONTENTS = _descriptor.EnumDescriptor(
@@ -100,14 +102,18 @@ _CLIENTTOSERVERMESSAGE_CONTENTS = _descriptor.EnumDescriptor(
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='CLEAR_DATA', index=3, number=4,
+      name='DEPRECATED_4', index=3, number=4,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='CLEAR_SERVER_DATA', index=4, number=5,
       options=None,
       type=None),
   ],
   containing_type=None,
   options=None,
-  serialized_start=6161,
-  serialized_end=6234,
+  serialized_start=6685,
+  serialized_end=6783,
 )
 
 _COMMITRESPONSE_RESPONSETYPE = _descriptor.EnumDescriptor(
@@ -143,8 +149,8 @@ _COMMITRESPONSE_RESPONSETYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=6700,
-  serialized_end=6810,
+  serialized_start=7249,
+  serialized_end=7359,
 )
 
 
@@ -206,8 +212,8 @@ _PROFILINGDATA = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1040,
-  serialized_end=1227,
+  serialized_start=1113,
+  serialized_end=1300,
 )
 
 
@@ -415,15 +421,43 @@ _ENTITYSPECIFICS = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='article', full_name='sync_pb.EntitySpecifics.article', index=28,
+      name='managed_user_whitelist', full_name='sync_pb.EntitySpecifics.managed_user_whitelist', index=28,
+      number=306060, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='article', full_name='sync_pb.EntitySpecifics.article', index=29,
       number=223759, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='app_list', full_name='sync_pb.EntitySpecifics.app_list', index=29,
+      name='app_list', full_name='sync_pb.EntitySpecifics.app_list', index=30,
       number=229170, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='wifi_credential', full_name='sync_pb.EntitySpecifics.wifi_credential', index=31,
+      number=218175, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='autofill_wallet', full_name='sync_pb.EntitySpecifics.autofill_wallet', index=32,
+      number=306270, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='wallet_metadata', full_name='sync_pb.EntitySpecifics.wallet_metadata', index=33,
+      number=330441, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -437,8 +471,8 @@ _ENTITYSPECIFICS = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1230,
-  serialized_end=2928,
+  serialized_start=1303,
+  serialized_end=3258,
 )
 
 
@@ -479,8 +513,8 @@ _SYNCENTITY_BOOKMARKDATA = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=3593,
-  serialized_end=3680,
+  serialized_start=3923,
+  serialized_end=4010,
 )
 
 _SYNCENTITY = _descriptor.Descriptor(
@@ -653,8 +687,8 @@ _SYNCENTITY = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=2931,
-  serialized_end=3680,
+  serialized_start=3261,
+  serialized_end=4010,
 )
 
 
@@ -688,8 +722,8 @@ _CHROMIUMEXTENSIONSACTIVITY = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=3682,
-  serialized_end=3775,
+  serialized_start=4012,
+  serialized_end=4105,
 )
 
 
@@ -723,8 +757,8 @@ _CLIENTCONFIGPARAMS = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=3777,
-  serialized_end=3854,
+  serialized_start=4107,
+  serialized_end=4184,
 )
 
 
@@ -779,8 +813,8 @@ _COMMITMESSAGE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=3857,
-  serialized_end=4099,
+  serialized_start=4187,
+  serialized_end=4429,
 )
 
 
@@ -833,6 +867,20 @@ _GETUPDATETRIGGERS = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
+    _descriptor.FieldDescriptor(
+      name='initial_sync_in_progress', full_name='sync_pb.GetUpdateTriggers.initial_sync_in_progress', index=6,
+      number=7, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='sync_for_resolve_conflict_in_progress', full_name='sync_pb.GetUpdateTriggers.sync_for_resolve_conflict_in_progress', index=7,
+      number=8, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
   ],
   extensions=[
   ],
@@ -842,8 +890,8 @@ _GETUPDATETRIGGERS = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=4102,
-  serialized_end=4311,
+  serialized_start=4432,
+  serialized_end=4722,
 )
 
 
@@ -892,8 +940,8 @@ _GARBAGECOLLECTIONDIRECTIVE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=4314,
-  serialized_end=4577,
+  serialized_start=4725,
+  serialized_end=4988,
 )
 
 
@@ -955,8 +1003,8 @@ _DATATYPEPROGRESSMARKER = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=4580,
-  serialized_end=4823,
+  serialized_start=4991,
+  serialized_end=5234,
 )
 
 
@@ -1060,8 +1108,8 @@ _GETUPDATESMESSAGE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=4826,
-  serialized_end=5335,
+  serialized_start=5237,
+  serialized_end=5746,
 )
 
 
@@ -1088,14 +1136,14 @@ _AUTHENTICATEMESSAGE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=5337,
-  serialized_end=5378,
+  serialized_start=5748,
+  serialized_end=5789,
 )
 
 
-_CLEARUSERDATAMESSAGE = _descriptor.Descriptor(
-  name='ClearUserDataMessage',
-  full_name='sync_pb.ClearUserDataMessage',
+_CLEARSERVERDATAMESSAGE = _descriptor.Descriptor(
+  name='ClearServerDataMessage',
+  full_name='sync_pb.ClearServerDataMessage',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
@@ -1109,14 +1157,14 @@ _CLEARUSERDATAMESSAGE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=5380,
-  serialized_end=5402,
+  serialized_start=5791,
+  serialized_end=5815,
 )
 
 
-_CLEARUSERDATARESPONSE = _descriptor.Descriptor(
-  name='ClearUserDataResponse',
-  full_name='sync_pb.ClearUserDataResponse',
+_CLEARSERVERDATARESPONSE = _descriptor.Descriptor(
+  name='ClearServerDataResponse',
+  full_name='sync_pb.ClearServerDataResponse',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
@@ -1130,8 +1178,50 @@ _CLEARUSERDATARESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=5404,
-  serialized_end=5427,
+  serialized_start=5817,
+  serialized_end=5842,
+)
+
+
+_DEPRECATEDMESSAGE1 = _descriptor.Descriptor(
+  name='DeprecatedMessage1',
+  full_name='sync_pb.DeprecatedMessage1',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=5844,
+  serialized_end=5864,
+)
+
+
+_DEPRECATEDMESSAGE2 = _descriptor.Descriptor(
+  name='DeprecatedMessage2',
+  full_name='sync_pb.DeprecatedMessage2',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=5866,
+  serialized_end=5886,
 )
 
 
@@ -1158,8 +1248,8 @@ _CHIPBAG = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=5429,
-  serialized_end=5460,
+  serialized_start=5888,
+  serialized_end=5919,
 )
 
 
@@ -1186,8 +1276,8 @@ _CLIENTSTATUS = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=5462,
-  serialized_end=5513,
+  serialized_start=5921,
+  serialized_end=5972,
 )
 
 
@@ -1228,8 +1318,8 @@ _DATATYPECONTEXT = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=5515,
-  serialized_end=5588,
+  serialized_start=5974,
+  serialized_end=6047,
 )
 
 
@@ -1250,7 +1340,7 @@ _CLIENTTOSERVERMESSAGE = _descriptor.Descriptor(
     _descriptor.FieldDescriptor(
       name='protocol_version', full_name='sync_pb.ClientToServerMessage.protocol_version', index=1,
       number=2, type=5, cpp_type=1, label=1,
-      has_default_value=True, default_value=33,
+      has_default_value=True, default_value=45,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -1283,12 +1373,12 @@ _CLIENTTOSERVERMESSAGE = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='clear_user_data', full_name='sync_pb.ClientToServerMessage.clear_user_data', index=6,
+      name='deprecated_field_9', full_name='sync_pb.ClientToServerMessage.deprecated_field_9', index=6,
       number=9, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None),
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\030\001')),
     _descriptor.FieldDescriptor(
       name='store_birthday', full_name='sync_pb.ClientToServerMessage.store_birthday', index=7,
       number=7, type=9, cpp_type=9, label=1,
@@ -1338,6 +1428,13 @@ _CLIENTTOSERVERMESSAGE = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
+    _descriptor.FieldDescriptor(
+      name='clear_server_data', full_name='sync_pb.ClientToServerMessage.clear_server_data', index=14,
+      number=15, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
   ],
   extensions=[
   ],
@@ -1348,8 +1445,8 @@ _CLIENTTOSERVERMESSAGE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=5591,
-  serialized_end=6234,
+  serialized_start=6050,
+  serialized_end=6783,
 )
 
 
@@ -1383,8 +1480,8 @@ _GETCRASHINFOREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=6236,
-  serialized_end=6302,
+  serialized_start=6785,
+  serialized_end=6851,
 )
 
 
@@ -1418,8 +1515,8 @@ _GETCRASHINFORESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=6304,
-  serialized_end=6371,
+  serialized_start=6853,
+  serialized_end=6920,
 )
 
 
@@ -1502,8 +1599,8 @@ _COMMITRESPONSE_ENTRYRESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=6455,
-  serialized_end=6698,
+  serialized_start=7004,
+  serialized_end=7247,
 )
 
 _COMMITRESPONSE = _descriptor.Descriptor(
@@ -1530,8 +1627,8 @@ _COMMITRESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=6374,
-  serialized_end=6810,
+  serialized_start=6923,
+  serialized_end=7359,
 )
 
 
@@ -1600,8 +1697,8 @@ _GETUPDATESRESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=6813,
-  serialized_end=7098,
+  serialized_start=7362,
+  serialized_end=7647,
 )
 
 
@@ -1635,8 +1732,8 @@ _GETUPDATESMETADATARESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=7100,
-  serialized_end=7217,
+  serialized_start=7649,
+  serialized_end=7766,
 )
 
 
@@ -1663,8 +1760,8 @@ _GETUPDATESSTREAMINGRESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=7219,
-  serialized_end=7286,
+  serialized_start=7768,
+  serialized_end=7835,
 )
 
 
@@ -1705,8 +1802,8 @@ _USERIDENTIFICATION = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=7288,
-  serialized_end=7368,
+  serialized_start=7837,
+  serialized_end=7917,
 )
 
 
@@ -1733,8 +1830,8 @@ _AUTHENTICATERESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=7370,
-  serialized_end=7435,
+  serialized_start=7919,
+  serialized_end=7984,
 )
 
 
@@ -1789,8 +1886,8 @@ _THROTTLEPARAMETERS = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=7438,
-  serialized_end=7608,
+  serialized_start=7987,
+  serialized_end=8157,
 )
 
 
@@ -1845,8 +1942,8 @@ _CLIENTTOSERVERRESPONSE_ERROR = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=8291,
-  serialized_end=8485,
+  serialized_start=8905,
+  serialized_end=9099,
 )
 
 _CLIENTTOSERVERRESPONSE = _descriptor.Descriptor(
@@ -1913,12 +2010,12 @@ _CLIENTTOSERVERRESPONSE = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='clear_user_data', full_name='sync_pb.ClientToServerResponse.clear_user_data', index=8,
+      name='deprecated_field_9', full_name='sync_pb.ClientToServerResponse.deprecated_field_9', index=8,
       number=9, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None),
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\030\001')),
     _descriptor.FieldDescriptor(
       name='stream_metadata', full_name='sync_pb.ClientToServerResponse.stream_metadata', index=9,
       number=10, type=11, cpp_type=10, label=1,
@@ -1954,6 +2051,13 @@ _CLIENTTOSERVERRESPONSE = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
+    _descriptor.FieldDescriptor(
+      name='clear_server_data', full_name='sync_pb.ClientToServerResponse.clear_server_data', index=14,
+      number=15, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
   ],
   extensions=[
   ],
@@ -1963,8 +2067,92 @@ _CLIENTTOSERVERRESPONSE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=7611,
-  serialized_end=8485,
+  serialized_start=8160,
+  serialized_end=9099,
+)
+
+
+_EVENTREQUEST = _descriptor.Descriptor(
+  name='EventRequest',
+  full_name='sync_pb.EventRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='sync_disabled', full_name='sync_pb.EventRequest.sync_disabled', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=9101,
+  serialized_end=9166,
+)
+
+
+_EVENTRESPONSE = _descriptor.Descriptor(
+  name='EventResponse',
+  full_name='sync_pb.EventResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=9168,
+  serialized_end=9183,
+)
+
+
+_SYNCDISABLEDEVENT = _descriptor.Descriptor(
+  name='SyncDisabledEvent',
+  full_name='sync_pb.SyncDisabledEvent',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='cache_guid', full_name='sync_pb.SyncDisabledEvent.cache_guid', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=unicode("", "utf-8"),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='store_birthday', full_name='sync_pb.SyncDisabledEvent.store_birthday', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=unicode("", "utf-8"),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=9185,
+  serialized_end=9248,
 )
 
 _ENTITYSPECIFICS.fields_by_name['encrypted'].message_type = encryption_pb2._ENCRYPTEDDATA
@@ -1995,8 +2183,12 @@ _ENTITYSPECIFICS.fields_by_name['favicon_image'].message_type = favicon_image_sp
 _ENTITYSPECIFICS.fields_by_name['managed_user_setting'].message_type = managed_user_setting_specifics_pb2._MANAGEDUSERSETTINGSPECIFICS
 _ENTITYSPECIFICS.fields_by_name['managed_user'].message_type = managed_user_specifics_pb2._MANAGEDUSERSPECIFICS
 _ENTITYSPECIFICS.fields_by_name['managed_user_shared_setting'].message_type = managed_user_shared_setting_specifics_pb2._MANAGEDUSERSHAREDSETTINGSPECIFICS
+_ENTITYSPECIFICS.fields_by_name['managed_user_whitelist'].message_type = managed_user_whitelist_specifics_pb2._MANAGEDUSERWHITELISTSPECIFICS
 _ENTITYSPECIFICS.fields_by_name['article'].message_type = article_specifics_pb2._ARTICLESPECIFICS
 _ENTITYSPECIFICS.fields_by_name['app_list'].message_type = app_list_specifics_pb2._APPLISTSPECIFICS
+_ENTITYSPECIFICS.fields_by_name['wifi_credential'].message_type = wifi_credential_specifics_pb2._WIFICREDENTIALSPECIFICS
+_ENTITYSPECIFICS.fields_by_name['autofill_wallet'].message_type = autofill_specifics_pb2._AUTOFILLWALLETSPECIFICS
+_ENTITYSPECIFICS.fields_by_name['wallet_metadata'].message_type = autofill_specifics_pb2._WALLETMETADATASPECIFICS
 _SYNCENTITY_BOOKMARKDATA.containing_type = _SYNCENTITY;
 _SYNCENTITY.fields_by_name['bookmarkdata'].message_type = _SYNCENTITY_BOOKMARKDATA
 _SYNCENTITY.fields_by_name['specifics'].message_type = _ENTITYSPECIFICS
@@ -2019,10 +2211,11 @@ _CLIENTTOSERVERMESSAGE.fields_by_name['message_contents'].enum_type = _CLIENTTOS
 _CLIENTTOSERVERMESSAGE.fields_by_name['commit'].message_type = _COMMITMESSAGE
 _CLIENTTOSERVERMESSAGE.fields_by_name['get_updates'].message_type = _GETUPDATESMESSAGE
 _CLIENTTOSERVERMESSAGE.fields_by_name['authenticate'].message_type = _AUTHENTICATEMESSAGE
-_CLIENTTOSERVERMESSAGE.fields_by_name['clear_user_data'].message_type = _CLEARUSERDATAMESSAGE
+_CLIENTTOSERVERMESSAGE.fields_by_name['deprecated_field_9'].message_type = _DEPRECATEDMESSAGE1
 _CLIENTTOSERVERMESSAGE.fields_by_name['debug_info'].message_type = client_debug_info_pb2._DEBUGINFO
 _CLIENTTOSERVERMESSAGE.fields_by_name['bag_of_chips'].message_type = _CHIPBAG
 _CLIENTTOSERVERMESSAGE.fields_by_name['client_status'].message_type = _CLIENTSTATUS
+_CLIENTTOSERVERMESSAGE.fields_by_name['clear_server_data'].message_type = _CLEARSERVERDATAMESSAGE
 _CLIENTTOSERVERMESSAGE_CONTENTS.containing_type = _CLIENTTOSERVERMESSAGE;
 _COMMITRESPONSE_ENTRYRESPONSE.fields_by_name['response_type'].enum_type = _COMMITRESPONSE_RESPONSETYPE
 _COMMITRESPONSE_ENTRYRESPONSE.containing_type = _COMMITRESPONSE;
@@ -2043,11 +2236,13 @@ _CLIENTTOSERVERRESPONSE.fields_by_name['authenticate'].message_type = _AUTHENTIC
 _CLIENTTOSERVERRESPONSE.fields_by_name['error_code'].enum_type = sync_enums_pb2._SYNCENUMS_ERRORTYPE
 _CLIENTTOSERVERRESPONSE.fields_by_name['client_command'].message_type = client_commands_pb2._CLIENTCOMMAND
 _CLIENTTOSERVERRESPONSE.fields_by_name['profiling_data'].message_type = _PROFILINGDATA
-_CLIENTTOSERVERRESPONSE.fields_by_name['clear_user_data'].message_type = _CLEARUSERDATARESPONSE
+_CLIENTTOSERVERRESPONSE.fields_by_name['deprecated_field_9'].message_type = _DEPRECATEDMESSAGE2
 _CLIENTTOSERVERRESPONSE.fields_by_name['stream_metadata'].message_type = _GETUPDATESMETADATARESPONSE
 _CLIENTTOSERVERRESPONSE.fields_by_name['stream_data'].message_type = _GETUPDATESSTREAMINGRESPONSE
 _CLIENTTOSERVERRESPONSE.fields_by_name['error'].message_type = _CLIENTTOSERVERRESPONSE_ERROR
 _CLIENTTOSERVERRESPONSE.fields_by_name['new_bag_of_chips'].message_type = _CHIPBAG
+_CLIENTTOSERVERRESPONSE.fields_by_name['clear_server_data'].message_type = _CLEARSERVERDATARESPONSE
+_EVENTREQUEST.fields_by_name['sync_disabled'].message_type = _SYNCDISABLEDEVENT
 DESCRIPTOR.message_types_by_name['ProfilingData'] = _PROFILINGDATA
 DESCRIPTOR.message_types_by_name['EntitySpecifics'] = _ENTITYSPECIFICS
 DESCRIPTOR.message_types_by_name['SyncEntity'] = _SYNCENTITY
@@ -2059,8 +2254,10 @@ DESCRIPTOR.message_types_by_name['GarbageCollectionDirective'] = _GARBAGECOLLECT
 DESCRIPTOR.message_types_by_name['DataTypeProgressMarker'] = _DATATYPEPROGRESSMARKER
 DESCRIPTOR.message_types_by_name['GetUpdatesMessage'] = _GETUPDATESMESSAGE
 DESCRIPTOR.message_types_by_name['AuthenticateMessage'] = _AUTHENTICATEMESSAGE
-DESCRIPTOR.message_types_by_name['ClearUserDataMessage'] = _CLEARUSERDATAMESSAGE
-DESCRIPTOR.message_types_by_name['ClearUserDataResponse'] = _CLEARUSERDATARESPONSE
+DESCRIPTOR.message_types_by_name['ClearServerDataMessage'] = _CLEARSERVERDATAMESSAGE
+DESCRIPTOR.message_types_by_name['ClearServerDataResponse'] = _CLEARSERVERDATARESPONSE
+DESCRIPTOR.message_types_by_name['DeprecatedMessage1'] = _DEPRECATEDMESSAGE1
+DESCRIPTOR.message_types_by_name['DeprecatedMessage2'] = _DEPRECATEDMESSAGE2
 DESCRIPTOR.message_types_by_name['ChipBag'] = _CHIPBAG
 DESCRIPTOR.message_types_by_name['ClientStatus'] = _CLIENTSTATUS
 DESCRIPTOR.message_types_by_name['DataTypeContext'] = _DATATYPECONTEXT
@@ -2075,6 +2272,9 @@ DESCRIPTOR.message_types_by_name['UserIdentification'] = _USERIDENTIFICATION
 DESCRIPTOR.message_types_by_name['AuthenticateResponse'] = _AUTHENTICATERESPONSE
 DESCRIPTOR.message_types_by_name['ThrottleParameters'] = _THROTTLEPARAMETERS
 DESCRIPTOR.message_types_by_name['ClientToServerResponse'] = _CLIENTTOSERVERRESPONSE
+DESCRIPTOR.message_types_by_name['EventRequest'] = _EVENTREQUEST
+DESCRIPTOR.message_types_by_name['EventResponse'] = _EVENTRESPONSE
+DESCRIPTOR.message_types_by_name['SyncDisabledEvent'] = _SYNCDISABLEDEVENT
 
 class ProfilingData(_message.Message):
   __metaclass__ = _reflection.GeneratedProtocolMessageType
@@ -2148,17 +2348,29 @@ class AuthenticateMessage(_message.Message):
 
   # @@protoc_insertion_point(class_scope:sync_pb.AuthenticateMessage)
 
-class ClearUserDataMessage(_message.Message):
+class ClearServerDataMessage(_message.Message):
   __metaclass__ = _reflection.GeneratedProtocolMessageType
-  DESCRIPTOR = _CLEARUSERDATAMESSAGE
+  DESCRIPTOR = _CLEARSERVERDATAMESSAGE
 
-  # @@protoc_insertion_point(class_scope:sync_pb.ClearUserDataMessage)
+  # @@protoc_insertion_point(class_scope:sync_pb.ClearServerDataMessage)
 
-class ClearUserDataResponse(_message.Message):
+class ClearServerDataResponse(_message.Message):
   __metaclass__ = _reflection.GeneratedProtocolMessageType
-  DESCRIPTOR = _CLEARUSERDATARESPONSE
+  DESCRIPTOR = _CLEARSERVERDATARESPONSE
 
-  # @@protoc_insertion_point(class_scope:sync_pb.ClearUserDataResponse)
+  # @@protoc_insertion_point(class_scope:sync_pb.ClearServerDataResponse)
+
+class DeprecatedMessage1(_message.Message):
+  __metaclass__ = _reflection.GeneratedProtocolMessageType
+  DESCRIPTOR = _DEPRECATEDMESSAGE1
+
+  # @@protoc_insertion_point(class_scope:sync_pb.DeprecatedMessage1)
+
+class DeprecatedMessage2(_message.Message):
+  __metaclass__ = _reflection.GeneratedProtocolMessageType
+  DESCRIPTOR = _DEPRECATEDMESSAGE2
+
+  # @@protoc_insertion_point(class_scope:sync_pb.DeprecatedMessage2)
 
 class ChipBag(_message.Message):
   __metaclass__ = _reflection.GeneratedProtocolMessageType
@@ -2256,7 +2468,29 @@ class ClientToServerResponse(_message.Message):
 
   # @@protoc_insertion_point(class_scope:sync_pb.ClientToServerResponse)
 
+class EventRequest(_message.Message):
+  __metaclass__ = _reflection.GeneratedProtocolMessageType
+  DESCRIPTOR = _EVENTREQUEST
+
+  # @@protoc_insertion_point(class_scope:sync_pb.EventRequest)
+
+class EventResponse(_message.Message):
+  __metaclass__ = _reflection.GeneratedProtocolMessageType
+  DESCRIPTOR = _EVENTRESPONSE
+
+  # @@protoc_insertion_point(class_scope:sync_pb.EventResponse)
+
+class SyncDisabledEvent(_message.Message):
+  __metaclass__ = _reflection.GeneratedProtocolMessageType
+  DESCRIPTOR = _SYNCDISABLEDEVENT
+
+  # @@protoc_insertion_point(class_scope:sync_pb.SyncDisabledEvent)
+
 
 DESCRIPTOR.has_options = True
 DESCRIPTOR._options = _descriptor._ParseOptions(descriptor_pb2.FileOptions(), 'H\003`\001')
+_CLIENTTOSERVERMESSAGE.fields_by_name['deprecated_field_9'].has_options = True
+_CLIENTTOSERVERMESSAGE.fields_by_name['deprecated_field_9']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\030\001')
+_CLIENTTOSERVERRESPONSE.fields_by_name['deprecated_field_9'].has_options = True
+_CLIENTTOSERVERRESPONSE.fields_by_name['deprecated_field_9']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\030\001')
 # @@protoc_insertion_point(module_scope)

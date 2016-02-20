@@ -14,7 +14,7 @@ import encryption_pb2
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='nigori_specifics.proto',
   package='sync_pb',
-  serialized_pb='\n\x16nigori_specifics.proto\x12\x07sync_pb\x1a\x10\x65ncryption.proto\"T\n\tNigoriKey\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x10\n\x08user_key\x18\x02 \x01(\x0c\x12\x16\n\x0e\x65ncryption_key\x18\x03 \x01(\x0c\x12\x0f\n\x07mac_key\x18\x04 \x01(\x0c\"/\n\x0cNigoriKeyBag\x12\x1f\n\x03key\x18\x02 \x03(\x0b\x32\x12.sync_pb.NigoriKey\"\xed\x07\n\x0fNigoriSpecifics\x12\x31\n\x11\x65ncryption_keybag\x18\x01 \x01(\x0b\x32\x16.sync_pb.EncryptedData\x12\x18\n\x10keybag_is_frozen\x18\x02 \x01(\x08\x12\x19\n\x11\x65ncrypt_bookmarks\x18\r \x01(\x08\x12\x1b\n\x13\x65ncrypt_preferences\x18\x0e \x01(\x08\x12 \n\x18\x65ncrypt_autofill_profile\x18\x0f \x01(\x08\x12\x18\n\x10\x65ncrypt_autofill\x18\x10 \x01(\x08\x12\x16\n\x0e\x65ncrypt_themes\x18\x11 \x01(\x08\x12\x1a\n\x12\x65ncrypt_typed_urls\x18\x12 \x01(\x08\x12\x1a\n\x12\x65ncrypt_extensions\x18\x13 \x01(\x08\x12\x18\n\x10\x65ncrypt_sessions\x18\x14 \x01(\x08\x12\x14\n\x0c\x65ncrypt_apps\x18\x15 \x01(\x08\x12\x1e\n\x16\x65ncrypt_search_engines\x18\x16 \x01(\x08\x12\x1a\n\x12\x65ncrypt_everything\x18\x18 \x01(\x08\x12\"\n\x1a\x65ncrypt_extension_settings\x18\x19 \x01(\x08\x12!\n\x19\x65ncrypt_app_notifications\x18\x1a \x01(\x08\x12\x1c\n\x14\x65ncrypt_app_settings\x18\x1b \x01(\x08\x12\x19\n\x11sync_tab_favicons\x18\x1d \x01(\x08\x12U\n\x0fpassphrase_type\x18\x1e \x01(\x0e\x32\'.sync_pb.NigoriSpecifics.PassphraseType:\x13IMPLICIT_PASSPHRASE\x12\x38\n\x18keystore_decryptor_token\x18\x1f \x01(\x0b\x32\x16.sync_pb.EncryptedData\x12\x1f\n\x17keystore_migration_time\x18  \x01(\x03\x12\x1e\n\x16\x63ustom_passphrase_time\x18! \x01(\x03\x12\x1a\n\x12\x65ncrypt_dictionary\x18\" \x01(\x08\x12\x1e\n\x16\x65ncrypt_favicon_images\x18# \x01(\x08\x12 \n\x18\x65ncrypt_favicon_tracking\x18$ \x01(\x08\x12\x18\n\x10\x65ncrypt_articles\x18% \x01(\x08\x12\x18\n\x10\x65ncrypt_app_list\x18& \x01(\x08\"y\n\x0ePassphraseType\x12\x17\n\x13IMPLICIT_PASSPHRASE\x10\x01\x12\x17\n\x13KEYSTORE_PASSPHRASE\x10\x02\x12\x1e\n\x1a\x46ROZEN_IMPLICIT_PASSPHRASE\x10\x03\x12\x15\n\x11\x43USTOM_PASSPHRASE\x10\x04\x42\x04H\x03`\x01')
+  serialized_pb='\n\x16nigori_specifics.proto\x12\x07sync_pb\x1a\x10\x65ncryption.proto\"T\n\tNigoriKey\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x10\n\x08user_key\x18\x02 \x01(\x0c\x12\x16\n\x0e\x65ncryption_key\x18\x03 \x01(\x0c\x12\x0f\n\x07mac_key\x18\x04 \x01(\x0c\"/\n\x0cNigoriKeyBag\x12\x1f\n\x03key\x18\x02 \x03(\x0b\x32\x12.sync_pb.NigoriKey\"\xd0\x08\n\x0fNigoriSpecifics\x12\x31\n\x11\x65ncryption_keybag\x18\x01 \x01(\x0b\x32\x16.sync_pb.EncryptedData\x12\x18\n\x10keybag_is_frozen\x18\x02 \x01(\x08\x12\x19\n\x11\x65ncrypt_bookmarks\x18\r \x01(\x08\x12\x1b\n\x13\x65ncrypt_preferences\x18\x0e \x01(\x08\x12 \n\x18\x65ncrypt_autofill_profile\x18\x0f \x01(\x08\x12\x18\n\x10\x65ncrypt_autofill\x18\x10 \x01(\x08\x12\x16\n\x0e\x65ncrypt_themes\x18\x11 \x01(\x08\x12\x1a\n\x12\x65ncrypt_typed_urls\x18\x12 \x01(\x08\x12\x1a\n\x12\x65ncrypt_extensions\x18\x13 \x01(\x08\x12\x18\n\x10\x65ncrypt_sessions\x18\x14 \x01(\x08\x12\x14\n\x0c\x65ncrypt_apps\x18\x15 \x01(\x08\x12\x1e\n\x16\x65ncrypt_search_engines\x18\x16 \x01(\x08\x12\x1a\n\x12\x65ncrypt_everything\x18\x18 \x01(\x08\x12\"\n\x1a\x65ncrypt_extension_settings\x18\x19 \x01(\x08\x12!\n\x19\x65ncrypt_app_notifications\x18\x1a \x01(\x08\x12\x1c\n\x14\x65ncrypt_app_settings\x18\x1b \x01(\x08\x12\x19\n\x11sync_tab_favicons\x18\x1d \x01(\x08\x12U\n\x0fpassphrase_type\x18\x1e \x01(\x0e\x32\'.sync_pb.NigoriSpecifics.PassphraseType:\x13IMPLICIT_PASSPHRASE\x12\x38\n\x18keystore_decryptor_token\x18\x1f \x01(\x0b\x32\x16.sync_pb.EncryptedData\x12\x1f\n\x17keystore_migration_time\x18  \x01(\x03\x12\x1e\n\x16\x63ustom_passphrase_time\x18! \x01(\x03\x12\x1a\n\x12\x65ncrypt_dictionary\x18\" \x01(\x08\x12\x1e\n\x16\x65ncrypt_favicon_images\x18# \x01(\x08\x12 \n\x18\x65ncrypt_favicon_tracking\x18$ \x01(\x08\x12\x18\n\x10\x65ncrypt_articles\x18% \x01(\x08\x12\x18\n\x10\x65ncrypt_app_list\x18& \x01(\x08\x12(\n encrypt_autofill_wallet_metadata\x18\' \x01(\x08\x12\x37\n/server_only_was_missing_keystore_migration_time\x18( \x01(\x08\"y\n\x0ePassphraseType\x12\x17\n\x13IMPLICIT_PASSPHRASE\x10\x01\x12\x17\n\x13KEYSTORE_PASSPHRASE\x10\x02\x12\x1e\n\x1a\x46ROZEN_IMPLICIT_PASSPHRASE\x10\x03\x12\x15\n\x11\x43USTOM_PASSPHRASE\x10\x04\x42\x04H\x03`\x01')
 
 
 
@@ -43,8 +43,8 @@ _NIGORISPECIFICS_PASSPHRASETYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=1073,
-  serialized_end=1194,
+  serialized_start=1172,
+  serialized_end=1293,
 )
 
 
@@ -314,6 +314,20 @@ _NIGORISPECIFICS = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
+    _descriptor.FieldDescriptor(
+      name='encrypt_autofill_wallet_metadata', full_name='sync_pb.NigoriSpecifics.encrypt_autofill_wallet_metadata', index=26,
+      number=39, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='server_only_was_missing_keystore_migration_time', full_name='sync_pb.NigoriSpecifics.server_only_was_missing_keystore_migration_time', index=27,
+      number=40, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
   ],
   extensions=[
   ],
@@ -325,7 +339,7 @@ _NIGORISPECIFICS = _descriptor.Descriptor(
   is_extendable=False,
   extension_ranges=[],
   serialized_start=189,
-  serialized_end=1194,
+  serialized_end=1293,
 )
 
 _NIGORIKEYBAG.fields_by_name['key'].message_type = _NIGORIKEY

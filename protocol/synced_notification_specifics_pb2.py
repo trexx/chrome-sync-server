@@ -8,14 +8,12 @@ from google.protobuf import descriptor_pb2
 # @@protoc_insertion_point(imports)
 
 
-import synced_notification_data_pb2
-import synced_notification_render_pb2
 
 
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='synced_notification_specifics.proto',
   package='sync_pb',
-  serialized_pb='\n#synced_notification_specifics.proto\x12\x07sync_pb\x1a\x1esynced_notification_data.proto\x1a synced_notification_render.proto\"c\n\x1bSyncedNotificationSpecifics\x12\x44\n\x16\x63oalesced_notification\x18\x01 \x01(\x0b\x32$.sync_pb.CoalescedSyncedNotificationB\x04H\x03`\x01')
+  serialized_pb='\n#synced_notification_specifics.proto\x12\x07sync_pb\"\x1d\n\x1bSyncedNotificationSpecificsB\x04H\x03`\x01')
 
 
 
@@ -27,13 +25,6 @@ _SYNCEDNOTIFICATIONSPECIFICS = _descriptor.Descriptor(
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
-    _descriptor.FieldDescriptor(
-      name='coalesced_notification', full_name='sync_pb.SyncedNotificationSpecifics.coalesced_notification', index=0,
-      number=1, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
   ],
   extensions=[
   ],
@@ -43,11 +34,10 @@ _SYNCEDNOTIFICATIONSPECIFICS = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=114,
-  serialized_end=213,
+  serialized_start=48,
+  serialized_end=77,
 )
 
-_SYNCEDNOTIFICATIONSPECIFICS.fields_by_name['coalesced_notification'].message_type = synced_notification_data_pb2._COALESCEDSYNCEDNOTIFICATION
 DESCRIPTOR.message_types_by_name['SyncedNotificationSpecifics'] = _SYNCEDNOTIFICATIONSPECIFICS
 
 class SyncedNotificationSpecifics(_message.Message):

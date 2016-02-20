@@ -13,7 +13,7 @@ from google.protobuf import descriptor_pb2
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='extension_specifics.proto',
   package='sync_pb',
-  serialized_pb='\n\x19\x65xtension_specifics.proto\x12\x07sync_pb\"\x97\x01\n\x12\x45xtensionSpecifics\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0f\n\x07version\x18\x02 \x01(\t\x12\x12\n\nupdate_url\x18\x03 \x01(\t\x12\x0f\n\x07\x65nabled\x18\x04 \x01(\x08\x12\x19\n\x11incognito_enabled\x18\x05 \x01(\x08\x12\x0c\n\x04name\x18\x06 \x01(\t\x12\x16\n\x0eremote_install\x18\x07 \x01(\x08\x42\x04H\x03`\x01')
+  serialized_pb='\n\x19\x65xtension_specifics.proto\x12\x07sync_pb\"\xea\x01\n\x12\x45xtensionSpecifics\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0f\n\x07version\x18\x02 \x01(\t\x12\x12\n\nupdate_url\x18\x03 \x01(\t\x12\x0f\n\x07\x65nabled\x18\x04 \x01(\x08\x12\x19\n\x11incognito_enabled\x18\x05 \x01(\x08\x12\x0c\n\x04name\x18\x06 \x01(\t\x12\x16\n\x0eremote_install\x18\x07 \x01(\x08\x12\x1e\n\x16installed_by_custodian\x18\x08 \x01(\x08\x12\x18\n\x10\x61ll_urls_enabled\x18\t \x01(\x08\x12\x17\n\x0f\x64isable_reasons\x18\n \x01(\x05\x42\x04H\x03`\x01')
 
 
 
@@ -74,6 +74,27 @@ _EXTENSIONSPECIFICS = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
+    _descriptor.FieldDescriptor(
+      name='installed_by_custodian', full_name='sync_pb.ExtensionSpecifics.installed_by_custodian', index=7,
+      number=8, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='all_urls_enabled', full_name='sync_pb.ExtensionSpecifics.all_urls_enabled', index=8,
+      number=9, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='disable_reasons', full_name='sync_pb.ExtensionSpecifics.disable_reasons', index=9,
+      number=10, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
   ],
   extensions=[
   ],
@@ -84,7 +105,7 @@ _EXTENSIONSPECIFICS = _descriptor.Descriptor(
   is_extendable=False,
   extension_ranges=[],
   serialized_start=39,
-  serialized_end=190,
+  serialized_end=273,
 )
 
 DESCRIPTOR.message_types_by_name['ExtensionSpecifics'] = _EXTENSIONSPECIFICS

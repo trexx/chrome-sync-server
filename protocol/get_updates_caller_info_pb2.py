@@ -13,7 +13,7 @@ from google.protobuf import descriptor_pb2
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='get_updates_caller_info.proto',
   package='sync_pb',
-  serialized_pb='\n\x1dget_updates_caller_info.proto\x12\x07sync_pb\"\xe4\x02\n\x14GetUpdatesCallerInfo\x12>\n\x06source\x18\x01 \x02(\x0e\x32..sync_pb.GetUpdatesCallerInfo.GetUpdatesSource\x12\x1d\n\x15notifications_enabled\x18\x02 \x01(\x08\"\xec\x01\n\x10GetUpdatesSource\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x10\n\x0c\x46IRST_UPDATE\x10\x01\x12\t\n\x05LOCAL\x10\x02\x12\x10\n\x0cNOTIFICATION\x10\x03\x12\x0c\n\x08PERIODIC\x10\x04\x12\x1b\n\x17SYNC_CYCLE_CONTINUATION\x10\x05\x12\x1c\n\x18NEWLY_SUPPORTED_DATATYPE\x10\x07\x12\r\n\tMIGRATION\x10\x08\x12\x0e\n\nNEW_CLIENT\x10\t\x12\x13\n\x0fRECONFIGURATION\x10\n\x12\x14\n\x10\x44\x41TATYPE_REFRESH\x10\x0b\x12\t\n\x05RETRY\x10\rB\x04H\x03`\x01')
+  serialized_pb='\n\x1dget_updates_caller_info.proto\x12\x07sync_pb\"\xf6\x02\n\x14GetUpdatesCallerInfo\x12>\n\x06source\x18\x01 \x02(\x0e\x32..sync_pb.GetUpdatesCallerInfo.GetUpdatesSource\x12\x1d\n\x15notifications_enabled\x18\x02 \x01(\x08\"\xfe\x01\n\x10GetUpdatesSource\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x10\n\x0c\x46IRST_UPDATE\x10\x01\x12\t\n\x05LOCAL\x10\x02\x12\x10\n\x0cNOTIFICATION\x10\x03\x12\x0c\n\x08PERIODIC\x10\x04\x12\x1b\n\x17SYNC_CYCLE_CONTINUATION\x10\x05\x12\x1c\n\x18NEWLY_SUPPORTED_DATATYPE\x10\x07\x12\r\n\tMIGRATION\x10\x08\x12\x0e\n\nNEW_CLIENT\x10\t\x12\x13\n\x0fRECONFIGURATION\x10\n\x12\x14\n\x10\x44\x41TATYPE_REFRESH\x10\x0b\x12\t\n\x05RETRY\x10\r\x12\x10\n\x0cPROGRAMMATIC\x10\x0e\x42\x04H\x03`\x01')
 
 
 
@@ -71,11 +71,15 @@ _GETUPDATESCALLERINFO_GETUPDATESSOURCE = _descriptor.EnumDescriptor(
       name='RETRY', index=11, number=13,
       options=None,
       type=None),
+    _descriptor.EnumValueDescriptor(
+      name='PROGRAMMATIC', index=12, number=14,
+      options=None,
+      type=None),
   ],
   containing_type=None,
   options=None,
   serialized_start=163,
-  serialized_end=399,
+  serialized_end=417,
 )
 
 
@@ -111,7 +115,7 @@ _GETUPDATESCALLERINFO = _descriptor.Descriptor(
   is_extendable=False,
   extension_ranges=[],
   serialized_start=43,
-  serialized_end=399,
+  serialized_end=417,
 )
 
 _GETUPDATESCALLERINFO.fields_by_name['source'].enum_type = _GETUPDATESCALLERINFO_GETUPDATESSOURCE

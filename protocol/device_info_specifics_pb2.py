@@ -14,7 +14,7 @@ import sync_enums_pb2
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='device_info_specifics.proto',
   package='sync_pb',
-  serialized_pb='\n\x1b\x64\x65vice_info_specifics.proto\x12\x07sync_pb\x1a\x10sync_enums.proto\"\xa3\x01\n\x13\x44\x65viceInfoSpecifics\x12\x12\n\ncache_guid\x18\x01 \x01(\t\x12\x13\n\x0b\x63lient_name\x18\x02 \x01(\t\x12\x32\n\x0b\x64\x65vice_type\x18\x03 \x01(\x0e\x32\x1d.sync_pb.SyncEnums.DeviceType\x12\x17\n\x0fsync_user_agent\x18\x04 \x01(\t\x12\x16\n\x0e\x63hrome_version\x18\x05 \x01(\tB\x04H\x03`\x01')
+  serialized_pb='\n\x1b\x64\x65vice_info_specifics.proto\x12\x07sync_pb\x1a\x10sync_enums.proto\"\xde\x01\n\x13\x44\x65viceInfoSpecifics\x12\x12\n\ncache_guid\x18\x01 \x01(\t\x12\x13\n\x0b\x63lient_name\x18\x02 \x01(\t\x12\x32\n\x0b\x64\x65vice_type\x18\x03 \x01(\x0e\x32\x1d.sync_pb.SyncEnums.DeviceType\x12\x17\n\x0fsync_user_agent\x18\x04 \x01(\t\x12\x16\n\x0e\x63hrome_version\x18\x05 \x01(\t\x12\x18\n\x10\x62\x61\x63kup_timestamp\x18\x06 \x01(\x03\x12\x1f\n\x17signin_scoped_device_id\x18\x07 \x01(\tB\x04H\x03`\x01')
 
 
 
@@ -61,6 +61,20 @@ _DEVICEINFOSPECIFICS = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
+    _descriptor.FieldDescriptor(
+      name='backup_timestamp', full_name='sync_pb.DeviceInfoSpecifics.backup_timestamp', index=5,
+      number=6, type=3, cpp_type=2, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='signin_scoped_device_id', full_name='sync_pb.DeviceInfoSpecifics.signin_scoped_device_id', index=6,
+      number=7, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=unicode("", "utf-8"),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
   ],
   extensions=[
   ],
@@ -71,7 +85,7 @@ _DEVICEINFOSPECIFICS = _descriptor.Descriptor(
   is_extendable=False,
   extension_ranges=[],
   serialized_start=59,
-  serialized_end=222,
+  serialized_end=281,
 )
 
 _DEVICEINFOSPECIFICS.fields_by_name['device_type'].enum_type = sync_enums_pb2._SYNCENUMS_DEVICETYPE

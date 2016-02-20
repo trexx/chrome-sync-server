@@ -14,7 +14,7 @@ import encryption_pb2
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='password_specifics.proto',
   package='sync_pb',
-  serialized_pb='\n\x18password_specifics.proto\x12\x07sync_pb\x1a\x10\x65ncryption.proto\"\xb4\x02\n\x15PasswordSpecificsData\x12\x0e\n\x06scheme\x18\x01 \x01(\x05\x12\x14\n\x0csignon_realm\x18\x02 \x01(\t\x12\x0e\n\x06origin\x18\x03 \x01(\t\x12\x0e\n\x06\x61\x63tion\x18\x04 \x01(\t\x12\x18\n\x10username_element\x18\x05 \x01(\t\x12\x16\n\x0eusername_value\x18\x06 \x01(\t\x12\x18\n\x10password_element\x18\x07 \x01(\t\x12\x16\n\x0epassword_value\x18\x08 \x01(\t\x12\x11\n\tssl_valid\x18\t \x01(\x08\x12\x11\n\tpreferred\x18\n \x01(\x08\x12\x14\n\x0c\x64\x61te_created\x18\x0b \x01(\x03\x12\x13\n\x0b\x62lacklisted\x18\x0c \x01(\x08\x12\x0c\n\x04type\x18\r \x01(\x05\x12\x12\n\ntimes_used\x18\x0e \x01(\x05\"\x82\x01\n\x11PasswordSpecifics\x12)\n\tencrypted\x18\x01 \x01(\x0b\x32\x16.sync_pb.EncryptedData\x12\x42\n\x1a\x63lient_only_encrypted_data\x18\x02 \x01(\x0b\x32\x1e.sync_pb.PasswordSpecificsDataB\x04H\x03`\x01')
+  serialized_pb='\n\x18password_specifics.proto\x12\x07sync_pb\x1a\x10\x65ncryption.proto\"\xf6\x02\n\x15PasswordSpecificsData\x12\x0e\n\x06scheme\x18\x01 \x01(\x05\x12\x14\n\x0csignon_realm\x18\x02 \x01(\t\x12\x0e\n\x06origin\x18\x03 \x01(\t\x12\x0e\n\x06\x61\x63tion\x18\x04 \x01(\t\x12\x18\n\x10username_element\x18\x05 \x01(\t\x12\x16\n\x0eusername_value\x18\x06 \x01(\t\x12\x18\n\x10password_element\x18\x07 \x01(\t\x12\x16\n\x0epassword_value\x18\x08 \x01(\t\x12\x11\n\tssl_valid\x18\t \x01(\x08\x12\x11\n\tpreferred\x18\n \x01(\x08\x12\x14\n\x0c\x64\x61te_created\x18\x0b \x01(\x03\x12\x13\n\x0b\x62lacklisted\x18\x0c \x01(\x08\x12\x0c\n\x04type\x18\r \x01(\x05\x12\x12\n\ntimes_used\x18\x0e \x01(\x05\x12\x14\n\x0c\x64isplay_name\x18\x0f \x01(\t\x12\x12\n\navatar_url\x18\x10 \x01(\t\x12\x16\n\x0e\x66\x65\x64\x65ration_url\x18\x11 \x01(\t\"\x82\x01\n\x11PasswordSpecifics\x12)\n\tencrypted\x18\x01 \x01(\x0b\x32\x16.sync_pb.EncryptedData\x12\x42\n\x1a\x63lient_only_encrypted_data\x18\x02 \x01(\x0b\x32\x1e.sync_pb.PasswordSpecificsDataB\x04H\x03`\x01')
 
 
 
@@ -124,6 +124,27 @@ _PASSWORDSPECIFICSDATA = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
+    _descriptor.FieldDescriptor(
+      name='display_name', full_name='sync_pb.PasswordSpecificsData.display_name', index=14,
+      number=15, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=unicode("", "utf-8"),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='avatar_url', full_name='sync_pb.PasswordSpecificsData.avatar_url', index=15,
+      number=16, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=unicode("", "utf-8"),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='federation_url', full_name='sync_pb.PasswordSpecificsData.federation_url', index=16,
+      number=17, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=unicode("", "utf-8"),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
   ],
   extensions=[
   ],
@@ -134,7 +155,7 @@ _PASSWORDSPECIFICSDATA = _descriptor.Descriptor(
   is_extendable=False,
   extension_ranges=[],
   serialized_start=56,
-  serialized_end=364,
+  serialized_end=430,
 )
 
 
@@ -168,8 +189,8 @@ _PASSWORDSPECIFICS = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=367,
-  serialized_end=497,
+  serialized_start=433,
+  serialized_end=563,
 )
 
 _PASSWORDSPECIFICS.fields_by_name['encrypted'].message_type = encryption_pb2._ENCRYPTEDDATA

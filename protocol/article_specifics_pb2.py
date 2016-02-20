@@ -8,12 +8,13 @@ from google.protobuf import descriptor_pb2
 # @@protoc_insertion_point(imports)
 
 
+import attachments_pb2
 
 
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='article_specifics.proto',
   package='sync_pb',
-  serialized_pb='\n\x17\x61rticle_specifics.proto\x12\x07sync_pb\"X\n\x10\x41rticleSpecifics\x12\x10\n\x08\x65ntry_id\x18\x01 \x01(\t\x12\r\n\x05title\x18\x02 \x01(\t\x12#\n\x05pages\x18\x03 \x03(\x0b\x32\x14.sync_pb.ArticlePage\"\x1a\n\x0b\x41rticlePage\x12\x0b\n\x03url\x18\x01 \x01(\tB\x04H\x03`\x01')
+  serialized_pb='\n\x17\x61rticle_specifics.proto\x12\x07sync_pb\x1a\x11\x61ttachments.proto\"\x8a\x01\n\x10\x41rticleSpecifics\x12\x10\n\x08\x65ntry_id\x18\x01 \x01(\t\x12\r\n\x05title\x18\x02 \x01(\t\x12#\n\x05pages\x18\x03 \x03(\x0b\x32\x14.sync_pb.ArticlePage\x12\x30\n\x0b\x61ttachments\x18\x04 \x01(\x0b\x32\x1b.sync_pb.ArticleAttachments\"\x1a\n\x0b\x41rticlePage\x12\x0b\n\x03url\x18\x01 \x01(\t\"K\n\x12\x41rticleAttachments\x12\x35\n\x11\x64istilled_article\x18\x01 \x01(\x0b\x32\x1a.sync_pb.AttachmentIdProtoB\x04H\x03`\x01')
 
 
 
@@ -46,6 +47,13 @@ _ARTICLESPECIFICS = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
+    _descriptor.FieldDescriptor(
+      name='attachments', full_name='sync_pb.ArticleSpecifics.attachments', index=3,
+      number=4, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
   ],
   extensions=[
   ],
@@ -55,8 +63,8 @@ _ARTICLESPECIFICS = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=36,
-  serialized_end=124,
+  serialized_start=56,
+  serialized_end=194,
 )
 
 
@@ -83,13 +91,44 @@ _ARTICLEPAGE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=126,
-  serialized_end=152,
+  serialized_start=196,
+  serialized_end=222,
+)
+
+
+_ARTICLEATTACHMENTS = _descriptor.Descriptor(
+  name='ArticleAttachments',
+  full_name='sync_pb.ArticleAttachments',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='distilled_article', full_name='sync_pb.ArticleAttachments.distilled_article', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=224,
+  serialized_end=299,
 )
 
 _ARTICLESPECIFICS.fields_by_name['pages'].message_type = _ARTICLEPAGE
+_ARTICLESPECIFICS.fields_by_name['attachments'].message_type = _ARTICLEATTACHMENTS
+_ARTICLEATTACHMENTS.fields_by_name['distilled_article'].message_type = attachments_pb2._ATTACHMENTIDPROTO
 DESCRIPTOR.message_types_by_name['ArticleSpecifics'] = _ARTICLESPECIFICS
 DESCRIPTOR.message_types_by_name['ArticlePage'] = _ARTICLEPAGE
+DESCRIPTOR.message_types_by_name['ArticleAttachments'] = _ARTICLEATTACHMENTS
 
 class ArticleSpecifics(_message.Message):
   __metaclass__ = _reflection.GeneratedProtocolMessageType
@@ -102,6 +141,12 @@ class ArticlePage(_message.Message):
   DESCRIPTOR = _ARTICLEPAGE
 
   # @@protoc_insertion_point(class_scope:sync_pb.ArticlePage)
+
+class ArticleAttachments(_message.Message):
+  __metaclass__ = _reflection.GeneratedProtocolMessageType
+  DESCRIPTOR = _ARTICLEATTACHMENTS
+
+  # @@protoc_insertion_point(class_scope:sync_pb.ArticleAttachments)
 
 
 DESCRIPTOR.has_options = True

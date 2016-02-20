@@ -13,7 +13,7 @@ from google.protobuf import descriptor_pb2
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='sync_enums.proto',
   package='sync_pb',
-  serialized_pb='\n\x10sync_enums.proto\x12\x07sync_pb\"\xd2\n\n\tSyncEnums\"\xf1\x02\n\x17SingletonDebugEventType\x12\x1c\n\x18\x43ONNECTION_STATUS_CHANGE\x10\x01\x12\x11\n\rUPDATED_TOKEN\x10\x02\x12\x17\n\x13PASSPHRASE_REQUIRED\x10\x03\x12\x17\n\x13PASSPHRASE_ACCEPTED\x10\x04\x12\x1b\n\x17INITIALIZATION_COMPLETE\x10\x05\x12\x1c\n\x18STOP_SYNCING_PERMANENTLY\x10\x06\x12\x17\n\x13\x45NCRYPTION_COMPLETE\x10\x07\x12\x14\n\x10\x41\x43TIONABLE_ERROR\x10\x08\x12\x1b\n\x17\x45NCRYPTED_TYPES_CHANGED\x10\t\x12\x1b\n\x17PASSPHRASE_TYPE_CHANGED\x10\n\x12\x1a\n\x16KEYSTORE_TOKEN_UPDATED\x10\x0b\x12\x16\n\x12\x43ONFIGURE_COMPLETE\x10\x0c\x12\x1b\n\x17\x42OOTSTRAP_TOKEN_UPDATED\x10\r\"\xc3\x01\n\x0ePageTransition\x12\x08\n\x04LINK\x10\x00\x12\t\n\x05TYPED\x10\x01\x12\x11\n\rAUTO_BOOKMARK\x10\x02\x12\x11\n\rAUTO_SUBFRAME\x10\x03\x12\x13\n\x0fMANUAL_SUBFRAME\x10\x04\x12\r\n\tGENERATED\x10\x05\x12\x11\n\rAUTO_TOPLEVEL\x10\x06\x12\x0f\n\x0b\x46ORM_SUBMIT\x10\x07\x12\n\n\x06RELOAD\x10\x08\x12\x0b\n\x07KEYWORD\x10\t\x12\x15\n\x11KEYWORD_GENERATED\x10\n\"F\n\x1aPageTransitionRedirectType\x12\x13\n\x0f\x43LIENT_REDIRECT\x10\x01\x12\x13\n\x0fSERVER_REDIRECT\x10\x02\"\xfe\x01\n\tErrorType\x12\x0b\n\x07SUCCESS\x10\x00\x12\x11\n\rACCESS_DENIED\x10\x01\x12\x13\n\x0fNOT_MY_BIRTHDAY\x10\x02\x12\r\n\tTHROTTLED\x10\x03\x12\x10\n\x0c\x41UTH_EXPIRED\x10\x04\x12\x16\n\x12USER_NOT_ACTIVATED\x10\x05\x12\x10\n\x0c\x41UTH_INVALID\x10\x06\x12\x11\n\rCLEAR_PENDING\x10\x07\x12\x13\n\x0fTRANSIENT_ERROR\x10\x08\x12\x12\n\x0eMIGRATION_DONE\x10\t\x12\x15\n\x11\x44ISABLED_BY_ADMIN\x10\n\x12\x11\n\rUSER_ROLLBACK\x10\x0b\x12\x0b\n\x07UNKNOWN\x10\x64\"\xa3\x01\n\x06\x41\x63tion\x12\x12\n\x0eUPGRADE_CLIENT\x10\x00\x12\x1e\n\x1a\x43LEAR_USER_DATA_AND_RESYNC\x10\x01\x12\x1a\n\x16\x45NABLE_SYNC_ON_ACCOUNT\x10\x02\x12\x19\n\x15STOP_AND_RESTART_SYNC\x10\x03\x12\x1a\n\x16\x44ISABLE_SYNC_ON_CLIENT\x10\x04\x12\x12\n\x0eUNKNOWN_ACTION\x10\x05\"x\n\nDeviceType\x12\x0c\n\x08TYPE_WIN\x10\x01\x12\x0c\n\x08TYPE_MAC\x10\x02\x12\x0e\n\nTYPE_LINUX\x10\x03\x12\r\n\tTYPE_CROS\x10\x04\x12\x0e\n\nTYPE_OTHER\x10\x05\x12\x0e\n\nTYPE_PHONE\x10\x06\x12\x0f\n\x0bTYPE_TABLET\x10\x07\"\xa1\x01\n\x10GetUpdatesOrigin\x12\x12\n\x0eUNKNOWN_ORIGIN\x10\x00\x12\x0c\n\x08PERIODIC\x10\x04\x12\x1c\n\x18NEWLY_SUPPORTED_DATATYPE\x10\x07\x12\r\n\tMIGRATION\x10\x08\x12\x0e\n\nNEW_CLIENT\x10\t\x12\x13\n\x0fRECONFIGURATION\x10\n\x12\x0e\n\nGU_TRIGGER\x10\x0c\x12\t\n\x05RETRY\x10\rB\x04H\x03`\x01')
+  serialized_pb='\n\x10sync_enums.proto\x12\x07sync_pb\"\x93\x0b\n\tSyncEnums\"\xf1\x02\n\x17SingletonDebugEventType\x12\x1c\n\x18\x43ONNECTION_STATUS_CHANGE\x10\x01\x12\x11\n\rUPDATED_TOKEN\x10\x02\x12\x17\n\x13PASSPHRASE_REQUIRED\x10\x03\x12\x17\n\x13PASSPHRASE_ACCEPTED\x10\x04\x12\x1b\n\x17INITIALIZATION_COMPLETE\x10\x05\x12\x1c\n\x18STOP_SYNCING_PERMANENTLY\x10\x06\x12\x17\n\x13\x45NCRYPTION_COMPLETE\x10\x07\x12\x14\n\x10\x41\x43TIONABLE_ERROR\x10\x08\x12\x1b\n\x17\x45NCRYPTED_TYPES_CHANGED\x10\t\x12\x1b\n\x17PASSPHRASE_TYPE_CHANGED\x10\n\x12\x1a\n\x16KEYSTORE_TOKEN_UPDATED\x10\x0b\x12\x16\n\x12\x43ONFIGURE_COMPLETE\x10\x0c\x12\x1b\n\x17\x42OOTSTRAP_TOKEN_UPDATED\x10\r\"\xc3\x01\n\x0ePageTransition\x12\x08\n\x04LINK\x10\x00\x12\t\n\x05TYPED\x10\x01\x12\x11\n\rAUTO_BOOKMARK\x10\x02\x12\x11\n\rAUTO_SUBFRAME\x10\x03\x12\x13\n\x0fMANUAL_SUBFRAME\x10\x04\x12\r\n\tGENERATED\x10\x05\x12\x11\n\rAUTO_TOPLEVEL\x10\x06\x12\x0f\n\x0b\x46ORM_SUBMIT\x10\x07\x12\n\n\x06RELOAD\x10\x08\x12\x0b\n\x07KEYWORD\x10\t\x12\x15\n\x11KEYWORD_GENERATED\x10\n\"F\n\x1aPageTransitionRedirectType\x12\x13\n\x0f\x43LIENT_REDIRECT\x10\x01\x12\x13\n\x0fSERVER_REDIRECT\x10\x02\"\xad\x02\n\tErrorType\x12\x0b\n\x07SUCCESS\x10\x00\x12\x11\n\rACCESS_DENIED\x10\x01\x12\x13\n\x0fNOT_MY_BIRTHDAY\x10\x02\x12\r\n\tTHROTTLED\x10\x03\x12\x10\n\x0c\x41UTH_EXPIRED\x10\x04\x12\x16\n\x12USER_NOT_ACTIVATED\x10\x05\x12\x10\n\x0c\x41UTH_INVALID\x10\x06\x12\x11\n\rCLEAR_PENDING\x10\x07\x12\x13\n\x0fTRANSIENT_ERROR\x10\x08\x12\x12\n\x0eMIGRATION_DONE\x10\t\x12\x15\n\x11\x44ISABLED_BY_ADMIN\x10\n\x12\x11\n\rUSER_ROLLBACK\x10\x0b\x12\x13\n\x0fPARTIAL_FAILURE\x10\x0c\x12\x18\n\x14\x43LIENT_DATA_OBSOLETE\x10\r\x12\x0b\n\x07UNKNOWN\x10\x64\"\xa3\x01\n\x06\x41\x63tion\x12\x12\n\x0eUPGRADE_CLIENT\x10\x00\x12\x1e\n\x1a\x43LEAR_USER_DATA_AND_RESYNC\x10\x01\x12\x1a\n\x16\x45NABLE_SYNC_ON_ACCOUNT\x10\x02\x12\x19\n\x15STOP_AND_RESTART_SYNC\x10\x03\x12\x1a\n\x16\x44ISABLE_SYNC_ON_CLIENT\x10\x04\x12\x12\n\x0eUNKNOWN_ACTION\x10\x05\"x\n\nDeviceType\x12\x0c\n\x08TYPE_WIN\x10\x01\x12\x0c\n\x08TYPE_MAC\x10\x02\x12\x0e\n\nTYPE_LINUX\x10\x03\x12\r\n\tTYPE_CROS\x10\x04\x12\x0e\n\nTYPE_OTHER\x10\x05\x12\x0e\n\nTYPE_PHONE\x10\x06\x12\x0f\n\x0bTYPE_TABLET\x10\x07\"\xb3\x01\n\x10GetUpdatesOrigin\x12\x12\n\x0eUNKNOWN_ORIGIN\x10\x00\x12\x0c\n\x08PERIODIC\x10\x04\x12\x1c\n\x18NEWLY_SUPPORTED_DATATYPE\x10\x07\x12\r\n\tMIGRATION\x10\x08\x12\x0e\n\nNEW_CLIENT\x10\t\x12\x13\n\x0fRECONFIGURATION\x10\n\x12\x0e\n\nGU_TRIGGER\x10\x0c\x12\t\n\x05RETRY\x10\r\x12\x10\n\x0cPROGRAMMATIC\x10\x0e\x42\x04H\x03`\x01')
 
 
 
@@ -215,14 +215,22 @@ _SYNCENUMS_ERRORTYPE = _descriptor.EnumDescriptor(
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='UNKNOWN', index=12, number=100,
+      name='PARTIAL_FAILURE', index=12, number=12,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='CLIENT_DATA_OBSOLETE', index=13, number=13,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='UNKNOWN', index=14, number=100,
       options=None,
       type=None),
   ],
   containing_type=None,
   options=None,
   serialized_start=686,
-  serialized_end=940,
+  serialized_end=987,
 )
 
 _SYNCENUMS_ACTION = _descriptor.EnumDescriptor(
@@ -258,8 +266,8 @@ _SYNCENUMS_ACTION = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=943,
-  serialized_end=1106,
+  serialized_start=990,
+  serialized_end=1153,
 )
 
 _SYNCENUMS_DEVICETYPE = _descriptor.EnumDescriptor(
@@ -299,8 +307,8 @@ _SYNCENUMS_DEVICETYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=1108,
-  serialized_end=1228,
+  serialized_start=1155,
+  serialized_end=1275,
 )
 
 _SYNCENUMS_GETUPDATESORIGIN = _descriptor.EnumDescriptor(
@@ -341,11 +349,15 @@ _SYNCENUMS_GETUPDATESORIGIN = _descriptor.EnumDescriptor(
       name='RETRY', index=7, number=13,
       options=None,
       type=None),
+    _descriptor.EnumValueDescriptor(
+      name='PROGRAMMATIC', index=8, number=14,
+      options=None,
+      type=None),
   ],
   containing_type=None,
   options=None,
-  serialized_start=1231,
-  serialized_end=1392,
+  serialized_start=1278,
+  serialized_end=1457,
 )
 
 
@@ -373,7 +385,7 @@ _SYNCENUMS = _descriptor.Descriptor(
   is_extendable=False,
   extension_ranges=[],
   serialized_start=30,
-  serialized_end=1392,
+  serialized_end=1457,
 )
 
 _SYNCENUMS_SINGLETONDEBUGEVENTTYPE.containing_type = _SYNCENUMS;

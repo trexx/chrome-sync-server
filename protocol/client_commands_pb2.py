@@ -13,9 +13,44 @@ from google.protobuf import descriptor_pb2
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='client_commands.proto',
   package='sync_pb',
-  serialized_pb='\n\x15\x63lient_commands.proto\x12\x07sync_pb\"\x88\x02\n\rClientCommand\x12\x1e\n\x16set_sync_poll_interval\x18\x01 \x01(\x05\x12#\n\x1bset_sync_long_poll_interval\x18\x02 \x01(\x05\x12\x1d\n\x15max_commit_batch_size\x18\x03 \x01(\x05\x12%\n\x1dsessions_commit_delay_seconds\x18\x04 \x01(\x05\x12\x1e\n\x16throttle_delay_seconds\x18\x05 \x01(\x05\x12,\n$client_invalidation_hint_buffer_size\x18\x06 \x01(\x05\x12\x1e\n\x16gu_retry_delay_seconds\x18\x07 \x01(\x05\x42\x04H\x03`\x01')
+  serialized_pb='\n\x15\x63lient_commands.proto\x12\x07sync_pb\"9\n\x10\x43ustomNudgeDelay\x12\x13\n\x0b\x64\x61tatype_id\x18\x01 \x01(\x05\x12\x10\n\x08\x64\x65lay_ms\x18\x02 \x01(\x05\"\xc0\x02\n\rClientCommand\x12\x1e\n\x16set_sync_poll_interval\x18\x01 \x01(\x05\x12#\n\x1bset_sync_long_poll_interval\x18\x02 \x01(\x05\x12\x1d\n\x15max_commit_batch_size\x18\x03 \x01(\x05\x12%\n\x1dsessions_commit_delay_seconds\x18\x04 \x01(\x05\x12\x1e\n\x16throttle_delay_seconds\x18\x05 \x01(\x05\x12,\n$client_invalidation_hint_buffer_size\x18\x06 \x01(\x05\x12\x1e\n\x16gu_retry_delay_seconds\x18\x07 \x01(\x05\x12\x36\n\x13\x63ustom_nudge_delays\x18\x08 \x03(\x0b\x32\x19.sync_pb.CustomNudgeDelayB\x04H\x03`\x01')
 
 
+
+
+_CUSTOMNUDGEDELAY = _descriptor.Descriptor(
+  name='CustomNudgeDelay',
+  full_name='sync_pb.CustomNudgeDelay',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='datatype_id', full_name='sync_pb.CustomNudgeDelay.datatype_id', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='delay_ms', full_name='sync_pb.CustomNudgeDelay.delay_ms', index=1,
+      number=2, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=34,
+  serialized_end=91,
+)
 
 
 _CLIENTCOMMAND = _descriptor.Descriptor(
@@ -74,6 +109,13 @@ _CLIENTCOMMAND = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
+    _descriptor.FieldDescriptor(
+      name='custom_nudge_delays', full_name='sync_pb.ClientCommand.custom_nudge_delays', index=7,
+      number=8, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
   ],
   extensions=[
   ],
@@ -83,11 +125,19 @@ _CLIENTCOMMAND = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=35,
-  serialized_end=299,
+  serialized_start=94,
+  serialized_end=414,
 )
 
+_CLIENTCOMMAND.fields_by_name['custom_nudge_delays'].message_type = _CUSTOMNUDGEDELAY
+DESCRIPTOR.message_types_by_name['CustomNudgeDelay'] = _CUSTOMNUDGEDELAY
 DESCRIPTOR.message_types_by_name['ClientCommand'] = _CLIENTCOMMAND
+
+class CustomNudgeDelay(_message.Message):
+  __metaclass__ = _reflection.GeneratedProtocolMessageType
+  DESCRIPTOR = _CUSTOMNUDGEDELAY
+
+  # @@protoc_insertion_point(class_scope:sync_pb.CustomNudgeDelay)
 
 class ClientCommand(_message.Message):
   __metaclass__ = _reflection.GeneratedProtocolMessageType

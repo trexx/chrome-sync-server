@@ -29,7 +29,7 @@
             ],
           },
         }],
-        ['OS=="ios" and "<(GENERATOR)"!="ninja"', {
+        ['OS=="ios" and "<(GENERATOR)"=="xcode" and "<(GENERATOR_FLAVOR)"!="ninja"', {
           'variables': {
             'ninja_output_dir': 'ninja-protoc',
             'ninja_product_dir':
@@ -53,6 +53,7 @@
               # normal protoc target under the condition that "OS==iOS".
               'target_name': 'compile_protoc',
               'type': 'none',
+              'toolsets': ['host'],
               'includes': ['../../build/ios/mac_build.gypi'],
               'actions': [
                 {
@@ -68,54 +69,6 @@
               ],
             },
           ],
-        }],
-        ['OS=="android"', {
-          'targets': [
-            {
-              'target_name': 'protobuf_lite_javalib',
-              'type' : 'none',
-              'dependencies': [
-                'protoc#host',
-              ],
-              'variables': {
-                'script_descriptors': './protobuf_lite_java_descriptor_proto.py',
-                'script_pom': './protobuf_lite_java_parse_pom.py',
-                'protoc': '<(PRODUCT_DIR)/<(EXECUTABLE_PREFIX)protoc<(EXECUTABLE_SUFFIX)',
-                # Variables needed by java.gypi below.
-                'java_out_dir': '<(PRODUCT_DIR)/java_proto/protobuf_lite_java_descriptor_proto',
-                'generated_src_dirs': ['<(java_out_dir)'],
-                'java_in_dir': 'java',
-                'maven_pom': '<(java_in_dir)/pom.xml',
-                'javac_includes': ['<!@(<(script_pom) <(maven_pom))'],
-                'additional_input_paths': [
-                  '<(java_out_dir)/com/google/protobuf/DescriptorProtos.java'
-                ],
-              },
-              'actions': [
-                {
-                  'action_name': 'protobuf_lite_java_gen_descriptor_proto',
-                  'inputs': [
-                    '<(script_descriptors)',
-                    '<(protoc)',
-                    'src/google/protobuf/descriptor.proto',
-                  ],
-                  'outputs': [
-                    '<(java_out_dir)/com/google/protobuf/DescriptorProtos.java',
-                  ],
-                  'action': [
-                    '<(script_descriptors)',
-                    '<(protoc)',
-                    '<(java_out_dir)',
-                    'src',
-                    'src/google/protobuf/descriptor.proto',
-                  ],
-                  'message': 'Generating descriptor protos for Java',
-                },
-              ],
-              # Now that we have generated DescriptorProtos.java, build jar.
-              'includes': ['../../build/java.gypi'],
-            },
-          ]
         }],
       ],
       'targets': [
@@ -217,7 +170,7 @@
         {
           'target_name': 'protoc',
           'conditions': [
-            ['OS!="ios" or "<(GENERATOR)"=="ninja"', {
+            ['OS!="ios" or "<(GENERATOR)"!="xcode" or "<(GENERATOR_FLAVOR)"=="ninja"', {
               'type': 'executable',
               'toolsets': ['host'],
               'sources': [
@@ -285,8 +238,9 @@
                 '<(config_h_dir)',
                 'src/src',
               ],
-            }, {  # else, OS=="ios" and "<(GENERATOR)"!="ninja"
+            }, {  # else, OS=="ios" and "<(GENERATOR)"=="xcode" and "<(GENERATOR_FLAVOR)"!="ninja"
               'type': 'none',
+              'toolsets': ['host'],
               'dependencies': [
                 'compile_protoc',
               ],

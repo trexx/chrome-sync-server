@@ -13,8 +13,10 @@ specify an explicit port and xmpp_port if necessary.
 import asyncore
 import BaseHTTPServer
 import errno
+import gzip
 import os
 import select
+import StringIO
 import socket
 import sys
 import urlparse
@@ -70,10 +72,8 @@ class SyncHTTPServer(testserver_base.ClientRestrictingServerMixIn,
   def GetAuthenticated(self):
     return self.authenticated
 
-  def serve_forever(self):
-    """This is a merge of asyncore.loop() and SocketServer.serve_forever().
-    """
-
+  def handle_request(self):
+    """Adaptation of asyncore.loop"""
     def HandleXmppSocket(fd, socket_map, handler):
       """Runs the handler for the xmpp connection for fd.
 
@@ -92,44 +92,43 @@ class SyncHTTPServer(testserver_base.ClientRestrictingServerMixIn,
       except:
         xmpp_connection.handle_error()
 
-    while True:
-      read_fds = [ self.fileno() ]
-      write_fds = []
-      exceptional_fds = []
+    read_fds = [ self.fileno() ]
+    write_fds = []
+    exceptional_fds = []
 
-      for fd, xmpp_connection in self._xmpp_socket_map.items():
-        is_r = xmpp_connection.readable()
-        is_w = xmpp_connection.writable()
-        if is_r:
-          read_fds.append(fd)
-        if is_w:
-          write_fds.append(fd)
-        if is_r or is_w:
-          exceptional_fds.append(fd)
+    for fd, xmpp_connection in self._xmpp_socket_map.items():
+      is_r = xmpp_connection.readable()
+      is_w = xmpp_connection.writable()
+      if is_r:
+        read_fds.append(fd)
+      if is_w:
+        write_fds.append(fd)
+      if is_r or is_w:
+        exceptional_fds.append(fd)
 
-      try:
-        read_fds, write_fds, exceptional_fds = (
-          select.select(read_fds, write_fds, exceptional_fds))
-      except select.error, err:
-        if err.args[0] != errno.EINTR:
-          raise
-        else:
-          continue
+    try:
+      read_fds, write_fds, exceptional_fds = (
+        select.select(read_fds, write_fds, exceptional_fds))
+    except select.error, err:
+      if err.args[0] != errno.EINTR:
+        raise
+      else:
+        return
 
-      for fd in read_fds:
-        if fd == self.fileno():
-          self.HandleRequestNoBlock()
-          continue
-        HandleXmppSocket(fd, self._xmpp_socket_map,
-                         asyncore.dispatcher.handle_read_event)
+    for fd in read_fds:
+      if fd == self.fileno():
+        self.HandleRequestNoBlock()
+        return
+      HandleXmppSocket(fd, self._xmpp_socket_map,
+                       asyncore.dispatcher.handle_read_event)
 
-      for fd in write_fds:
-        HandleXmppSocket(fd, self._xmpp_socket_map,
-                         asyncore.dispatcher.handle_write_event)
+    for fd in write_fds:
+      HandleXmppSocket(fd, self._xmpp_socket_map,
+                       asyncore.dispatcher.handle_write_event)
 
-      for fd in exceptional_fds:
-        HandleXmppSocket(fd, self._xmpp_socket_map,
-                         asyncore.dispatcher.handle_expt_event)
+    for fd in exceptional_fds:
+      HandleXmppSocket(fd, self._xmpp_socket_map,
+                       asyncore.dispatcher.handle_expt_event)
 
 
 class SyncPageHandler(testserver_base.BasePageHandler):
@@ -154,10 +153,6 @@ class SyncPageHandler(testserver_base.BasePageHandler):
                     self.ChromiumSyncEnablePreCommitGetUpdateAvoidanceHandler,
                     self.GaiaOAuth2TokenHandler,
                     self.GaiaSetOAuth2TokenResponseHandler,
-                    self.TriggerSyncedNotificationHandler,
-                    self.SyncedNotificationsPageHandler,
-                    self.TriggerSyncedNotificationAppInfoHandler,
-                    self.SyncedNotificationsAppInfoPageHandler,
                     self.CustomizeClientCommandHandler]
 
     post_handlers = [self.ChromiumSyncCommandHandler,
@@ -203,6 +198,12 @@ class SyncPageHandler(testserver_base.BasePageHandler):
 
     length = int(self.headers.getheader('content-length'))
     raw_request = self.rfile.read(length)
+    if self.headers.getheader('Content-Encoding'):
+      encode = self.headers.getheader('Content-Encoding')
+      if encode == "gzip":
+        raw_request = gzip.GzipFile(
+            fileobj=StringIO.StringIO(raw_request)).read()
+
     http_response = 200
     raw_reply = None
     if not self.server.GetAuthenticated():
@@ -503,68 +504,6 @@ class SyncPageHandler(testserver_base.BasePageHandler):
     self.wfile.write(raw_reply)
     return True
 
-  def TriggerSyncedNotificationHandler(self):
-    test_name = "/triggersyncednotification"
-    if not self._ShouldHandleRequest(test_name):
-      return False
-
-    query = urlparse.urlparse(self.path)[4]
-    query_params = urlparse.parse_qs(query)
-
-    serialized_notification = ''
-
-    if 'serialized_notification' in query_params:
-      serialized_notification = query_params['serialized_notification'][0]
-
-    try:
-      notification_string = self.server._sync_handler.account \
-          .AddSyncedNotification(serialized_notification)
-      reply = "A synced notification was triggered:\n\n"
-      reply += "<code>{}</code>.".format(notification_string)
-      response_code = 200
-    except chromiumsync.ClientNotConnectedError:
-      reply = ('The client is not connected to the server, so the notification'
-               ' could not be created.')
-      response_code = 400
-
-    self.send_response(response_code)
-    self.send_header('Content-Type', 'text/html')
-    self.send_header('Content-Length', len(reply))
-    self.end_headers()
-    self.wfile.write(reply)
-    return True
-
-  def TriggerSyncedNotificationAppInfoHandler(self):
-    test_name = "/triggersyncednotificationappinfo"
-    if not self._ShouldHandleRequest(test_name):
-      return False
-
-    query = urlparse.urlparse(self.path)[4]
-    query_params = urlparse.parse_qs(query)
-
-    app_info = ''
-
-    if 'synced_notification_app_info' in query_params:
-      app_info = query_params['synced_notification_app_info'][0]
-
-    try:
-      app_info_string = self.server._sync_handler.account \
-          .AddSyncedNotificationAppInfo(app_info)
-      reply = "A synced notification app info was sent:\n\n"
-      reply += "<code>{}</code>.".format(app_info_string)
-      response_code = 200
-    except chromiumsync.ClientNotConnectedError:
-      reply = ('The client is not connected to the server, so the app info'
-               ' could not be created.')
-      response_code = 400
-
-    self.send_response(response_code)
-    self.send_header('Content-Type', 'text/html')
-    self.send_header('Content-Length', len(reply))
-    self.end_headers()
-    self.wfile.write(reply)
-    return True
-
   def CustomizeClientCommandHandler(self):
     test_name = "/customizeclientcommand"
     if not self._ShouldHandleRequest(test_name):
@@ -593,36 +532,6 @@ class SyncPageHandler(testserver_base.BasePageHandler):
     self.send_header('Content-Length', len(reply))
     self.end_headers()
     self.wfile.write(reply)
-    return True
-
-  def SyncedNotificationsPageHandler(self):
-    test_name = "/syncednotifications"
-    if not self._ShouldHandleRequest(test_name):
-      return False
-
-    html = open('third_party/chromium/html/synced_notifications.html', 'r').read()
-
-    self.send_response(200)
-    self.send_header('Content-Type', 'text/html')
-    self.send_header('Content-Length', len(html))
-    self.end_headers()
-    self.wfile.write(html)
-    return True
-
-  def SyncedNotificationsAppInfoPageHandler(self):
-    test_name = "/syncednotificationsappinfo"
-    if not self._ShouldHandleRequest(test_name):
-      return False
-
-    html = \
-      open('third_party/chromium/html/synced_notification_app_info.html', 'r').\
-      read()
-
-    self.send_response(200)
-    self.send_header('Content-Type', 'text/html')
-    self.send_header('Content-Length', len(html))
-    self.end_headers()
-    self.wfile.write(html)
     return True
 
 class SyncServerRunner(testserver_base.TestServerRunner):
@@ -658,5 +567,5 @@ class SyncServerRunner(testserver_base.TestServerRunner):
     # Override the default logfile name used in testserver.py.
     self.option_parser.set_defaults(log_file='sync_testserver.log')
 
-# if __name__ == '__main__':
-#   sys.exit(SyncServerRunner().main())
+if __name__ == '__main__':
+  sys.exit(SyncServerRunner().main())

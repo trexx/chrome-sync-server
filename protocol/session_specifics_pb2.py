@@ -14,7 +14,7 @@ import sync_enums_pb2
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='session_specifics.proto',
   package='sync_pb',
-  serialized_pb='\n\x17session_specifics.proto\x12\x07sync_pb\x1a\x10sync_enums.proto\"\x8a\x01\n\x10SessionSpecifics\x12\x13\n\x0bsession_tag\x18\x01 \x01(\t\x12&\n\x06header\x18\x02 \x01(\x0b\x32\x16.sync_pb.SessionHeader\x12 \n\x03tab\x18\x03 \x01(\x0b\x32\x13.sync_pb.SessionTab\x12\x17\n\x0btab_node_id\x18\x04 \x01(\x05:\x02-1\"\x80\x01\n\rSessionHeader\x12&\n\x06window\x18\x02 \x03(\x0b\x32\x16.sync_pb.SessionWindow\x12\x13\n\x0b\x63lient_name\x18\x03 \x01(\t\x12\x32\n\x0b\x64\x65vice_type\x18\x04 \x01(\x0e\x32\x1d.sync_pb.SyncEnums.DeviceType\"\xc6\x01\n\rSessionWindow\x12\x11\n\twindow_id\x18\x01 \x01(\x05\x12\x1e\n\x12selected_tab_index\x18\x02 \x01(\x05:\x02-1\x12\x45\n\x0c\x62rowser_type\x18\x03 \x01(\x0e\x32\".sync_pb.SessionWindow.BrowserType:\x0bTYPE_TABBED\x12\x0b\n\x03tab\x18\x04 \x03(\x05\".\n\x0b\x42rowserType\x12\x0f\n\x0bTYPE_TABBED\x10\x01\x12\x0e\n\nTYPE_POPUP\x10\x02\"\xd5\x02\n\nSessionTab\x12\x0e\n\x06tab_id\x18\x01 \x01(\x05\x12\x11\n\twindow_id\x18\x02 \x01(\x05\x12\x1c\n\x10tab_visual_index\x18\x03 \x01(\x05:\x02-1\x12$\n\x18\x63urrent_navigation_index\x18\x04 \x01(\x05:\x02-1\x12\x15\n\x06pinned\x18\x05 \x01(\x08:\x05\x66\x61lse\x12\x18\n\x10\x65xtension_app_id\x18\x06 \x01(\t\x12*\n\nnavigation\x18\x07 \x03(\x0b\x32\x16.sync_pb.TabNavigation\x12\x0f\n\x07\x66\x61vicon\x18\x08 \x01(\x0c\x12\x35\n\x0c\x66\x61vicon_type\x18\t \x01(\x0e\x32\x1f.sync_pb.SessionTab.FaviconType\x12\x16\n\x0e\x66\x61vicon_source\x18\x0b \x01(\t\"#\n\x0b\x46\x61viconType\x12\x14\n\x10TYPE_WEB_FAVICON\x10\x01\"\xb5\x06\n\rTabNavigation\x12\x13\n\x0bvirtual_url\x18\x02 \x01(\t\x12\x10\n\x08referrer\x18\x03 \x01(\t\x12\r\n\x05title\x18\x04 \x01(\t\x12\r\n\x05state\x18\x05 \x01(\t\x12\x41\n\x0fpage_transition\x18\x06 \x01(\x0e\x32!.sync_pb.SyncEnums.PageTransition:\x05TYPED\x12\x44\n\rredirect_type\x18\x07 \x01(\x0e\x32-.sync_pb.SyncEnums.PageTransitionRedirectType\x12\x11\n\tunique_id\x18\x08 \x01(\x05\x12\x16\n\x0etimestamp_msec\x18\t \x01(\x03\x12\x1f\n\x17navigation_forward_back\x18\n \x01(\x08\x12#\n\x1bnavigation_from_address_bar\x18\x0b \x01(\x08\x12\x1c\n\x14navigation_home_page\x18\x0c \x01(\x08\x12\x1e\n\x16navigation_chain_start\x18\r \x01(\x08\x12\x1c\n\x14navigation_chain_end\x18\x0e \x01(\x08\x12\x11\n\tglobal_id\x18\x0f \x01(\x03\x12\x14\n\x0csearch_terms\x18\x10 \x01(\t\x12\x13\n\x0b\x66\x61vicon_url\x18\x11 \x01(\t\x12I\n\rblocked_state\x18\x12 \x01(\x0e\x32#.sync_pb.TabNavigation.BlockedState:\rSTATE_ALLOWED\x12\x1f\n\x17\x63ontent_pack_categories\x18\x13 \x03(\t\x12\x18\n\x10http_status_code\x18\x14 \x01(\x05\x12\x1a\n\x0freferrer_policy\x18\x15 \x01(\x05:\x01\x31\x12\x13\n\x0bis_restored\x18\x16 \x01(\x08\x12\x38\n\x13navigation_redirect\x18\x17 \x03(\x0b\x32\x1b.sync_pb.NavigationRedirect\x12$\n\x1clast_navigation_redirect_url\x18\x18 \x01(\t\"4\n\x0c\x42lockedState\x12\x11\n\rSTATE_ALLOWED\x10\x01\x12\x11\n\rSTATE_BLOCKED\x10\x02\"!\n\x12NavigationRedirect\x12\x0b\n\x03url\x18\x01 \x01(\tB\x04H\x03`\x01')
+  serialized_pb='\n\x17session_specifics.proto\x12\x07sync_pb\x1a\x10sync_enums.proto\"\x8a\x01\n\x10SessionSpecifics\x12\x13\n\x0bsession_tag\x18\x01 \x01(\t\x12&\n\x06header\x18\x02 \x01(\x0b\x32\x16.sync_pb.SessionHeader\x12 \n\x03tab\x18\x03 \x01(\x0b\x32\x13.sync_pb.SessionTab\x12\x17\n\x0btab_node_id\x18\x04 \x01(\x05:\x02-1\"\x80\x01\n\rSessionHeader\x12&\n\x06window\x18\x02 \x03(\x0b\x32\x16.sync_pb.SessionWindow\x12\x13\n\x0b\x63lient_name\x18\x03 \x01(\t\x12\x32\n\x0b\x64\x65vice_type\x18\x04 \x01(\x0e\x32\x1d.sync_pb.SyncEnums.DeviceType\"\xc6\x01\n\rSessionWindow\x12\x11\n\twindow_id\x18\x01 \x01(\x05\x12\x1e\n\x12selected_tab_index\x18\x02 \x01(\x05:\x02-1\x12\x45\n\x0c\x62rowser_type\x18\x03 \x01(\x0e\x32\".sync_pb.SessionWindow.BrowserType:\x0bTYPE_TABBED\x12\x0b\n\x03tab\x18\x04 \x03(\x05\".\n\x0b\x42rowserType\x12\x0f\n\x0bTYPE_TABBED\x10\x01\x12\x0e\n\nTYPE_POPUP\x10\x02\"\xeb\x02\n\nSessionTab\x12\x0e\n\x06tab_id\x18\x01 \x01(\x05\x12\x11\n\twindow_id\x18\x02 \x01(\x05\x12\x1c\n\x10tab_visual_index\x18\x03 \x01(\x05:\x02-1\x12$\n\x18\x63urrent_navigation_index\x18\x04 \x01(\x05:\x02-1\x12\x15\n\x06pinned\x18\x05 \x01(\x08:\x05\x66\x61lse\x12\x18\n\x10\x65xtension_app_id\x18\x06 \x01(\t\x12*\n\nnavigation\x18\x07 \x03(\x0b\x32\x16.sync_pb.TabNavigation\x12\x0f\n\x07\x66\x61vicon\x18\x08 \x01(\x0c\x12\x35\n\x0c\x66\x61vicon_type\x18\t \x01(\x0e\x32\x1f.sync_pb.SessionTab.FaviconType\x12\x16\n\x0e\x66\x61vicon_source\x18\x0b \x01(\t\x12\x14\n\x0cvariation_id\x18\x0c \x03(\x04\"#\n\x0b\x46\x61viconType\x12\x14\n\x10TYPE_WEB_FAVICON\x10\x01\"\xd3\x06\n\rTabNavigation\x12\x13\n\x0bvirtual_url\x18\x02 \x01(\t\x12\x10\n\x08referrer\x18\x03 \x01(\t\x12\r\n\x05title\x18\x04 \x01(\t\x12\x41\n\x0fpage_transition\x18\x06 \x01(\x0e\x32!.sync_pb.SyncEnums.PageTransition:\x05TYPED\x12\x44\n\rredirect_type\x18\x07 \x01(\x0e\x32-.sync_pb.SyncEnums.PageTransitionRedirectType\x12\x11\n\tunique_id\x18\x08 \x01(\x05\x12\x16\n\x0etimestamp_msec\x18\t \x01(\x03\x12\x1f\n\x17navigation_forward_back\x18\n \x01(\x08\x12#\n\x1bnavigation_from_address_bar\x18\x0b \x01(\x08\x12\x1c\n\x14navigation_home_page\x18\x0c \x01(\x08\x12\x1e\n\x16navigation_chain_start\x18\r \x01(\x08\x12\x1c\n\x14navigation_chain_end\x18\x0e \x01(\x08\x12\x11\n\tglobal_id\x18\x0f \x01(\x03\x12\x14\n\x0csearch_terms\x18\x10 \x01(\t\x12\x13\n\x0b\x66\x61vicon_url\x18\x11 \x01(\t\x12I\n\rblocked_state\x18\x12 \x01(\x0e\x32#.sync_pb.TabNavigation.BlockedState:\rSTATE_ALLOWED\x12\x1f\n\x17\x63ontent_pack_categories\x18\x13 \x03(\t\x12\x18\n\x10http_status_code\x18\x14 \x01(\x05\x12#\n\x18obsolete_referrer_policy\x18\x15 \x01(\x05:\x01\x31\x12\x13\n\x0bis_restored\x18\x16 \x01(\x08\x12\x38\n\x13navigation_redirect\x18\x17 \x03(\x0b\x32\x1b.sync_pb.NavigationRedirect\x12$\n\x1clast_navigation_redirect_url\x18\x18 \x01(\t\x12\"\n\x17\x63orrect_referrer_policy\x18\x19 \x01(\x05:\x01\x31\"4\n\x0c\x42lockedState\x12\x11\n\rSTATE_ALLOWED\x10\x01\x12\x11\n\rSTATE_BLOCKED\x10\x02\"!\n\x12NavigationRedirect\x12\x0b\n\x03url\x18\x01 \x01(\tB\x04H\x03`\x01')
 
 
 
@@ -52,8 +52,8 @@ _SESSIONTAB_FAVICONTYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=834,
-  serialized_end=869,
+  serialized_start=856,
+  serialized_end=891,
 )
 
 _TABNAVIGATION_BLOCKEDSTATE = _descriptor.EnumDescriptor(
@@ -73,8 +73,8 @@ _TABNAVIGATION_BLOCKEDSTATE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=1641,
-  serialized_end=1693,
+  serialized_start=1693,
+  serialized_end=1745,
 )
 
 
@@ -296,6 +296,13 @@ _SESSIONTAB = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
+    _descriptor.FieldDescriptor(
+      name='variation_id', full_name='sync_pb.SessionTab.variation_id', index=10,
+      number=12, type=4, cpp_type=4, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
   ],
   extensions=[
   ],
@@ -307,7 +314,7 @@ _SESSIONTAB = _descriptor.Descriptor(
   is_extendable=False,
   extension_ranges=[],
   serialized_start=528,
-  serialized_end=869,
+  serialized_end=891,
 )
 
 
@@ -340,142 +347,142 @@ _TABNAVIGATION = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='state', full_name='sync_pb.TabNavigation.state', index=3,
-      number=5, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=unicode("", "utf-8"),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='page_transition', full_name='sync_pb.TabNavigation.page_transition', index=4,
+      name='page_transition', full_name='sync_pb.TabNavigation.page_transition', index=3,
       number=6, type=14, cpp_type=8, label=1,
       has_default_value=True, default_value=1,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='redirect_type', full_name='sync_pb.TabNavigation.redirect_type', index=5,
+      name='redirect_type', full_name='sync_pb.TabNavigation.redirect_type', index=4,
       number=7, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=1,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='unique_id', full_name='sync_pb.TabNavigation.unique_id', index=6,
+      name='unique_id', full_name='sync_pb.TabNavigation.unique_id', index=5,
       number=8, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='timestamp_msec', full_name='sync_pb.TabNavigation.timestamp_msec', index=7,
+      name='timestamp_msec', full_name='sync_pb.TabNavigation.timestamp_msec', index=6,
       number=9, type=3, cpp_type=2, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='navigation_forward_back', full_name='sync_pb.TabNavigation.navigation_forward_back', index=8,
+      name='navigation_forward_back', full_name='sync_pb.TabNavigation.navigation_forward_back', index=7,
       number=10, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='navigation_from_address_bar', full_name='sync_pb.TabNavigation.navigation_from_address_bar', index=9,
+      name='navigation_from_address_bar', full_name='sync_pb.TabNavigation.navigation_from_address_bar', index=8,
       number=11, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='navigation_home_page', full_name='sync_pb.TabNavigation.navigation_home_page', index=10,
+      name='navigation_home_page', full_name='sync_pb.TabNavigation.navigation_home_page', index=9,
       number=12, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='navigation_chain_start', full_name='sync_pb.TabNavigation.navigation_chain_start', index=11,
+      name='navigation_chain_start', full_name='sync_pb.TabNavigation.navigation_chain_start', index=10,
       number=13, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='navigation_chain_end', full_name='sync_pb.TabNavigation.navigation_chain_end', index=12,
+      name='navigation_chain_end', full_name='sync_pb.TabNavigation.navigation_chain_end', index=11,
       number=14, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='global_id', full_name='sync_pb.TabNavigation.global_id', index=13,
+      name='global_id', full_name='sync_pb.TabNavigation.global_id', index=12,
       number=15, type=3, cpp_type=2, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='search_terms', full_name='sync_pb.TabNavigation.search_terms', index=14,
+      name='search_terms', full_name='sync_pb.TabNavigation.search_terms', index=13,
       number=16, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=unicode("", "utf-8"),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='favicon_url', full_name='sync_pb.TabNavigation.favicon_url', index=15,
+      name='favicon_url', full_name='sync_pb.TabNavigation.favicon_url', index=14,
       number=17, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=unicode("", "utf-8"),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='blocked_state', full_name='sync_pb.TabNavigation.blocked_state', index=16,
+      name='blocked_state', full_name='sync_pb.TabNavigation.blocked_state', index=15,
       number=18, type=14, cpp_type=8, label=1,
       has_default_value=True, default_value=1,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='content_pack_categories', full_name='sync_pb.TabNavigation.content_pack_categories', index=17,
+      name='content_pack_categories', full_name='sync_pb.TabNavigation.content_pack_categories', index=16,
       number=19, type=9, cpp_type=9, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='http_status_code', full_name='sync_pb.TabNavigation.http_status_code', index=18,
+      name='http_status_code', full_name='sync_pb.TabNavigation.http_status_code', index=17,
       number=20, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='referrer_policy', full_name='sync_pb.TabNavigation.referrer_policy', index=19,
+      name='obsolete_referrer_policy', full_name='sync_pb.TabNavigation.obsolete_referrer_policy', index=18,
       number=21, type=5, cpp_type=1, label=1,
       has_default_value=True, default_value=1,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='is_restored', full_name='sync_pb.TabNavigation.is_restored', index=20,
+      name='is_restored', full_name='sync_pb.TabNavigation.is_restored', index=19,
       number=22, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='navigation_redirect', full_name='sync_pb.TabNavigation.navigation_redirect', index=21,
+      name='navigation_redirect', full_name='sync_pb.TabNavigation.navigation_redirect', index=20,
       number=23, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='last_navigation_redirect_url', full_name='sync_pb.TabNavigation.last_navigation_redirect_url', index=22,
+      name='last_navigation_redirect_url', full_name='sync_pb.TabNavigation.last_navigation_redirect_url', index=21,
       number=24, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=unicode("", "utf-8"),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='correct_referrer_policy', full_name='sync_pb.TabNavigation.correct_referrer_policy', index=22,
+      number=25, type=5, cpp_type=1, label=1,
+      has_default_value=True, default_value=1,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -489,8 +496,8 @@ _TABNAVIGATION = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=872,
-  serialized_end=1693,
+  serialized_start=894,
+  serialized_end=1745,
 )
 
 
@@ -517,8 +524,8 @@ _NAVIGATIONREDIRECT = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1695,
-  serialized_end=1728,
+  serialized_start=1747,
+  serialized_end=1780,
 )
 
 _SESSIONSPECIFICS.fields_by_name['header'].message_type = _SESSIONHEADER

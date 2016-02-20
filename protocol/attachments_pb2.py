@@ -13,7 +13,7 @@ from google.protobuf import descriptor_pb2
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='attachments.proto',
   package='sync_pb',
-  serialized_pb='\n\x11\x61ttachments.proto\x12\x07sync_pb\"&\n\x11\x41ttachmentIdProto\x12\x11\n\tunique_id\x18\x01 \x01(\t\"X\n\x18\x41ttachmentMetadataRecord\x12&\n\x02id\x18\x01 \x01(\x0b\x32\x1a.sync_pb.AttachmentIdProto\x12\x14\n\x0cis_on_server\x18\x02 \x01(\x08\"G\n\x12\x41ttachmentMetadata\x12\x31\n\x06record\x18\x01 \x03(\x0b\x32!.sync_pb.AttachmentMetadataRecordB\x04H\x03`\x01')
+  serialized_pb='\n\x11\x61ttachments.proto\x12\x07sync_pb\"J\n\x11\x41ttachmentIdProto\x12\x11\n\tunique_id\x18\x01 \x01(\t\x12\x12\n\nsize_bytes\x18\x02 \x01(\x04\x12\x0e\n\x06\x63rc32c\x18\x03 \x01(\r\"X\n\x18\x41ttachmentMetadataRecord\x12&\n\x02id\x18\x01 \x01(\x0b\x32\x1a.sync_pb.AttachmentIdProto\x12\x14\n\x0cis_on_server\x18\x02 \x01(\x08\"G\n\x12\x41ttachmentMetadata\x12\x31\n\x06record\x18\x01 \x03(\x0b\x32!.sync_pb.AttachmentMetadataRecordB\x04H\x03`\x01')
 
 
 
@@ -32,6 +32,20 @@ _ATTACHMENTIDPROTO = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
+    _descriptor.FieldDescriptor(
+      name='size_bytes', full_name='sync_pb.AttachmentIdProto.size_bytes', index=1,
+      number=2, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='crc32c', full_name='sync_pb.AttachmentIdProto.crc32c', index=2,
+      number=3, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
   ],
   extensions=[
   ],
@@ -42,7 +56,7 @@ _ATTACHMENTIDPROTO = _descriptor.Descriptor(
   is_extendable=False,
   extension_ranges=[],
   serialized_start=30,
-  serialized_end=68,
+  serialized_end=104,
 )
 
 
@@ -76,8 +90,8 @@ _ATTACHMENTMETADATARECORD = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=70,
-  serialized_end=158,
+  serialized_start=106,
+  serialized_end=194,
 )
 
 
@@ -104,8 +118,8 @@ _ATTACHMENTMETADATA = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=160,
-  serialized_end=231,
+  serialized_start=196,
+  serialized_end=267,
 )
 
 _ATTACHMENTMETADATARECORD.fields_by_name['id'].message_type = _ATTACHMENTIDPROTO

@@ -13,9 +13,129 @@ from google.protobuf import descriptor_pb2
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='autofill_specifics.proto',
   package='sync_pb',
-  serialized_pb='\n\x18\x61utofill_specifics.proto\x12\x07sync_pb\"\xb5\x04\n\x18\x41utofillProfileSpecifics\x12\x0c\n\x04guid\x18\x0f \x01(\t\x12\x0e\n\x06origin\x18\x10 \x01(\t\x12\x12\n\nname_first\x18\x02 \x03(\t\x12\x13\n\x0bname_middle\x18\x03 \x03(\t\x12\x11\n\tname_last\x18\x04 \x03(\t\x12\x15\n\remail_address\x18\x05 \x03(\t\x12\x14\n\x0c\x63ompany_name\x18\x06 \x01(\t\x12\x1a\n\x12\x61\x64\x64ress_home_line1\x18\x07 \x01(\t\x12\x1a\n\x12\x61\x64\x64ress_home_line2\x18\x08 \x01(\t\x12\x19\n\x11\x61\x64\x64ress_home_city\x18\t \x01(\t\x12\x1a\n\x12\x61\x64\x64ress_home_state\x18\n \x01(\t\x12\x18\n\x10\x61\x64\x64ress_home_zip\x18\x0b \x01(\t\x12\x1c\n\x14\x61\x64\x64ress_home_country\x18\x0c \x01(\t\x12#\n\x1b\x61\x64\x64ress_home_street_address\x18\x11 \x01(\t\x12!\n\x19\x61\x64\x64ress_home_sorting_code\x18\x12 \x01(\t\x12\'\n\x1f\x61\x64\x64ress_home_dependent_locality\x18\x13 \x01(\t\x12\"\n\x1a\x61\x64\x64ress_home_language_code\x18\x14 \x01(\t\x12\x1f\n\x17phone_home_whole_number\x18\r \x03(\t\x12\x11\n\x05label\x18\x01 \x01(\tB\x02\x18\x01\x12\"\n\x16phone_fax_whole_number\x18\x0e \x01(\tB\x02\x18\x01\"}\n\x11\x41utofillSpecifics\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t\x12\x17\n\x0fusage_timestamp\x18\x03 \x03(\x03\x12\x32\n\x07profile\x18\x04 \x01(\x0b\x32!.sync_pb.AutofillProfileSpecificsB\x04H\x03`\x01')
+  serialized_pb='\n\x18\x61utofill_specifics.proto\x12\x07sync_pb\"\xed\x04\n\x18\x41utofillProfileSpecifics\x12\x0c\n\x04guid\x18\x0f \x01(\t\x12\x0e\n\x06origin\x18\x10 \x01(\t\x12\x11\n\tuse_count\x18\x16 \x01(\x03\x12\x10\n\x08use_date\x18\x17 \x01(\x03\x12\x12\n\nname_first\x18\x02 \x03(\t\x12\x13\n\x0bname_middle\x18\x03 \x03(\t\x12\x11\n\tname_last\x18\x04 \x03(\t\x12\x11\n\tname_full\x18\x15 \x03(\t\x12\x15\n\remail_address\x18\x05 \x03(\t\x12\x14\n\x0c\x63ompany_name\x18\x06 \x01(\t\x12\x1a\n\x12\x61\x64\x64ress_home_line1\x18\x07 \x01(\t\x12\x1a\n\x12\x61\x64\x64ress_home_line2\x18\x08 \x01(\t\x12\x19\n\x11\x61\x64\x64ress_home_city\x18\t \x01(\t\x12\x1a\n\x12\x61\x64\x64ress_home_state\x18\n \x01(\t\x12\x18\n\x10\x61\x64\x64ress_home_zip\x18\x0b \x01(\t\x12\x1c\n\x14\x61\x64\x64ress_home_country\x18\x0c \x01(\t\x12#\n\x1b\x61\x64\x64ress_home_street_address\x18\x11 \x01(\t\x12!\n\x19\x61\x64\x64ress_home_sorting_code\x18\x12 \x01(\t\x12\'\n\x1f\x61\x64\x64ress_home_dependent_locality\x18\x13 \x01(\t\x12\"\n\x1a\x61\x64\x64ress_home_language_code\x18\x14 \x01(\t\x12\x1f\n\x17phone_home_whole_number\x18\r \x03(\t\x12\x11\n\x05label\x18\x01 \x01(\tB\x02\x18\x01\x12\"\n\x16phone_fax_whole_number\x18\x0e \x01(\tB\x02\x18\x01\"}\n\x11\x41utofillSpecifics\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t\x12\x17\n\x0fusage_timestamp\x18\x03 \x03(\x03\x12\x32\n\x07profile\x18\x04 \x01(\x0b\x32!.sync_pb.AutofillProfileSpecifics\"\x9c\x03\n\x16WalletMaskedCreditCard\x12\n\n\x02id\x18\x01 \x01(\t\x12@\n\x06status\x18\x02 \x01(\x0e\x32\x30.sync_pb.WalletMaskedCreditCard.WalletCardStatus\x12\x14\n\x0cname_on_card\x18\x03 \x01(\t\x12<\n\x04type\x18\x04 \x01(\x0e\x32..sync_pb.WalletMaskedCreditCard.WalletCardType\x12\x11\n\tlast_four\x18\x05 \x01(\t\x12\x11\n\texp_month\x18\x06 \x01(\x05\x12\x10\n\x08\x65xp_year\x18\x07 \x01(\x05\"*\n\x10WalletCardStatus\x12\t\n\x05VALID\x10\x00\x12\x0b\n\x07\x45XPIRED\x10\x01\"|\n\x0eWalletCardType\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x08\n\x04\x41MEX\x10\x01\x12\x0c\n\x08\x44ISCOVER\x10\x02\x12\x07\n\x03JCB\x10\x03\x12\x0b\n\x07MAESTRO\x10\x04\x12\x0f\n\x0bMASTER_CARD\x10\x05\x12\x08\n\x04SOLO\x10\x06\x12\n\n\x06SWITCH\x10\x07\x12\x08\n\x04VISA\x10\x08\"\xa1\x02\n\x13WalletPostalAddress\x12\n\n\x02id\x18\x01 \x01(\t\x12\x16\n\x0erecipient_name\x18\x0c \x01(\t\x12\x14\n\x0c\x63ompany_name\x18\x02 \x01(\t\x12\x16\n\x0estreet_address\x18\x03 \x03(\t\x12\x11\n\taddress_1\x18\x04 \x01(\t\x12\x11\n\taddress_2\x18\x05 \x01(\t\x12\x11\n\taddress_3\x18\x06 \x01(\t\x12\x11\n\taddress_4\x18\x07 \x01(\t\x12\x13\n\x0bpostal_code\x18\x08 \x01(\t\x12\x14\n\x0csorting_code\x18\t \x01(\t\x12\x14\n\x0c\x63ountry_code\x18\n \x01(\t\x12\x15\n\rlanguage_code\x18\x0b \x01(\t\x12\x14\n\x0cphone_number\x18\r \x01(\t\"\x88\x02\n\x17\x41utofillWalletSpecifics\x12=\n\x04type\x18\x01 \x01(\x0e\x32/.sync_pb.AutofillWalletSpecifics.WalletInfoType\x12\x34\n\x0bmasked_card\x18\x02 \x01(\x0b\x32\x1f.sync_pb.WalletMaskedCreditCard\x12-\n\x07\x61\x64\x64ress\x18\x03 \x01(\x0b\x32\x1c.sync_pb.WalletPostalAddress\"I\n\x0eWalletInfoType\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x16\n\x12MASKED_CREDIT_CARD\x10\x01\x12\x12\n\x0ePOSTAL_ADDRESS\x10\x02\"\xab\x01\n\x17WalletMetadataSpecifics\x12\x33\n\x04type\x18\x01 \x01(\x0e\x32%.sync_pb.WalletMetadataSpecifics.Type\x12\n\n\x02id\x18\x02 \x01(\t\x12\x11\n\tuse_count\x18\x03 \x01(\x03\x12\x10\n\x08use_date\x18\x04 \x01(\x03\"*\n\x04Type\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x08\n\x04\x43\x41RD\x10\x01\x12\x0b\n\x07\x41\x44\x44RESS\x10\x02\x42\x04H\x03`\x01')
 
 
+
+_WALLETMASKEDCREDITCARD_WALLETCARDSTATUS = _descriptor.EnumDescriptor(
+  name='WalletCardStatus',
+  full_name='sync_pb.WalletMaskedCreditCard.WalletCardStatus',
+  filename=None,
+  file=DESCRIPTOR,
+  values=[
+    _descriptor.EnumValueDescriptor(
+      name='VALID', index=0, number=0,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='EXPIRED', index=1, number=1,
+      options=None,
+      type=None),
+  ],
+  containing_type=None,
+  options=None,
+  serialized_start=1033,
+  serialized_end=1075,
+)
+
+_WALLETMASKEDCREDITCARD_WALLETCARDTYPE = _descriptor.EnumDescriptor(
+  name='WalletCardType',
+  full_name='sync_pb.WalletMaskedCreditCard.WalletCardType',
+  filename=None,
+  file=DESCRIPTOR,
+  values=[
+    _descriptor.EnumValueDescriptor(
+      name='UNKNOWN', index=0, number=0,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='AMEX', index=1, number=1,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='DISCOVER', index=2, number=2,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='JCB', index=3, number=3,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='MAESTRO', index=4, number=4,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='MASTER_CARD', index=5, number=5,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='SOLO', index=6, number=6,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='SWITCH', index=7, number=7,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='VISA', index=8, number=8,
+      options=None,
+      type=None),
+  ],
+  containing_type=None,
+  options=None,
+  serialized_start=1077,
+  serialized_end=1201,
+)
+
+_AUTOFILLWALLETSPECIFICS_WALLETINFOTYPE = _descriptor.EnumDescriptor(
+  name='WalletInfoType',
+  full_name='sync_pb.AutofillWalletSpecifics.WalletInfoType',
+  filename=None,
+  file=DESCRIPTOR,
+  values=[
+    _descriptor.EnumValueDescriptor(
+      name='UNKNOWN', index=0, number=0,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='MASKED_CREDIT_CARD', index=1, number=1,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='POSTAL_ADDRESS', index=2, number=2,
+      options=None,
+      type=None),
+  ],
+  containing_type=None,
+  options=None,
+  serialized_start=1687,
+  serialized_end=1760,
+)
+
+_WALLETMETADATASPECIFICS_TYPE = _descriptor.EnumDescriptor(
+  name='Type',
+  full_name='sync_pb.WalletMetadataSpecifics.Type',
+  filename=None,
+  file=DESCRIPTOR,
+  values=[
+    _descriptor.EnumValueDescriptor(
+      name='UNKNOWN', index=0, number=0,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='CARD', index=1, number=1,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='ADDRESS', index=2, number=2,
+      options=None,
+      type=None),
+  ],
+  containing_type=None,
+  options=None,
+  serialized_start=1892,
+  serialized_end=1934,
+)
 
 
 _AUTOFILLPROFILESPECIFICS = _descriptor.Descriptor(
@@ -40,126 +160,147 @@ _AUTOFILLPROFILESPECIFICS = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='name_first', full_name='sync_pb.AutofillProfileSpecifics.name_first', index=2,
+      name='use_count', full_name='sync_pb.AutofillProfileSpecifics.use_count', index=2,
+      number=22, type=3, cpp_type=2, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='use_date', full_name='sync_pb.AutofillProfileSpecifics.use_date', index=3,
+      number=23, type=3, cpp_type=2, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='name_first', full_name='sync_pb.AutofillProfileSpecifics.name_first', index=4,
       number=2, type=9, cpp_type=9, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='name_middle', full_name='sync_pb.AutofillProfileSpecifics.name_middle', index=3,
+      name='name_middle', full_name='sync_pb.AutofillProfileSpecifics.name_middle', index=5,
       number=3, type=9, cpp_type=9, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='name_last', full_name='sync_pb.AutofillProfileSpecifics.name_last', index=4,
+      name='name_last', full_name='sync_pb.AutofillProfileSpecifics.name_last', index=6,
       number=4, type=9, cpp_type=9, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='email_address', full_name='sync_pb.AutofillProfileSpecifics.email_address', index=5,
+      name='name_full', full_name='sync_pb.AutofillProfileSpecifics.name_full', index=7,
+      number=21, type=9, cpp_type=9, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='email_address', full_name='sync_pb.AutofillProfileSpecifics.email_address', index=8,
       number=5, type=9, cpp_type=9, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='company_name', full_name='sync_pb.AutofillProfileSpecifics.company_name', index=6,
+      name='company_name', full_name='sync_pb.AutofillProfileSpecifics.company_name', index=9,
       number=6, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=unicode("", "utf-8"),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='address_home_line1', full_name='sync_pb.AutofillProfileSpecifics.address_home_line1', index=7,
+      name='address_home_line1', full_name='sync_pb.AutofillProfileSpecifics.address_home_line1', index=10,
       number=7, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=unicode("", "utf-8"),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='address_home_line2', full_name='sync_pb.AutofillProfileSpecifics.address_home_line2', index=8,
+      name='address_home_line2', full_name='sync_pb.AutofillProfileSpecifics.address_home_line2', index=11,
       number=8, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=unicode("", "utf-8"),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='address_home_city', full_name='sync_pb.AutofillProfileSpecifics.address_home_city', index=9,
+      name='address_home_city', full_name='sync_pb.AutofillProfileSpecifics.address_home_city', index=12,
       number=9, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=unicode("", "utf-8"),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='address_home_state', full_name='sync_pb.AutofillProfileSpecifics.address_home_state', index=10,
+      name='address_home_state', full_name='sync_pb.AutofillProfileSpecifics.address_home_state', index=13,
       number=10, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=unicode("", "utf-8"),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='address_home_zip', full_name='sync_pb.AutofillProfileSpecifics.address_home_zip', index=11,
+      name='address_home_zip', full_name='sync_pb.AutofillProfileSpecifics.address_home_zip', index=14,
       number=11, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=unicode("", "utf-8"),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='address_home_country', full_name='sync_pb.AutofillProfileSpecifics.address_home_country', index=12,
+      name='address_home_country', full_name='sync_pb.AutofillProfileSpecifics.address_home_country', index=15,
       number=12, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=unicode("", "utf-8"),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='address_home_street_address', full_name='sync_pb.AutofillProfileSpecifics.address_home_street_address', index=13,
+      name='address_home_street_address', full_name='sync_pb.AutofillProfileSpecifics.address_home_street_address', index=16,
       number=17, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=unicode("", "utf-8"),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='address_home_sorting_code', full_name='sync_pb.AutofillProfileSpecifics.address_home_sorting_code', index=14,
+      name='address_home_sorting_code', full_name='sync_pb.AutofillProfileSpecifics.address_home_sorting_code', index=17,
       number=18, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=unicode("", "utf-8"),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='address_home_dependent_locality', full_name='sync_pb.AutofillProfileSpecifics.address_home_dependent_locality', index=15,
+      name='address_home_dependent_locality', full_name='sync_pb.AutofillProfileSpecifics.address_home_dependent_locality', index=18,
       number=19, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=unicode("", "utf-8"),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='address_home_language_code', full_name='sync_pb.AutofillProfileSpecifics.address_home_language_code', index=16,
+      name='address_home_language_code', full_name='sync_pb.AutofillProfileSpecifics.address_home_language_code', index=19,
       number=20, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=unicode("", "utf-8"),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='phone_home_whole_number', full_name='sync_pb.AutofillProfileSpecifics.phone_home_whole_number', index=17,
+      name='phone_home_whole_number', full_name='sync_pb.AutofillProfileSpecifics.phone_home_whole_number', index=20,
       number=13, type=9, cpp_type=9, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='label', full_name='sync_pb.AutofillProfileSpecifics.label', index=18,
+      name='label', full_name='sync_pb.AutofillProfileSpecifics.label', index=21,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=unicode("", "utf-8"),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\030\001')),
     _descriptor.FieldDescriptor(
-      name='phone_fax_whole_number', full_name='sync_pb.AutofillProfileSpecifics.phone_fax_whole_number', index=19,
+      name='phone_fax_whole_number', full_name='sync_pb.AutofillProfileSpecifics.phone_fax_whole_number', index=22,
       number=14, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=unicode("", "utf-8"),
       message_type=None, enum_type=None, containing_type=None,
@@ -175,7 +316,7 @@ _AUTOFILLPROFILESPECIFICS = _descriptor.Descriptor(
   is_extendable=False,
   extension_ranges=[],
   serialized_start=38,
-  serialized_end=603,
+  serialized_end=659,
 )
 
 
@@ -223,13 +364,304 @@ _AUTOFILLSPECIFICS = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=605,
-  serialized_end=730,
+  serialized_start=661,
+  serialized_end=786,
+)
+
+
+_WALLETMASKEDCREDITCARD = _descriptor.Descriptor(
+  name='WalletMaskedCreditCard',
+  full_name='sync_pb.WalletMaskedCreditCard',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='id', full_name='sync_pb.WalletMaskedCreditCard.id', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=unicode("", "utf-8"),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='status', full_name='sync_pb.WalletMaskedCreditCard.status', index=1,
+      number=2, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='name_on_card', full_name='sync_pb.WalletMaskedCreditCard.name_on_card', index=2,
+      number=3, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=unicode("", "utf-8"),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='type', full_name='sync_pb.WalletMaskedCreditCard.type', index=3,
+      number=4, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='last_four', full_name='sync_pb.WalletMaskedCreditCard.last_four', index=4,
+      number=5, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=unicode("", "utf-8"),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='exp_month', full_name='sync_pb.WalletMaskedCreditCard.exp_month', index=5,
+      number=6, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='exp_year', full_name='sync_pb.WalletMaskedCreditCard.exp_year', index=6,
+      number=7, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+    _WALLETMASKEDCREDITCARD_WALLETCARDSTATUS,
+    _WALLETMASKEDCREDITCARD_WALLETCARDTYPE,
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=789,
+  serialized_end=1201,
+)
+
+
+_WALLETPOSTALADDRESS = _descriptor.Descriptor(
+  name='WalletPostalAddress',
+  full_name='sync_pb.WalletPostalAddress',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='id', full_name='sync_pb.WalletPostalAddress.id', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=unicode("", "utf-8"),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='recipient_name', full_name='sync_pb.WalletPostalAddress.recipient_name', index=1,
+      number=12, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=unicode("", "utf-8"),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='company_name', full_name='sync_pb.WalletPostalAddress.company_name', index=2,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=unicode("", "utf-8"),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='street_address', full_name='sync_pb.WalletPostalAddress.street_address', index=3,
+      number=3, type=9, cpp_type=9, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='address_1', full_name='sync_pb.WalletPostalAddress.address_1', index=4,
+      number=4, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=unicode("", "utf-8"),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='address_2', full_name='sync_pb.WalletPostalAddress.address_2', index=5,
+      number=5, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=unicode("", "utf-8"),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='address_3', full_name='sync_pb.WalletPostalAddress.address_3', index=6,
+      number=6, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=unicode("", "utf-8"),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='address_4', full_name='sync_pb.WalletPostalAddress.address_4', index=7,
+      number=7, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=unicode("", "utf-8"),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='postal_code', full_name='sync_pb.WalletPostalAddress.postal_code', index=8,
+      number=8, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=unicode("", "utf-8"),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='sorting_code', full_name='sync_pb.WalletPostalAddress.sorting_code', index=9,
+      number=9, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=unicode("", "utf-8"),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='country_code', full_name='sync_pb.WalletPostalAddress.country_code', index=10,
+      number=10, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=unicode("", "utf-8"),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='language_code', full_name='sync_pb.WalletPostalAddress.language_code', index=11,
+      number=11, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=unicode("", "utf-8"),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='phone_number', full_name='sync_pb.WalletPostalAddress.phone_number', index=12,
+      number=13, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=unicode("", "utf-8"),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=1204,
+  serialized_end=1493,
+)
+
+
+_AUTOFILLWALLETSPECIFICS = _descriptor.Descriptor(
+  name='AutofillWalletSpecifics',
+  full_name='sync_pb.AutofillWalletSpecifics',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='type', full_name='sync_pb.AutofillWalletSpecifics.type', index=0,
+      number=1, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='masked_card', full_name='sync_pb.AutofillWalletSpecifics.masked_card', index=1,
+      number=2, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='address', full_name='sync_pb.AutofillWalletSpecifics.address', index=2,
+      number=3, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+    _AUTOFILLWALLETSPECIFICS_WALLETINFOTYPE,
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=1496,
+  serialized_end=1760,
+)
+
+
+_WALLETMETADATASPECIFICS = _descriptor.Descriptor(
+  name='WalletMetadataSpecifics',
+  full_name='sync_pb.WalletMetadataSpecifics',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='type', full_name='sync_pb.WalletMetadataSpecifics.type', index=0,
+      number=1, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='id', full_name='sync_pb.WalletMetadataSpecifics.id', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=unicode("", "utf-8"),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='use_count', full_name='sync_pb.WalletMetadataSpecifics.use_count', index=2,
+      number=3, type=3, cpp_type=2, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='use_date', full_name='sync_pb.WalletMetadataSpecifics.use_date', index=3,
+      number=4, type=3, cpp_type=2, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+    _WALLETMETADATASPECIFICS_TYPE,
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=1763,
+  serialized_end=1934,
 )
 
 _AUTOFILLSPECIFICS.fields_by_name['profile'].message_type = _AUTOFILLPROFILESPECIFICS
+_WALLETMASKEDCREDITCARD.fields_by_name['status'].enum_type = _WALLETMASKEDCREDITCARD_WALLETCARDSTATUS
+_WALLETMASKEDCREDITCARD.fields_by_name['type'].enum_type = _WALLETMASKEDCREDITCARD_WALLETCARDTYPE
+_WALLETMASKEDCREDITCARD_WALLETCARDSTATUS.containing_type = _WALLETMASKEDCREDITCARD;
+_WALLETMASKEDCREDITCARD_WALLETCARDTYPE.containing_type = _WALLETMASKEDCREDITCARD;
+_AUTOFILLWALLETSPECIFICS.fields_by_name['type'].enum_type = _AUTOFILLWALLETSPECIFICS_WALLETINFOTYPE
+_AUTOFILLWALLETSPECIFICS.fields_by_name['masked_card'].message_type = _WALLETMASKEDCREDITCARD
+_AUTOFILLWALLETSPECIFICS.fields_by_name['address'].message_type = _WALLETPOSTALADDRESS
+_AUTOFILLWALLETSPECIFICS_WALLETINFOTYPE.containing_type = _AUTOFILLWALLETSPECIFICS;
+_WALLETMETADATASPECIFICS.fields_by_name['type'].enum_type = _WALLETMETADATASPECIFICS_TYPE
+_WALLETMETADATASPECIFICS_TYPE.containing_type = _WALLETMETADATASPECIFICS;
 DESCRIPTOR.message_types_by_name['AutofillProfileSpecifics'] = _AUTOFILLPROFILESPECIFICS
 DESCRIPTOR.message_types_by_name['AutofillSpecifics'] = _AUTOFILLSPECIFICS
+DESCRIPTOR.message_types_by_name['WalletMaskedCreditCard'] = _WALLETMASKEDCREDITCARD
+DESCRIPTOR.message_types_by_name['WalletPostalAddress'] = _WALLETPOSTALADDRESS
+DESCRIPTOR.message_types_by_name['AutofillWalletSpecifics'] = _AUTOFILLWALLETSPECIFICS
+DESCRIPTOR.message_types_by_name['WalletMetadataSpecifics'] = _WALLETMETADATASPECIFICS
 
 class AutofillProfileSpecifics(_message.Message):
   __metaclass__ = _reflection.GeneratedProtocolMessageType
@@ -242,6 +674,30 @@ class AutofillSpecifics(_message.Message):
   DESCRIPTOR = _AUTOFILLSPECIFICS
 
   # @@protoc_insertion_point(class_scope:sync_pb.AutofillSpecifics)
+
+class WalletMaskedCreditCard(_message.Message):
+  __metaclass__ = _reflection.GeneratedProtocolMessageType
+  DESCRIPTOR = _WALLETMASKEDCREDITCARD
+
+  # @@protoc_insertion_point(class_scope:sync_pb.WalletMaskedCreditCard)
+
+class WalletPostalAddress(_message.Message):
+  __metaclass__ = _reflection.GeneratedProtocolMessageType
+  DESCRIPTOR = _WALLETPOSTALADDRESS
+
+  # @@protoc_insertion_point(class_scope:sync_pb.WalletPostalAddress)
+
+class AutofillWalletSpecifics(_message.Message):
+  __metaclass__ = _reflection.GeneratedProtocolMessageType
+  DESCRIPTOR = _AUTOFILLWALLETSPECIFICS
+
+  # @@protoc_insertion_point(class_scope:sync_pb.AutofillWalletSpecifics)
+
+class WalletMetadataSpecifics(_message.Message):
+  __metaclass__ = _reflection.GeneratedProtocolMessageType
+  DESCRIPTOR = _WALLETMETADATASPECIFICS
+
+  # @@protoc_insertion_point(class_scope:sync_pb.WalletMetadataSpecifics)
 
 
 DESCRIPTOR.has_options = True

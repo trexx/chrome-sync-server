@@ -41,6 +41,7 @@ from protocol import history_delete_directive_specifics_pb2
 from protocol import managed_user_setting_specifics_pb2
 from protocol import managed_user_specifics_pb2
 from protocol import managed_user_shared_setting_specifics_pb2
+from protocol import managed_user_whitelist_specifics_pb2
 from protocol import nigori_specifics_pb2
 from protocol import password_specifics_pb2
 from protocol import preference_specifics_pb2
@@ -50,11 +51,10 @@ from protocol import session_specifics_pb2
 from protocol import sync_pb2
 from protocol import sync_enums_pb2
 from protocol import synced_notification_app_info_specifics_pb2
-from protocol import synced_notification_data_pb2
-from protocol import synced_notification_render_pb2
 from protocol import synced_notification_specifics_pb2
 from protocol import theme_specifics_pb2
 from protocol import typed_url_specifics_pb2
+from protocol import wifi_credential_specifics_pb2
 
 # An enumeration of the various kinds of data that can be synced.
 # Over the wire, this enumeration is not used: a sync object's type is
@@ -69,6 +69,7 @@ ALL_TYPES = (
     ARTICLE,
     AUTOFILL,
     AUTOFILL_PROFILE,
+    AUTOFILL_WALLET_METADATA,
     BOOKMARK,
     DEVICE_INFO,
     DICTIONARY,
@@ -77,6 +78,7 @@ ALL_TYPES = (
     HISTORY_DELETE_DIRECTIVE,
     MANAGED_USER_SETTING,
     MANAGED_USER_SHARED_SETTING,
+    MANAGED_USER_WHITELIST,
     MANAGED_USER,
     NIGORI,
     PASSWORD,
@@ -90,7 +92,8 @@ ALL_TYPES = (
     TYPED_URL,
     EXTENSION_SETTINGS,
     FAVICON_IMAGES,
-    FAVICON_TRACKING) = range(30)
+    FAVICON_TRACKING,
+    WIFI_CREDENTIAL) = range(33)
 
 # An enumeration on the frequency at which the server should send errors
 # to the client. This would be specified by the url that triggers the error.
@@ -114,6 +117,7 @@ SYNC_TYPE_TO_DESCRIPTOR = {
     ARTICLE: SYNC_TYPE_FIELDS['article'],
     AUTOFILL: SYNC_TYPE_FIELDS['autofill'],
     AUTOFILL_PROFILE: SYNC_TYPE_FIELDS['autofill_profile'],
+    AUTOFILL_WALLET_METADATA: SYNC_TYPE_FIELDS['wallet_metadata'],
     BOOKMARK: SYNC_TYPE_FIELDS['bookmark'],
     DEVICE_INFO: SYNC_TYPE_FIELDS['device_info'],
     DICTIONARY: SYNC_TYPE_FIELDS['dictionary'],
@@ -126,6 +130,7 @@ SYNC_TYPE_TO_DESCRIPTOR = {
     MANAGED_USER_SHARED_SETTING:
         SYNC_TYPE_FIELDS['managed_user_shared_setting'],
     MANAGED_USER_SETTING: SYNC_TYPE_FIELDS['managed_user_setting'],
+    MANAGED_USER_WHITELIST: SYNC_TYPE_FIELDS['managed_user_whitelist'],
     MANAGED_USER: SYNC_TYPE_FIELDS['managed_user'],
     NIGORI: SYNC_TYPE_FIELDS['nigori'],
     PASSWORD: SYNC_TYPE_FIELDS['password'],
@@ -138,6 +143,7 @@ SYNC_TYPE_TO_DESCRIPTOR = {
         SYNC_TYPE_FIELDS["synced_notification_app_info"],
     THEME: SYNC_TYPE_FIELDS['theme'],
     TYPED_URL: SYNC_TYPE_FIELDS['typed_url'],
+    WIFI_CREDENTIAL: SYNC_TYPE_FIELDS["wifi_credential"],
     }
 
 # The parent ID used to indicate a top-level node.
@@ -507,6 +513,9 @@ class SyncDataModel(object):
                     parent_tag=ROOT_ID, sync_type=AUTOFILL),
       PermanentItem('google_chrome_autofill_profiles', name='Autofill Profiles',
                     parent_tag=ROOT_ID, sync_type=AUTOFILL_PROFILE),
+      PermanentItem('google_chrome_autofill_wallet_metadata',
+                    name='Autofill Wallet Metadata', parent_tag=ROOT_ID,
+                    sync_type=AUTOFILL_WALLET_METADATA),
       PermanentItem('google_chrome_device_info', name='Device Info',
                     parent_tag=ROOT_ID, sync_type=DEVICE_INFO),
       PermanentItem('google_chrome_experiments', name='Experiments',
@@ -537,6 +546,9 @@ class SyncDataModel(object):
       PermanentItem('google_chrome_managed_user_shared_settings',
                     name='Managed User Shared Settings',
                     parent_tag=ROOT_ID, sync_type=MANAGED_USER_SHARED_SETTING),
+      PermanentItem('google_chrome_managed_user_whitelists',
+                    name='Managed User Whitelists', parent_tag=ROOT_ID,
+                    sync_type=MANAGED_USER_WHITELIST),
       PermanentItem('google_chrome_nigori', name='Nigori',
                     parent_tag=ROOT_ID, sync_type=NIGORI),
       PermanentItem('google_chrome_passwords', name='Passwords',
@@ -560,6 +572,8 @@ class SyncDataModel(object):
                     parent_tag=ROOT_ID, sync_type=THEME),
       PermanentItem('google_chrome_typed_urls', name='Typed URLs',
                     parent_tag=ROOT_ID, sync_type=TYPED_URL),
+      PermanentItem('google_chrome_wifi_credentials', name='WiFi Credentials',
+                    parent_tag=ROOT_ID, sync_type=WIFI_CREDENTIAL),
       PermanentItem('google_chrome_dictionary', name='Dictionary',
                     parent_tag=ROOT_ID, sync_type=DICTIONARY),
       PermanentItem('google_chrome_articles', name='Articles',
@@ -623,6 +637,12 @@ class SyncDataModel(object):
       return tag
     spec = [x for x in self._PERMANENT_ITEM_SPECS if x.tag == tag][0]
     return self._MakeCurrentId(spec.sync_type, '<server tag>%s' % tag)
+
+  def _TypeToTypeRootId(self, model_type):
+    """Returns the server ID for the type root node of the given type."""
+    tag = [x.tag for x in self._PERMANENT_ITEM_SPECS
+           if x.sync_type == model_type][0]
+    return self._ServerTagToId(tag)
 
   def _ClientTagToId(self, datatype, tag):
     """Determine the server ID from a client-unique tag.
@@ -840,6 +860,9 @@ class SyncDataModel(object):
     if entry.parent_id_string == ROOT_ID:
       # This is generally allowed.
       return True
+    if (not entry.HasField('parent_id_string') and
+        entry.HasField('client_defined_unique_tag')):
+      return True  # Unique client tag items do not need to specify a parent.
     if entry.parent_id_string not in self._entries:
       print 'Warning: Client sent unknown ID.  Should never happen.'
       return False
@@ -939,6 +962,11 @@ class SyncDataModel(object):
     # ID generation state is stored in 'commit_session'.
     self._RewriteIdsAsServerIds(entry, cache_guid, commit_session)
 
+    # Sets the parent ID field for a client-tagged item.  The client is allowed
+    # to not specify parents for these types of items.  The server can figure
+    # out on its own what the parent ID for this entry should be.
+    self._RewriteParentIdForUniqueClientEntry(entry)
+
     # Perform the optimistic concurrency check on the entry's version number.
     # Clients are not allowed to commit unless they indicate that they've seen
     # the most recent version of an object.
@@ -1034,6 +1062,27 @@ class SyncDataModel(object):
       return id_string
     datatype, old_migration_version, inner_id = parsed_id
     return self._MakeCurrentId(datatype, inner_id)
+
+  def _RewriteParentIdForUniqueClientEntry(self, entry):
+    """Sets the entry's parent ID field to the appropriate value.
+
+    The client must always set enough of the specifics of the entries it sends
+    up such that the server can identify its type.  (See crbug.com/373859)
+
+    The client is under no obligation to set the parent ID field.  The server
+    can always infer what the appropriate parent for this model type should be.
+    Having the client not send the parent ID is a step towards the removal of
+    type root nodes.  (See crbug.com/373869)
+
+    This server implements these features by "faking" the existing of a parent
+    ID early on in the commit processing.
+
+    This function has no effect on non-client-tagged items.
+    """
+    if not entry.HasField('client_defined_unique_tag'):
+      return  # Skip this processing for non-client-tagged types.
+    data_type = GetEntryType(entry)
+    entry.parent_id_string = self._TypeToTypeRootId(data_type)
 
   def TriggerMigration(self, datatypes):
     """Cause a migration to occur for a set of datatypes on this account.
@@ -1167,46 +1216,6 @@ class SyncDataModel(object):
   def GetInducedError(self):
     return self.induced_error
 
-  def AddSyncedNotification(self, serialized_notification):
-    """Adds a synced notification to the server data.
-
-    The notification will be delivered to the client on the next GetUpdates
-    call.
-
-    Args:
-      serialized_notification: A serialized CoalescedSyncedNotification.
-
-    Returns:
-      The string representation of the added SyncEntity.
-
-    Raises:
-      ClientNotConnectedError: if the client has not yet connected to this
-      server
-    """
-    # A unique string used wherever a unique ID for this notification is
-    # required.
-    unique_notification_id = str(uuid.uuid4())
-
-    specifics = self._CreateSyncedNotificationEntitySpecifics(
-        unique_notification_id, serialized_notification)
-
-    # Create the root SyncEntity representing a single notification.
-    entity = sync_pb2.SyncEntity()
-    entity.specifics.CopyFrom(specifics)
-    entity.parent_id_string = self._ServerTagToId(
-        'google_chrome_synced_notifications')
-    entity.name = 'Synced notification added for testing'
-    entity.version = self._GetNextVersionNumber()
-
-    entity.client_defined_unique_tag = self._CreateSyncedNotificationClientTag(
-        specifics.synced_notification.coalesced_notification.key)
-    entity.id_string = self._ClientTagToId(GetEntryType(entity),
-                                           entity.client_defined_unique_tag)
-
-    self._entries[entity.id_string] = copy.deepcopy(entity)
-
-    return google.protobuf.text_format.MessageToString(entity)
-
   def _GetNextVersionNumber(self):
     """Set the version to one more than the greatest version number seen."""
     entries = sorted(self._entries.values(), key=operator.attrgetter('version'))
@@ -1214,97 +1223,6 @@ class SyncDataModel(object):
       raise ClientNotConnectedError
     return entries[-1].version + 1
 
-  def _CreateSyncedNotificationEntitySpecifics(self, unique_id,
-                                               serialized_notification):
-    """Create the EntitySpecifics proto for a synced notification."""
-    coalesced = synced_notification_data_pb2.CoalescedSyncedNotification()
-    google.protobuf.text_format.Merge(serialized_notification, coalesced)
-
-    # Override the provided key so that we have a unique one.
-    coalesced.key = unique_id
-
-    specifics = sync_pb2.EntitySpecifics()
-    notification_specifics = \
-        synced_notification_specifics_pb2.SyncedNotificationSpecifics()
-    notification_specifics.coalesced_notification.CopyFrom(coalesced)
-    specifics.synced_notification.CopyFrom(notification_specifics)
-
-    return specifics
-
-  def _CreateSyncedNotificationClientTag(self, key):
-    """Create the client_defined_unique_tag value for a SyncedNotification.
-
-    Args:
-      key: The entity used to create the client tag.
-
-    Returns:
-      The string value of the to be used as the client_defined_unique_tag.
-    """
-    serialized_type = sync_pb2.EntitySpecifics()
-    specifics = synced_notification_specifics_pb2.SyncedNotificationSpecifics()
-    serialized_type.synced_notification.CopyFrom(specifics)
-    hash_input = serialized_type.SerializeToString() + key
-    return base64.b64encode(hashlib.sha1(hash_input).digest())
-
-  def AddSyncedNotificationAppInfo(self, app_info):
-    """Adds an app info struct to the server data.
-
-    The notification will be delivered to the client on the next GetUpdates
-    call.
-
-    Args:
-      app_info: A serialized AppInfo.
-
-    Returns:
-      The string representation of the added SyncEntity.
-
-    Raises:
-      ClientNotConnectedError: if the client has not yet connected to this
-      server
-    """
-    specifics = self._CreateSyncedNotificationAppInfoEntitySpecifics(app_info)
-
-    # Create the root SyncEntity representing a single app info protobuf.
-    entity = sync_pb2.SyncEntity()
-    entity.specifics.CopyFrom(specifics)
-    entity.parent_id_string = self._ServerTagToId(
-        'google_chrome_synced_notification_app_info')
-    entity.name = 'App info added for testing'
-    entity.version = self._GetNextVersionNumber()
-
-    # App Infos do not have a strong id, it only needs to be unique.
-    entity.client_defined_unique_tag = "foo"
-    entity.id_string = "foo"
-
-    self._entries[entity.id_string] = copy.deepcopy(entity)
-
-    print "entity before exit is ", entity
-
-    return google.protobuf.text_format.MessageToString(entity)
-
-  def _CreateSyncedNotificationAppInfoEntitySpecifics(
-    self, synced_notification_app_info):
-    """Create the EntitySpecifics proto for a synced notification app info."""
-    # Create a single, empty app_info object
-    app_info = \
-      synced_notification_app_info_specifics_pb2.SyncedNotificationAppInfo()
-    # Fill the app_info object from the text format protobuf.
-    google.protobuf.text_format.Merge(synced_notification_app_info, app_info)
-
-    # Create a new specifics object with a contained app_info
-    specifics = sync_pb2.EntitySpecifics()
-    app_info_specifics = \
-        synced_notification_app_info_specifics_pb2.\
-        SyncedNotificationAppInfoSpecifics()
-
-    # Copy the app info from the text format protobuf
-    contained_app_info = app_info_specifics.synced_notification_app_info.add()
-    contained_app_info.CopyFrom(app_info)
-
-    # And put the new app_info_specifics into the specifics before returning.
-    specifics.synced_notification_app_info.CopyFrom(app_info_specifics)
-
-    return specifics
 
 class TestServer(object):
   """An object to handle requests for one (and only one) Chrome Sync account.
@@ -1549,7 +1467,6 @@ class TestServer(object):
       else:
         print 'Unrecognizable sync request!'
         return (400, None)  # Bad request.
-      print 'Sync data: %s' % response.__str__()
       return (200, response.SerializeToString())
     except MigrationDoneError, error:
       print_context('<-')
@@ -1701,9 +1618,7 @@ class TestServer(object):
     """Customizes the value of the ClientCommand of ServerToClientResponse.
 
     Currently, this only allows for changing the sessions_commit_delay_seconds
-    field. This is useful for testing in conjunction with
-    AddSyncedNotification so that synced notifications are seen immediately
-    after triggering them with an HTTP call to the test server.
+    field.
 
     Args:
       sessions_commit_delay_seconds: The desired sync delay time for sessions.

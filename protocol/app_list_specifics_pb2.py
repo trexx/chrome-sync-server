@@ -13,7 +13,7 @@ from google.protobuf import descriptor_pb2
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='app_list_specifics.proto',
   package='sync_pb',
-  serialized_pb='\n\x18\x61pp_list_specifics.proto\x12\x07sync_pb\"\x90\x02\n\x10\x41ppListSpecifics\x12\x0f\n\x07item_id\x18\x01 \x01(\t\x12<\n\titem_type\x18\x02 \x01(\x0e\x32).sync_pb.AppListSpecifics.AppListItemType\x12\x11\n\titem_name\x18\x03 \x01(\t\x12\x11\n\tparent_id\x18\x04 \x01(\t\x12\x14\n\x0cpage_ordinal\x18\x05 \x01(\t\x12\x14\n\x0citem_ordinal\x18\x06 \x01(\t\"[\n\x0f\x41ppListItemType\x12\x0c\n\x08TYPE_APP\x10\x01\x12\x1b\n\x17TYPE_REMOVE_DEFAULT_APP\x10\x02\x12\x0f\n\x0bTYPE_FOLDER\x10\x03\x12\x0c\n\x08TYPE_URL\x10\x04\x42\x04H\x03`\x01')
+  serialized_pb='\n\x18\x61pp_list_specifics.proto\x12\x07sync_pb\"\x9d\x02\n\x10\x41ppListSpecifics\x12\x0f\n\x07item_id\x18\x01 \x01(\t\x12<\n\titem_type\x18\x02 \x01(\x0e\x32).sync_pb.AppListSpecifics.AppListItemType\x12\x11\n\titem_name\x18\x03 \x01(\t\x12\x11\n\tparent_id\x18\x04 \x01(\t\x12!\n\x15OBSOLETE_page_ordinal\x18\x05 \x01(\tB\x02\x18\x01\x12\x14\n\x0citem_ordinal\x18\x06 \x01(\t\"[\n\x0f\x41ppListItemType\x12\x0c\n\x08TYPE_APP\x10\x01\x12\x1b\n\x17TYPE_REMOVE_DEFAULT_APP\x10\x02\x12\x0f\n\x0bTYPE_FOLDER\x10\x03\x12\x0c\n\x08TYPE_URL\x10\x04\x42\x04H\x03`\x01')
 
 
 
@@ -42,8 +42,8 @@ _APPLISTSPECIFICS_APPLISTITEMTYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=219,
-  serialized_end=310,
+  serialized_start=232,
+  serialized_end=323,
 )
 
 
@@ -83,12 +83,12 @@ _APPLISTSPECIFICS = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='page_ordinal', full_name='sync_pb.AppListSpecifics.page_ordinal', index=4,
+      name='OBSOLETE_page_ordinal', full_name='sync_pb.AppListSpecifics.OBSOLETE_page_ordinal', index=4,
       number=5, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=unicode("", "utf-8"),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None),
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\030\001')),
     _descriptor.FieldDescriptor(
       name='item_ordinal', full_name='sync_pb.AppListSpecifics.item_ordinal', index=5,
       number=6, type=9, cpp_type=9, label=1,
@@ -107,7 +107,7 @@ _APPLISTSPECIFICS = _descriptor.Descriptor(
   is_extendable=False,
   extension_ranges=[],
   serialized_start=38,
-  serialized_end=310,
+  serialized_end=323,
 )
 
 _APPLISTSPECIFICS.fields_by_name['item_type'].enum_type = _APPLISTSPECIFICS_APPLISTITEMTYPE
@@ -123,4 +123,6 @@ class AppListSpecifics(_message.Message):
 
 DESCRIPTOR.has_options = True
 DESCRIPTOR._options = _descriptor._ParseOptions(descriptor_pb2.FileOptions(), 'H\003`\001')
+_APPLISTSPECIFICS.fields_by_name['OBSOLETE_page_ordinal'].has_options = True
+_APPLISTSPECIFICS.fields_by_name['OBSOLETE_page_ordinal']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), '\030\001')
 # @@protoc_insertion_point(module_scope)
