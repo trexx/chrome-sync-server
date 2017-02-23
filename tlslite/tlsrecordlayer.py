@@ -586,10 +586,10 @@ class TLSRecordLayer(object):
                 if self.version == (3,2):
                     b = self.fixedIVBlock + b
 
-                #Add padding: b = b + (macBytes + paddingBytes)
-                currentLength = len(b) + len(macBytes)
+                #Add padding: b = b+ (macBytes + paddingBytes)
+                currentLength = len(b) + len(macBytes) + 1
                 blockLength = self._writeState.encContext.block_size
-                paddingLength = blockLength - 1 - (currentLength % blockLength)
+                paddingLength = blockLength-(currentLength % blockLength)
 
                 paddingBytes = bytearray([paddingLength] * (paddingLength+1))
                 if self.fault == Fault.badPadding:
@@ -800,8 +800,6 @@ class TLSRecordLayer(object):
                     yield Finished(self.version).parse(p)
                 elif subType == HandshakeType.next_protocol:
                     yield NextProtocol().parse(p)
-                elif subType == HandshakeType.encrypted_extensions:
-                    yield EncryptedExtensions().parse(p)
                 else:
                     raise AssertionError()
 

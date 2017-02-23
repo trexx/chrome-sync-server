@@ -26,13 +26,13 @@ if pycryptoLoaded:
             return self.rsa.has_private()
 
         def _rawPrivateKeyOp(self, m):
-            s = bytes(numberToByteArray(m, numBytes(self.n)))
-            c = bytesToNumber(bytearray(self.rsa.decrypt((s,))))
+            s = numberToString(m, numBytes(self.n))
+            c = stringToNumber(self.rsa.decrypt((s,)))
             return c
 
         def _rawPublicKeyOp(self, c):
-            s = bytes(numberToByteArray(c, numBytes(self.n)))
-            m = bytesToNumber(bytearray(self.rsa.encrypt(s, None)[0]))
+            s = numberToString(c, numBytes(self.n))
+            m = stringToNumber(self.rsa.encrypt(s, None)[0])
             return m
 
         def generate(bits):

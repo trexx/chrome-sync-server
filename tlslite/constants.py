@@ -14,14 +14,10 @@ class CertificateType:
     openpgp = 1
 
 class ClientCertificateType:
-    # http://www.iana.org/assignments/tls-parameters/tls-parameters.xhtml#tls-parameters-2
     rsa_sign = 1
     dss_sign = 2
     rsa_fixed_dh = 3
     dss_fixed_dh = 4
-    ecdsa_sign = 64
-    rsa_fixed_ecdh = 65
-    ecdsa_fixed_ecdh = 66
  
 class HandshakeType:
     hello_request = 0
@@ -34,9 +30,7 @@ class HandshakeType:
     certificate_verify = 15
     client_key_exchange = 16
     finished = 20
-    certificate_status = 22
     next_protocol = 67
-    encrypted_extensions = 203
 
 class ContentType:
     change_cipher_spec = 20
@@ -45,18 +39,12 @@ class ContentType:
     application_data = 23
     all = (20,21,22,23)
 
-class CertificateStatusType:
-    ocsp = 1
-
 class ExtensionType:    # RFC 6066 / 4366
     server_name = 0     # RFC 6066 / 4366
-    status_request = 5  # RFC 6066 / 4366
     srp = 12            # RFC 5054  
     cert_type = 9       # RFC 6091
-    signed_cert_timestamps = 18  # RFC 6962
     tack = 0xF300
     supports_npn = 13172
-    channel_id = 30032
     
 class NameType:
     host_name = 0
@@ -115,7 +103,6 @@ class AlertDescription:
     protocol_version = 70
     insufficient_security = 71
     internal_error = 80
-    inappropriate_fallback = 86
     user_canceled = 90
     no_renegotiation = 100
     unknown_psk_identity = 115
@@ -127,9 +114,6 @@ class CipherSuite:
     # We actually don't do any renegotiation, but this
     # prevents renegotiation attacks
     TLS_EMPTY_RENEGOTIATION_INFO_SCSV = 0x00FF
-
-    # draft-bmoeller-tls-downgrade-scsv-01
-    TLS_FALLBACK_SCSV = 0x5600
     
     TLS_SRP_SHA_WITH_3DES_EDE_CBC_SHA  = 0xC01A
     TLS_SRP_SHA_WITH_AES_128_CBC_SHA = 0xC01D
@@ -147,10 +131,6 @@ class CipherSuite:
     
     TLS_RSA_WITH_RC4_128_MD5 = 0x0004
 
-    TLS_DHE_RSA_WITH_3DES_EDE_CBC_SHA = 0x0016
-    TLS_DHE_RSA_WITH_AES_128_CBC_SHA = 0x0033
-    TLS_DHE_RSA_WITH_AES_256_CBC_SHA = 0x0039
-
     TLS_DH_ANON_WITH_AES_128_CBC_SHA = 0x0034
     TLS_DH_ANON_WITH_AES_256_CBC_SHA = 0x003A
 
@@ -158,20 +138,17 @@ class CipherSuite:
     tripleDESSuites.append(TLS_SRP_SHA_WITH_3DES_EDE_CBC_SHA)
     tripleDESSuites.append(TLS_SRP_SHA_RSA_WITH_3DES_EDE_CBC_SHA)
     tripleDESSuites.append(TLS_RSA_WITH_3DES_EDE_CBC_SHA)
-    tripleDESSuites.append(TLS_DHE_RSA_WITH_3DES_EDE_CBC_SHA)
 
     aes128Suites = []
     aes128Suites.append(TLS_SRP_SHA_WITH_AES_128_CBC_SHA)
     aes128Suites.append(TLS_SRP_SHA_RSA_WITH_AES_128_CBC_SHA)
     aes128Suites.append(TLS_RSA_WITH_AES_128_CBC_SHA)
-    aes128Suites.append(TLS_DHE_RSA_WITH_AES_128_CBC_SHA)
     aes128Suites.append(TLS_DH_ANON_WITH_AES_128_CBC_SHA)
 
     aes256Suites = []
     aes256Suites.append(TLS_SRP_SHA_WITH_AES_256_CBC_SHA)
     aes256Suites.append(TLS_SRP_SHA_RSA_WITH_AES_256_CBC_SHA)
     aes256Suites.append(TLS_RSA_WITH_AES_256_CBC_SHA)
-    aes256Suites.append(TLS_DHE_RSA_WITH_AES_256_CBC_SHA)
     aes256Suites.append(TLS_DH_ANON_WITH_AES_256_CBC_SHA)
 
     rc4Suites = []
@@ -189,9 +166,6 @@ class CipherSuite:
     shaSuites.append(TLS_RSA_WITH_AES_128_CBC_SHA)
     shaSuites.append(TLS_RSA_WITH_AES_256_CBC_SHA)
     shaSuites.append(TLS_RSA_WITH_RC4_128_SHA)
-    shaSuites.append(TLS_DHE_RSA_WITH_3DES_EDE_CBC_SHA)
-    shaSuites.append(TLS_DHE_RSA_WITH_AES_128_CBC_SHA)
-    shaSuites.append(TLS_DHE_RSA_WITH_AES_256_CBC_SHA)
     shaSuites.append(TLS_DH_ANON_WITH_AES_128_CBC_SHA)
     shaSuites.append(TLS_DH_ANON_WITH_AES_256_CBC_SHA)
     
@@ -202,7 +176,6 @@ class CipherSuite:
     def _filterSuites(suites, settings):
         macNames = settings.macNames
         cipherNames = settings.cipherNames
-        keyExchangeNames = settings.keyExchangeNames
         macSuites = []
         if "sha" in macNames:
             macSuites += CipherSuite.shaSuites
@@ -219,20 +192,7 @@ class CipherSuite:
         if "rc4" in cipherNames:
             cipherSuites += CipherSuite.rc4Suites
 
-        keyExchangeSuites = []
-        if "rsa" in keyExchangeNames:
-            keyExchangeSuites += CipherSuite.certSuites
-        if "dhe_rsa" in keyExchangeNames:
-            keyExchangeSuites += CipherSuite.dheCertSuites
-        if "srp_sha" in keyExchangeNames:
-            keyExchangeSuites += CipherSuite.srpSuites
-        if "srp_sha_rsa" in keyExchangeNames:
-            keyExchangeSuites += CipherSuite.srpCertSuites
-        if "dh_anon" in keyExchangeNames:
-            keyExchangeSuites += CipherSuite.anonSuites
-
-        return [s for s in suites if s in macSuites and
-                s in cipherSuites and s in keyExchangeSuites]
+        return [s for s in suites if s in macSuites and s in cipherSuites]
 
     srpSuites = []
     srpSuites.append(TLS_SRP_SHA_WITH_3DES_EDE_CBC_SHA)
@@ -252,7 +212,7 @@ class CipherSuite:
     def getSrpCertSuites(settings):
         return CipherSuite._filterSuites(CipherSuite.srpCertSuites, settings)
 
-    srpAllSuites = srpCertSuites + srpSuites
+    srpAllSuites = srpSuites + srpCertSuites
 
     @staticmethod
     def getSrpAllSuites(settings):
@@ -264,21 +224,11 @@ class CipherSuite:
     certSuites.append(TLS_RSA_WITH_AES_256_CBC_SHA)
     certSuites.append(TLS_RSA_WITH_RC4_128_SHA)
     certSuites.append(TLS_RSA_WITH_RC4_128_MD5)
+    certAllSuites = srpCertSuites + certSuites
     
     @staticmethod
     def getCertSuites(settings):
         return CipherSuite._filterSuites(CipherSuite.certSuites, settings)
-
-    dheCertSuites = []
-    dheCertSuites.append(TLS_DHE_RSA_WITH_3DES_EDE_CBC_SHA)
-    dheCertSuites.append(TLS_DHE_RSA_WITH_AES_128_CBC_SHA)
-    dheCertSuites.append(TLS_DHE_RSA_WITH_AES_256_CBC_SHA)
-
-    @staticmethod
-    def getDheCertSuites(settings):
-        return CipherSuite._filterSuites(CipherSuite.dheCertSuites, settings)
-
-    certAllSuites = srpCertSuites + certSuites + dheCertSuites
 
     anonSuites = []
     anonSuites.append(TLS_DH_ANON_WITH_AES_128_CBC_SHA)
@@ -287,8 +237,6 @@ class CipherSuite:
     @staticmethod
     def getAnonSuites(settings):
         return CipherSuite._filterSuites(CipherSuite.anonSuites, settings)
-
-    dhAllSuites = dheCertSuites + anonSuites
 
     @staticmethod
     def canonicalCipherName(ciphersuite):

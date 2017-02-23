@@ -112,9 +112,6 @@ class ClientHello(HandshakeMsg):
         self.tack = False
         self.supports_npn = False
         self.server_name = bytearray(0)
-        self.channel_id = False
-        self.support_signed_cert_timestamps = False
-        self.status_request = False
 
     def create(self, version, random, session_id, cipher_suites,
                certificate_types=None, srpUsername=None,
@@ -182,25 +179,6 @@ class ClientHello(HandshakeMsg):
                             if name_type == NameType.host_name:
                                 self.server_name = hostNameBytes
                                 break
-                    elif extType == ExtensionType.channel_id:
-                        self.channel_id = True
-                    elif extType == ExtensionType.signed_cert_timestamps:
-                        if extLength:
-                            raise SyntaxError()
-                        self.support_signed_cert_timestamps = True
-                    elif extType == ExtensionType.status_request:
-                        # Extension contents are currently ignored.
-                        # According to RFC 6066, this is not strictly forbidden
-                        # (although it is suboptimal):
-                        # Servers that receive a client hello containing the
-                        # "status_request" extension MAY return a suitable
-                        # certificate status response to the client along with
-                        # their certificate.  If OCSP is requested, they
-                        # SHOULD use the information contained in the extension
-                        # when selecting an OCSP responder and SHOULD include
-                        # request_extensions in the OCSP request.
-                        p.getFixBytes(extLength)
-                        self.status_request = True
                     else:
                         _ = p.getFixBytes(extLength)
                     index2 = p.index
@@ -265,9 +243,6 @@ class ServerHello(HandshakeMsg):
         self.tackExt = None
         self.next_protos_advertised = None
         self.next_protos = None
-        self.channel_id = False
-        self.signed_cert_timestamps = None
-        self.status_request = False
 
     def create(self, version, random, session_id, cipher_suite,
                certificate_type, tackExt, next_protos_advertised):
@@ -354,15 +329,6 @@ class ServerHello(HandshakeMsg):
             w2.add(ExtensionType.supports_npn, 2)
             w2.add(len(encoded_next_protos_advertised), 2)
             w2.addFixSeq(encoded_next_protos_advertised, 1)
-        if self.channel_id:
-            w2.add(ExtensionType.channel_id, 2)
-            w2.add(0, 2)
-        if self.signed_cert_timestamps:
-            w2.add(ExtensionType.signed_cert_timestamps, 2)
-            w2.addVarSeq(bytearray(self.signed_cert_timestamps), 1, 2)
-        if self.status_request:
-            w2.add(ExtensionType.status_request, 2)
-            w2.add(0, 2)
         if len(w2.bytes):
             w.add(len(w2.bytes), 2)
             w.bytes += w2.bytes        
@@ -420,41 +386,12 @@ class Certificate(HandshakeMsg):
             raise AssertionError()
         return self.postWrite(w)
 
-class CertificateStatus(HandshakeMsg):
-    def __init__(self):
-        HandshakeMsg.__init__(self, HandshakeType.certificate_status)
-
-    def create(self, ocsp_response):
-        self.ocsp_response = ocsp_response
-        return self
-
-    # Defined for the sake of completeness, even though we currently only
-    # support sending the status message (server-side), not requesting
-    # or receiving it (client-side).
-    def parse(self, p):
-        p.startLengthCheck(3)
-        status_type = p.get(1)
-        # Only one type is specified, so hardwire it.
-        if status_type != CertificateStatusType.ocsp:
-            raise SyntaxError()
-        ocsp_response = p.getVarBytes(3)
-        if not ocsp_response:
-            # Can't be empty
-            raise SyntaxError()
-        self.ocsp_response = ocsp_response
-        p.stopLengthCheck()
-        return self
-
-    def write(self):
-        w = Writer()
-        w.add(CertificateStatusType.ocsp, 1)
-        w.addVarSeq(bytearray(self.ocsp_response), 1, 3)
-        return self.postWrite(w)
-
 class CertificateRequest(HandshakeMsg):
     def __init__(self):
         HandshakeMsg.__init__(self, HandshakeType.certificate_request)
-        self.certificate_types = []
+        #Apple's Secure Transport library rejects empty certificate_types, so
+        #default to rsa_sign.
+        self.certificate_types = [ClientCertificateType.rsa_sign]
         self.certificate_authorities = []
 
     def create(self, certificate_types, certificate_authorities):
@@ -531,31 +468,31 @@ class ServerKeyExchange(HandshakeMsg):
         p.stopLengthCheck()
         return self
 
-    def write_params(self):
+    def write(self):
         w = Writer()
         if self.cipherSuite in CipherSuite.srpAllSuites:
             w.addVarSeq(numberToByteArray(self.srp_N), 1, 2)
             w.addVarSeq(numberToByteArray(self.srp_g), 1, 2)
             w.addVarSeq(self.srp_s, 1, 1)
             w.addVarSeq(numberToByteArray(self.srp_B), 1, 2)
-        elif self.cipherSuite in CipherSuite.dhAllSuites:
+            if self.cipherSuite in CipherSuite.srpCertSuites:
+                w.addVarSeq(self.signature, 1, 2)
+        elif self.cipherSuite in CipherSuite.anonSuites:
             w.addVarSeq(numberToByteArray(self.dh_p), 1, 2)
             w.addVarSeq(numberToByteArray(self.dh_g), 1, 2)
             w.addVarSeq(numberToByteArray(self.dh_Ys), 1, 2)
-        else:
-            assert(False)
-        return w.bytes
-
-    def write(self):
-        w = Writer()
-        w.bytes += self.write_params()
-        if self.cipherSuite in CipherSuite.certAllSuites:
-            w.addVarSeq(self.signature, 1, 2)
+            if self.cipherSuite in []: # TODO support for signed_params
+                w.addVarSeq(self.signature, 1, 2)
         return self.postWrite(w)
 
     def hash(self, clientRandom, serverRandom):
-        bytes = clientRandom + serverRandom + self.write_params()
-        return MD5(bytes) + SHA1(bytes)
+        oldCipherSuite = self.cipherSuite
+        self.cipherSuite = None
+        try:
+            bytes = clientRandom + serverRandom + self.write()[4:]
+            return MD5(bytes) + SHA1(bytes)
+        finally:
+            self.cipherSuite = oldCipherSuite
 
 class ServerHelloDone(HandshakeMsg):
     def __init__(self):
@@ -605,7 +542,7 @@ class ClientKeyExchange(HandshakeMsg):
                     p.getFixBytes(len(p.bytes)-p.index)
             else:
                 raise AssertionError()
-        elif self.cipherSuite in CipherSuite.dhAllSuites:
+        elif self.cipherSuite in CipherSuite.anonSuites:
             self.dh_Yc = bytesToNumber(p.getVarBytes(2))            
         else:
             raise AssertionError()
@@ -718,28 +655,6 @@ class Finished(HandshakeMsg):
         w = Writer()
         w.addFixSeq(self.verify_data, 1)
         return self.postWrite(w)
-
-class EncryptedExtensions(HandshakeMsg):
-    def __init__(self):
-        self.channel_id_key = None
-        self.channel_id_proof = None
-
-    def parse(self, p):
-        p.startLengthCheck(3)
-        soFar = 0
-        while soFar != p.lengthCheck:
-            extType = p.get(2)
-            extLength = p.get(2)
-            if extType == ExtensionType.channel_id:
-                if extLength != 32*4:
-                    raise SyntaxError()
-                self.channel_id_key = p.getFixBytes(64)
-                self.channel_id_proof = p.getFixBytes(64)
-            else:
-                p.getFixBytes(extLength)
-            soFar += 4 + extLength
-        p.stopLengthCheck()
-        return self
 
 class ApplicationData(object):
     def __init__(self):

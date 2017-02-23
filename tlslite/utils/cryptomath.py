@@ -94,9 +94,7 @@ def bytesToNumber(b):
         byte = b[count]
         total += multiplier * byte
         multiplier *= 256
-    # Force-cast to long to appease PyCrypto.
-    # https://github.com/trevp/tlslite/issues/15
-    return long(total)
+    return total
 
 def numberToByteArray(n, howManyBytes=None):
     """Convert an integer into a bytearray, zero-pad to howManyBytes.

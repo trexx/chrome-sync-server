@@ -2,6 +2,7 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+#include <stdint.h>
 #include <stdio.h>
 
 #include "base/at_exit.h"
@@ -10,10 +11,11 @@
 #include "base/logging.h"
 #include "base/message_loop/message_loop.h"
 #include "base/process/launch.h"
+#include "base/run_loop.h"
 #include "base/strings/string_number_conversions.h"
 #include "base/test/test_timeouts.h"
+#include "components/sync/test/local_sync_test_server.h"
 #include "net/test/python_utils.h"
-#include "sync/test/local_sync_test_server.h"
 
 static void PrintUsage() {
   printf("run_sync_testserver [--port=<port>] [--xmpp-port=<xmpp_port>]\n");
@@ -23,9 +25,9 @@ static void PrintUsage() {
 // the sync HTTP and XMPP sever functionality respectively.
 static bool RunSyncTest(
     const base::FilePath::StringType& sync_test_script_name) {
-  scoped_ptr<syncer::LocalSyncTestServer> test_server(
+  std::unique_ptr<syncer::LocalSyncTestServer> test_server(
       new syncer::LocalSyncTestServer());
- if (!test_server->SetPythonPath()) {
+  if (!test_server->SetPythonPath()) {
     LOG(ERROR) << "Error trying to set python path. Exiting.";
     return false;
   }
@@ -54,8 +56,8 @@ static bool RunSyncTest(
 
 // Gets a port value from the switch with name |switch_name| and writes it to
 // |port|. Returns true if a port was provided and false otherwise.
-static bool GetPortFromSwitch(const std::string& switch_name, uint16* port) {
-  DCHECK(port != NULL) << "|port| is NULL";
+static bool GetPortFromSwitch(const std::string& switch_name, uint16_t* port) {
+  DCHECK(port != nullptr) << "|port| is null";
   base::CommandLine* command_line = base::CommandLine::ForCurrentProcess();
   int port_int = 0;
   if (command_line->HasSwitch(switch_name)) {
@@ -64,7 +66,7 @@ static bool GetPortFromSwitch(const std::string& switch_name, uint16* port) {
       return false;
     }
   }
-  *port = static_cast<uint16>(port_int);
+  *port = static_cast<uint16_t>(port_int);
   return true;
 }
 
@@ -99,13 +101,13 @@ int main(int argc, const char* argv[]) {
     return RunSyncTest(FILE_PATH_LITERAL("xmppserver_test.py")) ? 0 : -1;
   }
 
-  uint16 port = 0;
+  uint16_t port = 0;
   GetPortFromSwitch("port", &port);
 
-  uint16 xmpp_port = 0;
+  uint16_t xmpp_port = 0;
   GetPortFromSwitch("xmpp-port", &xmpp_port);
 
-  scoped_ptr<syncer::LocalSyncTestServer> test_server(
+  std::unique_ptr<syncer::LocalSyncTestServer> test_server(
       new syncer::LocalSyncTestServer(port, xmpp_port));
   if (!test_server->Start()) {
     printf("Error: failed to start python sync test server. Exiting.\n");
@@ -115,6 +117,6 @@ int main(int argc, const char* argv[]) {
   printf("Python sync test server running at %s (type ctrl+c to exit)\n",
          test_server->host_port_pair().ToString().c_str());
 
-  message_loop.Run();
+  base::RunLoop().Run();
   return 0;
 }

@@ -23,103 +23,6 @@ from .mathtls import *
 from .handshakesettings import HandshakeSettings
 from .utils.tackwrapper import *
 
-class KeyExchange(object):
-    def __init__(self, cipherSuite, clientHello, serverHello, privateKey):
-        """
-        Initializes the KeyExchange. privateKey is the signing private key.
-        """
-        self.cipherSuite = cipherSuite
-        self.clientHello = clientHello
-        self.serverHello = serverHello
-        self.privateKey = privateKey
-
-    def makeServerKeyExchange():
-        """
-        Returns a ServerKeyExchange object for the server's initial leg in the
-        handshake. If the key exchange method does not send ServerKeyExchange
-        (e.g. RSA), it returns None.
-        """
-        raise NotImplementedError()
-
-    def processClientKeyExchange(clientKeyExchange):
-        """
-        Processes the client's ClientKeyExchange message and returns the
-        premaster secret. Raises TLSLocalAlert on error.
-        """
-        raise NotImplementedError()
-
-class RSAKeyExchange(KeyExchange):
-    def makeServerKeyExchange(self):
-        return None
-
-    def processClientKeyExchange(self, clientKeyExchange):
-        premasterSecret = self.privateKey.decrypt(\
-            clientKeyExchange.encryptedPreMasterSecret)
-
-        # On decryption failure randomize premaster secret to avoid
-        # Bleichenbacher's "million message" attack
-        randomPreMasterSecret = getRandomBytes(48)
-        if not premasterSecret:
-            premasterSecret = randomPreMasterSecret
-        elif len(premasterSecret)!=48:
-            premasterSecret = randomPreMasterSecret
-        else:
-            versionCheck = (premasterSecret[0], premasterSecret[1])
-            if versionCheck != self.clientHello.client_version:
-                #Tolerate buggy IE clients
-                if versionCheck != self.serverHello.server_version:
-                    premasterSecret = randomPreMasterSecret
-        return premasterSecret
-
-def _hexStringToNumber(s):
-    s = s.replace(" ", "").replace("\n", "")
-    if len(s) % 2 != 0:
-        raise ValueError("Length is not even")
-    return bytesToNumber(bytearray(s.decode("hex")))
-
-class DHE_RSAKeyExchange(KeyExchange):
-    # 2048-bit MODP Group (RFC 3526, Section 3)
-    dh_p = _hexStringToNumber("""
-FFFFFFFF FFFFFFFF C90FDAA2 2168C234 C4C6628B 80DC1CD1
-29024E08 8A67CC74 020BBEA6 3B139B22 514A0879 8E3404DD
-EF9519B3 CD3A431B 302B0A6D F25F1437 4FE1356D 6D51C245
-E485B576 625E7EC6 F44C42E9 A637ED6B 0BFF5CB6 F406B7ED
-EE386BFB 5A899FA5 AE9F2411 7C4B1FE6 49286651 ECE45B3D
-C2007CB8 A163BF05 98DA4836 1C55D39A 69163FA8 FD24CF5F
-83655D23 DCA3AD96 1C62F356 208552BB 9ED52907 7096966D
-670C354E 4ABC9804 F1746C08 CA18217C 32905E46 2E36CE3B
-E39E772C 180E8603 9B2783A2 EC07A28F B5C55DF0 6F4C52C9
-DE2BCBF6 95581718 3995497C EA956AE5 15D22618 98FA0510
-15728E5A 8AACAA68 FFFFFFFF FFFFFFFF""")
-    dh_g = 2
-
-    # RFC 3526, Section 8.
-    strength = 160
-
-    def makeServerKeyExchange(self):
-        # Per RFC 3526, Section 1, the exponent should have double the entropy
-        # of the strength of the curve.
-        self.dh_Xs = bytesToNumber(getRandomBytes(self.strength * 2 / 8))
-        dh_Ys = powMod(self.dh_g, self.dh_Xs, self.dh_p)
-
-        serverKeyExchange = ServerKeyExchange(self.cipherSuite)
-        serverKeyExchange.createDH(self.dh_p, self.dh_g, dh_Ys)
-        serverKeyExchange.signature = self.privateKey.sign(
-            serverKeyExchange.hash(self.clientHello.random,
-                                   self.serverHello.random))
-        return serverKeyExchange
-
-    def processClientKeyExchange(self, clientKeyExchange):
-        dh_Yc = clientKeyExchange.dh_Yc
-
-        # First half of RFC 2631, Section 2.1.5. Validate the client's public
-        # key.
-        if not 2 <= dh_Yc <= self.dh_p - 1:
-            raise TLSLocalAlert(AlertDescription.illegal_parameter,
-                                "Invalid dh_Yc value")
-
-        S = powMod(dh_Yc, self.dh_Xs, self.dh_p)
-        return numberToByteArray(S)
 
 class TLSConnection(TLSRecordLayer):
     """
@@ -597,8 +500,6 @@ class TLSConnection(TLSRecordLayer):
             cipherSuites += CipherSuite.getSrpAllSuites(settings)
         elif certParams:
             cipherSuites += CipherSuite.getCertSuites(settings)
-            # TODO: Client DHE_RSA not supported.
-            # cipherSuites += CipherSuite.getDheCertSuites(settings)
         elif anonParams:
             cipherSuites += CipherSuite.getAnonSuites(settings)
         else:
@@ -1062,11 +963,9 @@ class TLSConnection(TLSRecordLayer):
     def handshakeServer(self, verifierDB=None,
                         certChain=None, privateKey=None, reqCert=False,
                         sessionCache=None, settings=None, checker=None,
-                        reqCAs = None, reqCertTypes = None,
+                        reqCAs = None, 
                         tacks=None, activationFlags=0,
-                        nextProtos=None, anon=False,
-                        tlsIntolerant=None, signedCertTimestamps=None,
-                        fallbackSCSV=False, ocspResponse=None):
+                        nextProtos=None, anon=False):
         """Perform a handshake in the role of server.
 
         This function performs an SSL or TLS handshake.  Depending on
@@ -1130,39 +1029,10 @@ class TLSConnection(TLSRecordLayer):
         will be sent along with a certificate request. This does not affect
         verification.        
 
-        @type reqCertTypes: list of int
-        @param reqCertTypes: A list of certificate_type values to be sent
-        along with a certificate request. This does not affect verification.
-
         @type nextProtos: list of strings.
         @param nextProtos: A list of upper layer protocols to expose to the
         clients through the Next-Protocol Negotiation Extension, 
         if they support it.
-
-        @type tlsIntolerant: (int, int) or None
-        @param tlsIntolerant: If tlsIntolerant is not None, the server will
-        simulate TLS version intolerance by returning a fatal handshake_failure
-        alert to all TLS versions tlsIntolerant or higher.
-
-        @type signedCertTimestamps: str
-        @param signedCertTimestamps: A SignedCertificateTimestampList (as a
-        binary 8-bit string) that will be sent as a TLS extension whenever
-        the client announces support for the extension.
-
-        @type fallbackSCSV: bool
-        @param fallbackSCSV: if true, the server will implement
-        TLS_FALLBACK_SCSV and thus reject connections using less than the
-        server's maximum TLS version that include this cipher suite.
-
-        @type ocspResponse: str
-        @param ocspResponse: An OCSP response (as a binary 8-bit string) that
-        will be sent stapled in the handshake whenever the client announces
-        support for the status_request extension.
-        Note that the response is sent independent of the ClientHello
-        status_request extension contents, and is thus only meant for testing
-        environments. Real OCSP stapling is more complicated as it requires
-        choosing a suitable response based on the ClientHello status_request
-        extension contents.
 
         @raise socket.error: If a socket error occurs.
         @raise tlslite.errors.TLSAbruptCloseError: If the socket is closed
@@ -1173,24 +1043,18 @@ class TLSConnection(TLSRecordLayer):
         """
         for result in self.handshakeServerAsync(verifierDB,
                 certChain, privateKey, reqCert, sessionCache, settings,
-                checker, reqCAs, reqCertTypes,
+                checker, reqCAs, 
                 tacks=tacks, activationFlags=activationFlags, 
-                nextProtos=nextProtos, anon=anon, tlsIntolerant=tlsIntolerant,
-                signedCertTimestamps=signedCertTimestamps,
-                fallbackSCSV=fallbackSCSV, ocspResponse=ocspResponse):
+                nextProtos=nextProtos, anon=anon):
             pass
 
 
     def handshakeServerAsync(self, verifierDB=None,
                              certChain=None, privateKey=None, reqCert=False,
                              sessionCache=None, settings=None, checker=None,
-                             reqCAs=None, reqCertTypes=None,
+                             reqCAs=None, 
                              tacks=None, activationFlags=0,
-                             nextProtos=None, anon=False,
-                             tlsIntolerant=None,
-                             signedCertTimestamps=None,
-                             fallbackSCSV=False,
-                             ocspResponse=None
+                             nextProtos=None, anon=False
                              ):
         """Start a server handshake operation on the TLS connection.
 
@@ -1207,24 +1071,18 @@ class TLSConnection(TLSRecordLayer):
             verifierDB=verifierDB, certChain=certChain,
             privateKey=privateKey, reqCert=reqCert,
             sessionCache=sessionCache, settings=settings, 
-            reqCAs=reqCAs, reqCertTypes=reqCertTypes,
+            reqCAs=reqCAs, 
             tacks=tacks, activationFlags=activationFlags, 
-            nextProtos=nextProtos, anon=anon,
-            tlsIntolerant=tlsIntolerant,
-            signedCertTimestamps=signedCertTimestamps,
-            fallbackSCSV=fallbackSCSV,
-            ocspResponse=ocspResponse)
+            nextProtos=nextProtos, anon=anon)
         for result in self._handshakeWrapperAsync(handshaker, checker):
             yield result
 
 
     def _handshakeServerAsyncHelper(self, verifierDB,
                              certChain, privateKey, reqCert, sessionCache,
-                             settings, reqCAs, reqCertTypes,
+                             settings, reqCAs, 
                              tacks, activationFlags, 
-                             nextProtos, anon,
-                             tlsIntolerant, signedCertTimestamps, fallbackSCSV,
-                             ocspResponse):
+                             nextProtos, anon):
 
         self._handshakeStart(client=False)
 
@@ -1236,8 +1094,6 @@ class TLSConnection(TLSRecordLayer):
             raise ValueError("Caller passed a privateKey but no certChain")
         if reqCAs and not reqCert:
             raise ValueError("Caller passed reqCAs but not reqCert")            
-        if reqCertTypes and not reqCert:
-            raise ValueError("Caller passed reqCertTypes but not reqCert")
         if certChain and not isinstance(certChain, X509CertChain):
             raise ValueError("Unrecognized certificate type")
         if activationFlags and not tacks:
@@ -1247,9 +1103,6 @@ class TLSConnection(TLSRecordLayer):
                 raise ValueError("tackpy is not loaded")
             if not settings or not settings.useExperimentalTackExtension:
                 raise ValueError("useExperimentalTackExtension not enabled")
-        if signedCertTimestamps and not certChain:
-            raise ValueError("Caller passed signedCertTimestamps but no "
-                             "certChain")
 
         if not settings:
             settings = HandshakeSettings()
@@ -1261,7 +1114,7 @@ class TLSConnection(TLSRecordLayer):
         # Handle ClientHello and resumption
         for result in self._serverGetClientHello(settings, certChain,\
                                             verifierDB, sessionCache,
-                                            anon, tlsIntolerant, fallbackSCSV):
+                                            anon):
             if result in (0,1): yield result
             elif result == None:
                 self._handshakeDone(resumed=True)                
@@ -1293,11 +1146,6 @@ class TLSConnection(TLSRecordLayer):
         serverHello.create(self.version, getRandomBytes(32), sessionID, \
                             cipherSuite, CertificateType.x509, tackExt,
                             nextProtos)
-        serverHello.channel_id = clientHello.channel_id
-        if clientHello.support_signed_cert_timestamps:
-            serverHello.signed_cert_timestamps = signedCertTimestamps
-        if clientHello.status_request:
-            serverHello.status_request = ocspResponse
 
         # Perform the SRP key exchange
         clientCertChain = None
@@ -1309,25 +1157,12 @@ class TLSConnection(TLSRecordLayer):
                 else: break
             premasterSecret = result
 
-        # Perform the RSA or DHE_RSA key exchange
-        elif (cipherSuite in CipherSuite.certSuites or
-              cipherSuite in CipherSuite.dheCertSuites):
-            if cipherSuite in CipherSuite.certSuites:
-                keyExchange = RSAKeyExchange(cipherSuite,
-                                             clientHello,
-                                             serverHello,
-                                             privateKey)
-            elif cipherSuite in CipherSuite.dheCertSuites:
-                keyExchange = DHE_RSAKeyExchange(cipherSuite,
-                                                 clientHello,
-                                                 serverHello,
-                                                 privateKey)
-            else:
-                assert(False)
+        # Perform the RSA key exchange
+        elif cipherSuite in CipherSuite.certSuites:
             for result in self._serverCertKeyExchange(clientHello, serverHello, 
-                                        certChain, keyExchange,
-                                        reqCert, reqCAs, reqCertTypes, cipherSuite,
-                                        settings, ocspResponse):
+                                        certChain, privateKey,
+                                        reqCert, reqCAs, cipherSuite,
+                                        settings):
                 if result in (0,1): yield result
                 else: break
             (premasterSecret, clientCertChain) = result
@@ -1347,7 +1182,7 @@ class TLSConnection(TLSRecordLayer):
         for result in self._serverFinished(premasterSecret, 
                                 clientHello.random, serverHello.random,
                                 cipherSuite, settings.cipherImplementations,
-                                nextProtos, clientHello.channel_id):
+                                nextProtos):
                 if result in (0,1): yield result
                 else: break
         masterSecret = result
@@ -1376,7 +1211,7 @@ class TLSConnection(TLSRecordLayer):
 
 
     def _serverGetClientHello(self, settings, certChain, verifierDB,
-                                sessionCache, anon, tlsIntolerant, fallbackSCSV):
+                                sessionCache, anon):
         #Initialize acceptable cipher suites
         cipherSuites = []
         if verifierDB:
@@ -1386,7 +1221,6 @@ class TLSConnection(TLSRecordLayer):
             cipherSuites += CipherSuite.getSrpSuites(settings)
         elif certChain:
             cipherSuites += CipherSuite.getCertSuites(settings)
-            cipherSuites += CipherSuite.getDheCertSuites(settings)
         elif anon:
             cipherSuites += CipherSuite.getAnonSuites(settings)
         else:
@@ -1412,23 +1246,9 @@ class TLSConnection(TLSRecordLayer):
                   "Too old version: %s" % str(clientHello.client_version)):
                 yield result
 
-        #If simulating TLS intolerance, reject certain TLS versions.
-        elif (tlsIntolerant is not None and
-            clientHello.client_version >= tlsIntolerant):
-            for result in self._sendError(\
-                    AlertDescription.handshake_failure):
-                yield result
-
         #If client's version is too high, propose my highest version
         elif clientHello.client_version > settings.maxVersion:
             self.version = settings.maxVersion
-
-        #Detect if the client performed an inappropriate fallback.
-        elif fallbackSCSV and clientHello.client_version < settings.maxVersion:
-            if CipherSuite.TLS_FALLBACK_SCSV in clientHello.cipher_suites:
-                for result in self._sendError(\
-                        AlertDescription.inappropriate_fallback):
-                    yield result
 
         else:
             #Set the version to the client's version
@@ -1505,9 +1325,10 @@ class TLSConnection(TLSRecordLayer):
         #the only time we won't use it is if we're resuming a
         #session, in which case we use the ciphersuite from the session.
         #
-        #Use the client's preferences for now.
-        for cipherSuite in clientHello.cipher_suites:
-            if cipherSuite in cipherSuites:
+        #Given the current ciphersuite ordering, this means we prefer SRP
+        #over non-SRP.
+        for cipherSuite in cipherSuites:
+            if cipherSuite in clientHello.cipher_suites:
                 break
         else:
             for result in self._sendError(\
@@ -1602,11 +1423,11 @@ class TLSConnection(TLSRecordLayer):
 
 
     def _serverCertKeyExchange(self, clientHello, serverHello, 
-                                serverCertChain, keyExchange,
-                                reqCert, reqCAs, reqCertTypes, cipherSuite,
-                                settings, ocspResponse):
-        #Send ServerHello, Certificate[, ServerKeyExchange]
-        #[, CertificateRequest], ServerHelloDone
+                                serverCertChain, privateKey,
+                                reqCert, reqCAs, cipherSuite,
+                                settings):
+        #Send ServerHello, Certificate[, CertificateRequest],
+        #ServerHelloDone
         msgs = []
 
         # If we verify a client cert chain, return it
@@ -1614,17 +1435,11 @@ class TLSConnection(TLSRecordLayer):
 
         msgs.append(serverHello)
         msgs.append(Certificate(CertificateType.x509).create(serverCertChain))
-        if serverHello.status_request:
-            msgs.append(CertificateStatus().create(ocspResponse))
-        serverKeyExchange = keyExchange.makeServerKeyExchange()
-        if serverKeyExchange is not None:
-            msgs.append(serverKeyExchange)
-        if reqCert:
-            reqCAs = reqCAs or []
-            #Apple's Secure Transport library rejects empty certificate_types,
-            #so default to rsa_sign.
-            reqCertTypes = reqCertTypes or [ClientCertificateType.rsa_sign]
-            msgs.append(CertificateRequest().create(reqCertTypes, reqCAs))
+        if reqCert and reqCAs:
+            msgs.append(CertificateRequest().create(\
+                [ClientCertificateType.rsa_sign], reqCAs))
+        elif reqCert:
+            msgs.append(CertificateRequest())
         msgs.append(ServerHelloDone())
         for result in self._sendMsgs(msgs):
             yield result
@@ -1678,13 +1493,21 @@ class TLSConnection(TLSRecordLayer):
             else: break
         clientKeyExchange = result
 
-        #Process ClientKeyExchange
-        try:
-            premasterSecret = \
-                keyExchange.processClientKeyExchange(clientKeyExchange)
-        except TLSLocalAlert, alert:
-            for result in self._sendError(alert.description, alert.message):
-                yield result
+        #Decrypt ClientKeyExchange
+        premasterSecret = privateKey.decrypt(\
+            clientKeyExchange.encryptedPreMasterSecret)
+
+        # On decryption failure randomize premaster secret to avoid
+        # Bleichenbacher's "million message" attack
+        randomPreMasterSecret = getRandomBytes(48)
+        versionCheck = (premasterSecret[0], premasterSecret[1])
+        if not premasterSecret:
+            premasterSecret = randomPreMasterSecret
+        elif len(premasterSecret)!=48:
+            premasterSecret = randomPreMasterSecret
+        elif versionCheck != clientHello.client_version:
+            if versionCheck != self.version: #Tolerate buggy IE clients
+                premasterSecret = randomPreMasterSecret
 
         #Get and check CertificateVerify, if relevant
         if clientCertChain:
@@ -1770,8 +1593,7 @@ class TLSConnection(TLSRecordLayer):
 
 
     def _serverFinished(self,  premasterSecret, clientRandom, serverRandom,
-                        cipherSuite, cipherImplementations, nextProtos,
-                        doingChannelID):
+                        cipherSuite, cipherImplementations, nextProtos):
         masterSecret = calcMasterSecret(self.version, premasterSecret,
                                       clientRandom, serverRandom)
         
@@ -1782,8 +1604,7 @@ class TLSConnection(TLSRecordLayer):
 
         #Exchange ChangeCipherSpec and Finished messages
         for result in self._getFinished(masterSecret, 
-                        expect_next_protocol=nextProtos is not None,
-                        expect_channel_id=doingChannelID):
+                        expect_next_protocol=nextProtos is not None):
             yield result
 
         for result in self._sendFinished(masterSecret):
@@ -1820,8 +1641,7 @@ class TLSConnection(TLSRecordLayer):
         for result in self._sendMsg(finished):
             yield result
 
-    def _getFinished(self, masterSecret, expect_next_protocol=False, nextProto=None,
-                     expect_channel_id=False):
+    def _getFinished(self, masterSecret, expect_next_protocol=False, nextProto=None):
         #Get and check ChangeCipherSpec
         for result in self._getMsg(ContentType.change_cipher_spec):
             if result in (0,1):
@@ -1853,20 +1673,6 @@ class TLSConnection(TLSRecordLayer):
         #Client Finish - Only set the next_protocol selected in the connection
         if nextProto:
             self.next_proto = nextProto
-
-        #Server Finish - Are we waiting for a EncryptedExtensions?
-        if expect_channel_id:
-            for result in self._getMsg(ContentType.handshake, HandshakeType.encrypted_extensions):
-                if result in (0,1):
-                    yield result
-            if result is None:
-                for result in self._sendError(AlertDescription.unexpected_message,
-                                             "Didn't get EncryptedExtensions message"):
-                    yield result
-            encrypted_extensions = result
-            self.channel_id = result.channel_id_key
-        else:
-            self.channel_id = None
 
         #Calculate verification data
         verifyData = self._calcFinished(masterSecret, False)
