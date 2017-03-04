@@ -27,7 +27,7 @@ from protocol import app_list_specifics_pb2
 from protocol import app_notification_specifics_pb2
 from protocol import app_setting_specifics_pb2
 from protocol import app_specifics_pb2
-#from protocol import arc_package_specifics_pb2
+from protocol import arc_package_specifics_pb2
 from protocol import article_specifics_pb2
 from protocol import autofill_specifics_pb2
 from protocol import bookmark_specifics_pb2
@@ -46,7 +46,7 @@ from protocol import managed_user_whitelist_specifics_pb2
 from protocol import nigori_specifics_pb2
 from protocol import password_specifics_pb2
 from protocol import preference_specifics_pb2
-#from protocol import printer_specifics_pb2
+from protocol import printer_specifics_pb2
 from protocol import priority_preference_specifics_pb2
 from protocol import search_engine_specifics_pb2
 from protocol import session_specifics_pb2
@@ -68,7 +68,7 @@ ALL_TYPES = (
     APP_LIST,
     APP_NOTIFICATION,
     APP_SETTINGS,
-#    ARC_PACKAGE,
+    ARC_PACKAGE,
     ARTICLE,
     AUTOFILL,
     AUTOFILL_PROFILE,
@@ -87,7 +87,7 @@ ALL_TYPES = (
     NIGORI,
     PASSWORD,
     PREFERENCE,
-#    PRINTERS,
+    PRINTERS,
     PRIORITY_PREFERENCE,
     READING_LIST,
     SEARCH_ENGINE,
@@ -99,7 +99,7 @@ ALL_TYPES = (
     EXTENSION_SETTINGS,
     FAVICON_IMAGES,
     FAVICON_TRACKING,
-    WIFI_CREDENTIAL) = range(35)
+    WIFI_CREDENTIAL) = range(37)
 
 # An enumeration on the frequency at which the server should send errors
 # to the client. This would be specified by the url that triggers the error.
@@ -120,7 +120,7 @@ SYNC_TYPE_TO_DESCRIPTOR = {
     APP_NOTIFICATION: SYNC_TYPE_FIELDS['app_notification'],
     APP_SETTINGS: SYNC_TYPE_FIELDS['app_setting'],
     APPS: SYNC_TYPE_FIELDS['app'],
-#    ARC_PACKAGE: SYNC_TYPE_FIELDS['arc_package'],
+    ARC_PACKAGE: SYNC_TYPE_FIELDS['arc_package'],
     ARTICLE: SYNC_TYPE_FIELDS['article'],
     AUTOFILL: SYNC_TYPE_FIELDS['autofill'],
     AUTOFILL_PROFILE: SYNC_TYPE_FIELDS['autofill_profile'],
@@ -143,9 +143,9 @@ SYNC_TYPE_TO_DESCRIPTOR = {
     NIGORI: SYNC_TYPE_FIELDS['nigori'],
     PASSWORD: SYNC_TYPE_FIELDS['password'],
     PREFERENCE: SYNC_TYPE_FIELDS['preference'],
-#    PRINTERS: SYNC_TYPE_FIELDS['printer'],
+    PRINTERS: SYNC_TYPE_FIELDS['printer'],
     PRIORITY_PREFERENCE: SYNC_TYPE_FIELDS['priority_preference'],
-#    READING_LIST: SYNC_TYPE_FIELDS['reading_list'],
+    READING_LIST: SYNC_TYPE_FIELDS['reading_list'],
     SEARCH_ENGINE: SYNC_TYPE_FIELDS['search_engine'],
     SESSION: SYNC_TYPE_FIELDS['session'],
     SYNCED_NOTIFICATION: SYNC_TYPE_FIELDS["synced_notification"],
@@ -508,8 +508,8 @@ class SyncDataModel(object):
       PermanentItem('google_chrome_app_settings',
                     name='App Settings',
                     parent_tag=ROOT_ID, sync_type=APP_SETTINGS),
-#      PermanentItem('google_chrome_arc_package', name='Arc Package',
-#                    parent_tag=ROOT_ID, sync_type=ARC_PACKAGE),
+      PermanentItem('google_chrome_arc_package', name='Arc Package',
+                    parent_tag=ROOT_ID, sync_type=ARC_PACKAGE),
       PermanentItem('google_chrome_bookmarks', name='Bookmarks',
                     parent_tag=ROOT_ID, sync_type=BOOKMARK),
       PermanentItem('bookmark_bar', name='Bookmark Bar',
@@ -568,9 +568,9 @@ class SyncDataModel(object):
                     parent_tag=ROOT_ID, sync_type=PASSWORD),
       PermanentItem('google_chrome_preferences', name='Preferences',
                     parent_tag=ROOT_ID, sync_type=PREFERENCE),
-#      PermanentItem('google_chrome_printer', name='Printers',
-#                    parent_tag=ROOT_ID, sync_type=PRINTERS,
-#                    create_by_default=False),
+      PermanentItem('google_chrome_printer', name='Printers',
+                    parent_tag=ROOT_ID, sync_type=PRINTERS,
+                    create_by_default=False),
       PermanentItem('google_chrome_priority_preferences',
                     name='Priority Preferences',
                     parent_tag=ROOT_ID, sync_type=PRIORITY_PREFERENCE),

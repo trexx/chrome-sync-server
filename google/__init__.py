@@ -1,4 +1,6 @@
-try:
-  __import__('pkg_resources').declare_namespace(__name__)
-except ImportError:
-  __path__ = __import__('pkgutil').extend_path(__path__, __name__)
+import sys
+import os
+
+THIS_DIR = os.path.dirname(os.path.abspath(__file__))
+
+sys.path.insert(0, os.path.join(THIS_DIR, "third_party", "six"))
