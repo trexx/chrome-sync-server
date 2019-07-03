@@ -1,8 +1,10 @@
 chrome-sync-server
 ==================
 
-Sync server for use with Chromium
-Most of this code and libraries is from the Chromium source code, wich has a C++ testserver that needs to be compiled.
+Sync server for use with Chromium  
+
+Most of this code and libraries is from the Chromium source code, originally as part of its test suite for testing sync functionality.  
+As of March 2019, it has since been deprecated and removed from the repository. [Source.](https://chromium.googlesource.com/chromium/src/+/088b19eadb8816b063dd739a9c35bec8b5e08e27)  
 
 ## To use the server:
 
@@ -36,16 +38,6 @@ Windows:
 ```
 chrome.exe google-chrome --enable-logging --enable-synced-notifications \ --sync-url=http://127.0.0.1:1337/chromiumsync
 ```
-## Resources
-
-  - [python.org](http://python.org/)
-  - [chromium](http://chromium.org/)
-
-## TODO
-
-  - Run as production server
-  - Save logged data
-
 
 ## License
 [MIT licence](http://opensource.org/licenses/MIT)
